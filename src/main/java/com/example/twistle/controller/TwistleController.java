@@ -28,7 +28,7 @@ public class TwistleController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("profiles", profileRepository.findAll());
-        return "index";
+        return "start";
     }
 
     // Directs user to word list-page, and fills it with all words in the database.
