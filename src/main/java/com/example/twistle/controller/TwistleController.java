@@ -100,4 +100,9 @@ public class TwistleController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/play")
+    public String showPlay() {
+        return "play";
+    }
 }
