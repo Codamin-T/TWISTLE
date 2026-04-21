@@ -96,7 +96,7 @@ public class TwistleController {
         }
         if (passwordEncoder.matches(profile.getPassword(), existingProfile.getPassword())) {
             System.out.println("Successfully logged in");
-            return "redirect:/word-menu";
+            return "redirect:/play";
         }
         return "redirect:/";
     }
