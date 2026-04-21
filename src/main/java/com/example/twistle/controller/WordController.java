@@ -39,7 +39,7 @@ public class WordController {
         System.out.println("Pressed length:"+length);
         model.addAttribute("length", length);
 
-        Word word = wordService.setDailyWords(length);
+        Word word = wordService.getDailyWord(length);
         model.addAttribute("word", word);
         System.out.println("Word to guess: " + word.getWord_text());
 

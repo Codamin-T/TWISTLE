@@ -14,11 +14,10 @@ public class WordService {
 
     public WordService(WordRepository wordRepository) {
         this.wordRepository =  wordRepository;
-
     }
 
     @Cacheable(value="word", key="#length")
-    public Word setDailyWords(int length){
+    public Word getDailyWord(int length){
         List<Word> words = wordRepository.findAllRandomByLengthNotRecent(length);
 
         long today = LocalDate.now().toEpochDay();
