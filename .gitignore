@@ -163,3 +163,6 @@ $RECYCLE.BIN/
 *.lnk
 
 .idea/
+
+# Enviorment Variables
+env.properties
