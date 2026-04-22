@@ -1,11 +1,22 @@
-body {
+.container div {
     margin: 0;
+    border-radius: 50%;
+    font-family: Helvetica;
+    background: linear-gradient(135deg, #00f5ff, #0061ff);
+    text-align: center;
+
 }
 
 .container {
     display: grid;
-
+    margin: 0;
+    gap: 10px;
+    grid-template-columns: repeat(2, 40px);
+    grid-template-rows: repeat(5, 40px);
+    justify-content: center;
 }
-div {
-    background: linear-gradient(135deg, #00f5ff, #0061ff);
+
+body {
+    margin: 100px;
+    padding: 0;
 }
