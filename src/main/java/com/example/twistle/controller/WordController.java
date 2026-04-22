@@ -27,11 +27,7 @@ public class WordController {
         //this.wordService = wordService;
     }
 
-    // Directs user to Twistle menu
-    @GetMapping("/word-menu")
-    public String wordMenu(Model model){
-        return "word-guess-menu";
-    }
+
 
     // Gets guessing screen and daily word for a specific word length.
     @GetMapping("/word-guess/{length}")

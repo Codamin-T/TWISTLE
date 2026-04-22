@@ -3,7 +3,11 @@ package com.example.twistle.controller;
 import com.example.twistle.model.*;
 import com.example.twistle.repository.*;
 import com.example.twistle.config.*;
+import com.example.twistle.service.GuessService;
+import com.example.twistle.service.WordService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.LazyInitializationExcludeFilter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,14 @@ public class TwistleController {
     private ProfileRepository profileRepository;
     @Autowired
     private WordRepository wordRepository;
+    @Autowired
+    private GuessService guessService;
+    @Autowired
+    private WordService wordService;
+    @Autowired
+    private HttpSession session;
+    @Autowired
+    private LazyInitializationExcludeFilter eagerJpaMetamodelCacheCleanup;
 
     public TwistleController() {
       this.securityConfig = new SecurityConfig();
@@ -104,5 +116,44 @@ public class TwistleController {
     @GetMapping("/play")
     public String showPlay() {
         return "play";
+    }
+
+    @GetMapping("/play/guess/2")
+    public String showGuess2(Model model) {
+        Word word = wordService.getDailyWord(2);
+
+        int[] correctedWordArray = new int[2];
+
+        model.addAttribute("word", word);
+        model.addAttribute("correctedWordArray", correctedWordArray);
+
+        System.out.println("Word to guess: " + word.getWord_text());
+        session.setAttribute("currentWord", word);
+        return "guess2";
+    }
+
+    @PostMapping("/play/guess/2")
+    public String processPlay(String guessText) {
+        Word wordToGuess = (Word)session.getAttribute("currentWord");
+        String wordToGuessString = wordToGuess.getWord_text();
+
+        int[] correctedWordArray = guessService.guessWord(guessText, wordToGuessString);
+
+        for(int i=0; i<correctedWordArray.length; i++){
+            if(correctedWordArray[i] == 0){
+                System.out.println("Letter at index: " + i + " is correct");
+            } else if (correctedWordArray[i] == 1){
+                System.out.println("Letter at index: " + i + " is in the word");
+            } else {
+                System.out.println("Letter at index: " + i + " is incorrect");
+            }
+        }
+        session.setAttribute("correctedWordArray", correctedWordArray);
+
+        if(wordToGuessString.equals(guessText)){
+            return "redirect:/play";
+        }
+
+        return "guess2";
     }
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Guess 2 Letters'">Word Guess</title>
+</head>
+<body>
+<h1 th:text="'Guess the 2-letter word'">Guess the word</h1>
+
+<form th:action="@{/play/guess/2}" method="post">
+    <input type="text" name="guessText" th:maxlength="2" th:minlength="2" required/>
+    <button type="submit">Guess</button>
+</form>
+
+<a th:href="@{/play}">Back</a>
+</body>
+</html>
