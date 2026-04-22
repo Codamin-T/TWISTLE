@@ -11,6 +11,8 @@
     <button type="submit">Guess</button>
 </form>
 
+<h4 th:each="correctedWordArray : ${correctedWordArray}" th:text="${correctedWordArray}"></h4>
+
 <a th:href="@{/play}">Back</a>
 </body>
 </html>

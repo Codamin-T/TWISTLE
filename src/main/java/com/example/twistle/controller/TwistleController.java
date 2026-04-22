@@ -123,6 +123,9 @@ public class TwistleController {
         Word word = wordService.getDailyWord(2);
 
         int[] correctedWordArray = new int[2];
+        for (int i = 0; i < correctedWordArray.length; i++) {
+            correctedWordArray[i] = 2;
+        }
 
         model.addAttribute("word", word);
         model.addAttribute("correctedWordArray", correctedWordArray);
