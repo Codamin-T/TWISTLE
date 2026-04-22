@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+}
+
+.container {
+    display: grid;
+
+}
+div {
+    background: linear-gradient(135deg, #00f5ff, #0061ff);
+}
