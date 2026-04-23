@@ -130,6 +130,9 @@ body {
     border-radius: 50%;
 }
 
+a {
+    text-decoration: none;
+}
 
 .b1 { background: linear-gradient(135deg, #00f5ff, #0061ff); }
 .b2 { background: linear-gradient(135deg, #ff4ecd, #ff006a); }
