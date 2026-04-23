@@ -156,7 +156,6 @@ public class TwistleController {
         if(wordToGuessString.equals(guessText)){
             return "redirect:/play";
         }
-
         return "guess2";
     }
 }
