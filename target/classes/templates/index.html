@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TWISTLE</title>
+</head>
+<body>
+<h1>TWISTLE</h1>
+<a th:href="@{/add_word}">Add New Word</a>
+<h3>Account List:</h3>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+    </tr>
+    <tr th:each="profile : ${profiles}">
+        <td th:text="${profile.username}"></td>
+        <td th:text="${profile.password}"></td>
+    </tr>
+</table>
+<a th:href="@{/register}">Register account</a>
+</body>
+</html>

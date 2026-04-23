@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{style.css}">
+    <title>Register</title>
+</head>
+<body>
+
+<div class="page">
+
+    <header class="hero">
+        <h1>Create Account</h1>
+        <p>Join TWISTLE and start learning</p>
+    </header>
+
+    <section class="actions">
+
+        <form th:action="@{/register}" th:object="${profile}" method="post" class="form-box">
+
+            <input type="text"
+                   th:field="*{username}"
+                   placeholder="Username"
+                   required
+                   class="input">
+
+            <input type="password"
+                   th:field="*{password}"
+                   placeholder="Password (min 6 chars)"
+                   required
+                   class="input">
+
+            <button type="submit" class="btn primary">
+                Register
+            </button>
+
+        </form>
+
+    </section>
+    <footer>
+        <a th:href="@{/login}" class="btn secondary">
+            Already have an account? Login
+        </a>
+    </footer>
+
+</div>
+
+</body>
+</html>
