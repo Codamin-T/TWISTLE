@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'WillyWonka';
+    font-style: normal;
+    font-weight: normal;
+    src: url('Wonderbar-pALD.woff') format('woff');
+    }
+
+/* seven letters */
+.sevenLetters div {
+    margin: 0;
+    border-radius: 50%;
+    font-family: Helvetica;
+    background: linear-gradient(135deg, #86299C, #EE9096);
+    text-align: center;
+    size: 200px;
+}
+
+h1 {
+    text-align: center;
+    color: #82BA88;
+    font-family: WillyWonka, script;
+}
+.sevenLetters {
+    display: grid;
+    margin: 5% 50vw;
+    gap: 10px;
+    grid-template-columns: repeat(7, 60px);
+    grid-template-rows: repeat(6, 60px);
+    justify-content: center;
+    opacity: 20%;
+}
+
+body {
+    padding: 0;
+    background: #70C1E1;
+
+}
+
+.sidebar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.side-item {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: default;
+}

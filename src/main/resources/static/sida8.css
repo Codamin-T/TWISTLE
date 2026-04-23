@@ -5,33 +5,34 @@
     src: url('Wonderbar-pALD.woff') format('woff');
     }
 
-.container div {
+/* Eight letters */
+.eightLetters div {
     margin: 0;
     border-radius: 50%;
     font-family: Helvetica;
-    background: linear-gradient(135deg, #EE9096, #B60300);
+    background: linear-gradient(135deg, #EE9096, #D62987);
     text-align: center;
     size: 200px;
 }
 
 h1 {
     text-align: center;
-    color: #EE9096;
+    color: #86299C;
     font-family: WillyWonka, script;
 }
-.container {
+.eightLetters {
     display: grid;
     margin: 5% 50vw;
     gap: 10px;
-    grid-template-columns: repeat(2, 60px);
-    grid-template-rows: repeat(5, 60px);
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(6, 60px);
     justify-content: center;
     opacity: 20%;
 }
 
 body {
     padding: 0;
-    background: #F5E8AA;
+    background: #82BA88;
 
 }
 
@@ -42,7 +43,7 @@ body {
 }
 
 .side-item {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
