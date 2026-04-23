@@ -9,7 +9,7 @@
     margin: 0;
     border-radius: 50%;
     font-family: Helvetica;
-    background: linear-gradient(135deg, #86299C, #EE9096);
+    background: linear-gradient(135deg, #77A80A, #EE9096);
     text-align: center;
     size: 200px;
 }
@@ -31,7 +31,7 @@ h1 {
 
 body {
     padding: 0;
-    background: #F491B4;
+    background: #70C1E1;
 }
 
 .sidebar {
