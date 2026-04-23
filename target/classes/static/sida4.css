@@ -9,28 +9,28 @@
     margin: 0;
     border-radius: 50%;
     font-family: Helvetica;
-    background: linear-gradient(135deg, #77A800, #147CBF);
+    background: linear-gradient(135deg, #EF8503, #FDC700);
     text-align: center;
     size: 200px;
 }
 
 h1 {
     text-align: center;
-    color: #147CBF;
+    color: #FDC700;
     font-family: WillyWonka, script;
 }
 .container {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(6, 60px);
-    grid-template-rows: repeat(4, 60px);
+    grid-template-columns: repeat(4, 60px);
+    grid-template-rows: repeat(6, 60px);
     justify-content: center;
     opacity: 20%;
 }
 
 body {
     padding: 0;
-    background: #FFF183;
+    background: #82BA88;
     justify-content: center;
     align-items: center;
 }
@@ -50,7 +50,7 @@ body {
 }
 
 .back-button {
-    background-color: #147CBF;
+    background-color: #FDC700;
     color: white;
     border: none;
     border-radius: 10px;
