@@ -117,6 +117,11 @@ public class TwistleController {
         return "4letters";
     }
 
+    @GetMapping("/sida6")
+    public String showSida6() {
+        return "sida6";
+    }
+
     @GetMapping("/sida7")
     public String showSida7() {
         return "sida7";
