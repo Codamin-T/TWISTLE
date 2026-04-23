@@ -166,3 +166,4 @@ $RECYCLE.BIN/
 
 # Enviorment Variables
 env.properties
+/target/classes/application.properties
