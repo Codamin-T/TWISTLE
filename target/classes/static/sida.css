@@ -2,8 +2,9 @@
     margin: 0;
     border-radius: 50%;
     font-family: Helvetica;
-    background: linear-gradient(135deg, #00f5ff, #0061ff);
+    background: linear-gradient(135deg, #EE9096, #B60300);;
     text-align: center;
+    size: 200px;
 
 }
 
@@ -11,11 +12,13 @@
     display: grid;
     margin: 25vh 50vw;
     gap: 10px;
-    grid-template-columns: repeat(2, 40px);
-    grid-template-rows: repeat(5, 40px);
+    grid-template-columns: repeat(2, 60px);
+    grid-template-rows: repeat(5, 60px);
     justify-content: center;
 }
 
 body {
     padding: 0;
+    background: #F5E8AA;
+    opacity: 20%;
 }
