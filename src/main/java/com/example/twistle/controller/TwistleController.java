@@ -112,8 +112,23 @@ public class TwistleController {
         return "sida2";
     }
 
+    @GetMapping("/sida3")
+    public String showSida3(){
+        return"sida3";
+    }
+
+    @GetMapping("/sida4")
+    public String showSida4(){
+        return "sida4";
+    }
+
     @GetMapping("/sida5")
     public String showSida5(){return "sida5";}
+
+    @GetMapping("/sida6")
+    public String showSida6(){
+        return"sida6";
+    }
 
     @GetMapping("/sida7")
     public String showSida7() {
