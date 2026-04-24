@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{style.css}">
+    <title>Login - TWISTLE</title>
+</head>
+
+<body>
+
+<div class="page">
+    <header class="hero">
+        <h1>Welcome back</h1>
+        <p>Log in to continue playing</p>
+    </header>
+
+    <section class="actions">
+
+        <form th:action="@{/login}"
+              th:object="${profile}"
+              method="post"
+              class="form-box">
+
+            <input type="text"
+                   th:field="*{username}"
+                   placeholder="Username"
+                   required
+                   class="input">
+
+            <input type="password"
+                   th:field="*{password}"
+                   placeholder="Password"
+                   required
+                   class="input">
+
+            <button type="submit" class="btn primary">
+                Login
+            </button>
+
+        </form>
+    </section>
+
+    <footer>
+        <a th:href="@{/register}" class="btn secondary">
+            Create new account
+        </a>
+        <br><br>
+        <a th:href="@{/word_list}" class="link-btn">
+            Go to Word List
+        </a>
+    </footer>
+
+</div>
+
+</body>
+</html>

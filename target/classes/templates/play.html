@@ -23,10 +23,10 @@
 
             <div class="how-to-play">
                 <p>
-                    GUess a word made of 2 lette
-                    Choose Easy or Hard mode
+                    Guess a word made of 2 letters
+                    Choose Easy OR Hard mode
                     Points & Streak
-                    You can alaso use hint if you have 50 points
+                    You can also use hint if you have 50 points
                 </p>
             </div>
         </aside>
@@ -34,33 +34,67 @@
 
     <main class="grid">
         <section class="bubbles">
+            <!--<div class = "button">-->
+                <div class="bubble-row left">
+                    <div class="bubble b2">
+                        <span class="dot b2"></span>
+                        <a th:href = "@{/sida2}" class = "test" >
+                            2
+                        </a>
+                    </div>
+                </div>
+            <!--</div>-->
+
+            <div class="bubble-row right">
+                <div class="bubble b3">
+                    <span class="dot b3"></span>
+                    <a th:href = "@{/sida3}" class = "test" >
+                        3
+                    </a>
+                </div>
+            </div>
 
             <div class="bubble-row left">
-                <div class="bubble b1"><span class="dot b1"></span>1</div>
+                <div class="bubble b4">
+                    <span class="dot b4"></span>
+                    <span class="dot b4"></span>
+                    <a th:href = "@{/sida4}" class = "test" >
+                        4
+                    </a>
+                </div>
             </div>
 
             <div class="bubble-row right">
-                <div class="bubble b2"><span class="dot b2"></span>2</div>
+                <div class="bubble b5">
+                    <span class="dot b5"></span>
+                    <a th:href ="@{/sida5}" class = "test">
+                        5
+                    </a>
+                </div>
             </div>
 
             <div class="bubble-row left">
-                <div class="bubble b3"><span class="dot b3"></span>3</div>
+                <div class="bubble b6"><span class="dot b6"></span><a th:href = "@{/sida6}" class = "test" >
+                    6
+                </a></div>
             </div>
 
             <div class="bubble-row right">
-                <div class="bubble b4"><span class="dot b4"></span>4</div>
+                <div class="bubble b7">
+                    <span class="dot b7"></span>
+                    <a th:href = "@{/sida7}" class = "test" >
+                        7
+                    </a>
+                </div>
             </div>
 
             <div class="bubble-row left">
-                <div class="bubble b5"><span class="dot b5"></span>5</div>
-            </div>
-
-            <div class="bubble-row right">
-                <div class="bubble b6"><span class="dot b6"></span>6</div>
-            </div>
-
-            <div class="bubble-row left">
-                <div class="bubble b7"><span class="dot b7"></span>7</div>
+                <div class="bubble b8">
+                    <span class="dot b8"></span>
+                    <a th:href = "@{/sida8}" class = "test" >
+                        8
+                    </a>
+                </div>
             </div>
 
         </section>
@@ -68,7 +102,7 @@
 
 
     <aside class="sidebar">
-        <div class="side-item">🥉Srteak <span id="steak">0</span></div>
+        <div class="side-item">🥉Streak <span id="steak">0</span></div>
         <div class="side-item">⭐ Score <span id="score">0</span></div>
     </aside>
 
@@ -81,15 +115,14 @@
 
 
     <footer class="legend">
-        <div class="legend-item"><span class="mini b1"></span> 2 letters</div>
-        <div class="legend-item"><span class="mini b2"></span> 3 letters</div>
-        <div class="legend-item"><span class="mini b3"></span> 4 letters</div>
-        <div class="legend-item"><span class="mini b4"></span> 5 letters</div>
-        <div class="legend-item"><span class="mini b5"></span> 6 letters</div>
-        <div class="legend-item"><span class="mini b6"></span> 7 letters</div>
-        <div class="legend-item"><span class="mini b7"></span> 8 letters</div>
+        <div class="legend-item"><span class="mini b2"></span> 2 letters</div>
+        <div class="legend-item"><span class="mini b3"></span> 3 letters</div>
+        <div class="legend-item"><span class="mini b4"></span> 4 letters</div>
+        <div class="legend-item"><span class="mini b5"></span> 5 letters</div>
+        <div class="legend-item"><span class="mini b6"></span> 6 letters</div>
+        <div class="legend-item"><span class="mini b7"></span> 7 letters</div>
+        <div class="legend-item"><span class="mini b8"></span> 8 letters</div>
     </footer>
-
 </div>
 
 </body>
