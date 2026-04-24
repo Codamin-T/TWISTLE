@@ -1,0 +1,9 @@
+com\example\twistle\controller\WordController.class
+com\example\twistle\config\SecurityConfig.class
+com\example\twistle\model\Word.class
+com\example\twistle\TwistleApplication.class
+com\example\twistle\service\WordService.class
+com\example\twistle\model\Profile.class
+com\example\twistle\controller\TwistleController.class
+com\example\twistle\repository\ProfileRepository.class
+com\example\twistle\repository\WordRepository.class
