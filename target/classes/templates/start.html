@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{style.css}">
+    <title>TWISTLE</title>
+</head>
+
+<body>
+<div class="page">
+    <header class="hero">
+        <h1>TWISTLE</h1>
+        <p>PROVE YOUR VOCABULARY</p>
+    </header>
+
+    <section class="actions">
+        <div class="buttons">
+
+            <a th:href="@{/play}" class="btn primary">
+                Play Now
+            </a>
+
+            <a th:href="@{/login}" class="btn primary">
+                Login
+            </a>
+
+            <a th:href="@{/register}" class="btn secondary">
+                Register
+            </a>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>@TWISTLE GRUPP11</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: system-ui, sans-serif;
+    background: radial-gradient(circle at top, #fdf2ff, #eef2ff);
+    min-height: 100vh;
+    color: #111;
+}
+
+
+.page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+    padding: 2rem;
+}
+
+.hero {
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: #6b7280;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.9rem 1.6rem;
+    border-radius: 12px;
+    border: none;
+
+    font-weight: 600;
+    cursor: pointer;
+
+    min-width: 140px;
+
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+
+.primary {
+    background: linear-gradient(135deg, #eb25b0, #7c3aed);
+    color: white;
+}
+
+.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
+}
+
+
+.secondary {
+    background: white;
+    border: 1px solid #ddd;
+    color: #111;
+}
+
+.secondary:hover {
+    transform: translateY(-3px);
+    background: #f3f4f6;
+}
+
+
+footer {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .page {
+        grid-template-rows: auto 1fr auto;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .btn {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+
+.form-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    max-width: 320px;
+
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+
+    text-align: center;
+    font-size: 1rem;
+
+    outline: none;
+    transition: 0.2s;
+}
+
+.input:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+
+.link-btn {
+    color: #7c3aed;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.link-btn:hover {
+    text-decoration: underline;
+}
