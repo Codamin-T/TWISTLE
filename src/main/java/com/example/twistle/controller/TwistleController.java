@@ -21,9 +21,10 @@ public class TwistleController {
     private WordRepository wordRepository;
 
     public TwistleController() {
-      this.securityConfig = new SecurityConfig();
-      this.passwordEncoder = securityConfig.passwordEncoder();
+        this.securityConfig = new SecurityConfig();
+        this.passwordEncoder = securityConfig.passwordEncoder();
     }
+
     // Index redirection
     @GetMapping("/")
     public String index(Model model) {
@@ -81,7 +82,7 @@ public class TwistleController {
 
     // Directs user to login page
     @GetMapping("/login")
-    public String showLoginForm(Model model){
+    public String showLoginForm(Model model) {
         model.addAttribute("profile", new Profile());
         return "login";
     }
@@ -105,4 +106,38 @@ public class TwistleController {
     public String showPlay() {
         return "play";
     }
+
+    @GetMapping("/sida2")
+    public String showSida2() {
+        return "sida2";
+    }
+
+    @GetMapping("/sida3")
+    public String showSida3(){
+        return"sida3";
+    }
+
+    @GetMapping("/sida4")
+    public String showSida4(){
+        return "sida4";
+    }
+
+    @GetMapping("/sida5")
+    public String showSida5(){return "sida5";}
+
+    @GetMapping("/sida6")
+    public String showSida6(){
+        return"sida6";
+    }
+
+    @GetMapping("/sida7")
+    public String showSida7() {
+        return "sida7";
+    }
+
+    @GetMapping("/sida8")
+    public String showSida8() {
+        return "sida8";
+    }
 }
+
