@@ -47,3 +47,11 @@ body {
     margin-bottom: 10px;
     cursor: default;
 }
+
+.back-button {
+    background-color: #286634;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: default;
+}

@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'WillyWonka';
+    font-style: normal;
+    font-weight: normal;
+    src: url('Wonderbar-pALD.woff') format('woff');
+    }
+
 
 * {
     margin: 0;
@@ -29,9 +36,9 @@ body {
 }
 
 .hero h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
-    margin-bottom: 0.5rem;
+    font-size: 3.5rem;
+    font-family: WillyWonka, script;
+    cursor: default;
 }
 
 .hero p {

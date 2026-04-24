@@ -48,3 +48,11 @@ body {
     margin-bottom: 10px;
     cursor: default;
 }
+
+.back-button {
+    background-color: #FDC700;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: default;
+}
