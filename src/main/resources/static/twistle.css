@@ -23,13 +23,13 @@ hr {
 }
 
 .tile {
-    /* Box /
+    /* Box */
     border: 2px solid lightgray;
     width: 60px;
     height: 60px;
     margin: 2.5px;
 
-    / Text /
+    /* Text */
     color: black;
     font-size: 36px;
     font-weight: bold;
@@ -71,7 +71,7 @@ hr {
     margin: 1px;
     border: 1px solid lightgray;
 
-    / Text /
+    /* Text */
     font-size: 20px;
     font-weight: bold;
     display: flex;
@@ -85,7 +85,7 @@ hr {
     margin: 1px;
     border: 1px solid lightgray;
 
-    / Text */
+    /* Text */
     font-size: 20px;
     font-weight: bold;
     display: flex;
