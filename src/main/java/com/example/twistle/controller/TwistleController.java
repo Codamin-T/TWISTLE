@@ -112,18 +112,18 @@ public class TwistleController {
 
     @GetMapping("/play")
     public String showPlay(Model model) {
-        HashMap<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
+        Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
 
         if (unlockedLevels == null) {
             unlockedLevels = new HashMap<>();
-            unlockedLevels.put("level1_complete", false);
-            unlockedLevels.put("level2_complete", false);
-            unlockedLevels.put("level3_complete", false);
-            unlockedLevels.put("level4_complete", false);
-            unlockedLevels.put("level5_complete", false);
-            unlockedLevels.put("level6_complete", false);
-            unlockedLevels.put("level7_complete", false);
-            unlockedLevels.put("level8_complete", false);
+            unlockedLevels.put("1", true);
+            unlockedLevels.put("2", false);
+            unlockedLevels.put("3", false);
+            unlockedLevels.put("4", false);
+            unlockedLevels.put("5", false);
+            unlockedLevels.put("6", false);
+            unlockedLevels.put("7", false);
+            unlockedLevels.put("8", false);
 
             session.setAttribute("unlockedLevels", unlockedLevels);
         }
@@ -132,8 +132,18 @@ public class TwistleController {
         return "play";
     }
 
+    @PostMapping("/completeLevel")
+    @ResponseBody
+    public void completeLevel(@RequestParam String level) {
+        // Boolean[] unlockedLevelsArray = (Boolean[]) session.getAttribute("unlockedLevelsArray");
+        Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>) session.getAttribute("unlockedLevels");
+        unlockedLevels.put(level, true);
+        session.setAttribute("unlockedLevels", unlockedLevels);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/unlockedLevels", method = RequestMethod.GET)
-    public HashMap<String, Boolean> showUnlockedLevels() {
+    public Map<String, Boolean> showUnlockedLevels() {
         return (HashMap)session.getAttribute("unlockedLevels");
     }
 
