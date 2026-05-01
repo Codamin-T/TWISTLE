@@ -3,12 +3,18 @@ package com.example.twistle.controller;
 import com.example.twistle.model.*;
 import com.example.twistle.repository.*;
 import com.example.twistle.config.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TwistleController {
@@ -19,6 +25,8 @@ public class TwistleController {
     private ProfileRepository profileRepository;
     @Autowired
     private WordRepository wordRepository;
+    @Autowired
+    private HttpSession session;
 
     public TwistleController() {
         this.securityConfig = new SecurityConfig();
@@ -104,11 +112,30 @@ public class TwistleController {
 
     @GetMapping("/play")
     public String showPlay() {
+        HashMap<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
+
+        if (unlockedLevels == null) {
+            unlockedLevels = new HashMap<>();
+            unlockedLevels.put("level1_complete", false);
+            unlockedLevels.put("level2_complete", false);
+            unlockedLevels.put("level3_complete", false);
+            unlockedLevels.put("level4_complete", false);
+            unlockedLevels.put("level5_complete", false);
+            unlockedLevels.put("level6_complete", false);
+            unlockedLevels.put("level7_complete", false);
+            unlockedLevels.put("level8_complete", false);
+
+            session.setAttribute("unlockedLevels", unlockedLevels);
+        }
         return "play";
     }
 
     @GetMapping("/sida2")
     public String showSida2() {
+        //FOR UNLOCKING NEXT LEVEL, SETS THIS LEVEL TO COMPLETE
+        /*
+        HashMap<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
+        unlockedLevels.put("level2_complete", true); */
         return "sida2";
     }
 
