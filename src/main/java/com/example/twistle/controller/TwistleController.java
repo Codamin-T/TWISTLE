@@ -111,7 +111,7 @@ public class TwistleController {
     }
 
     @GetMapping("/play")
-    public String showPlay() {
+    public String showPlay(Model model) {
         HashMap<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
 
         if (unlockedLevels == null) {
@@ -127,6 +127,8 @@ public class TwistleController {
 
             session.setAttribute("unlockedLevels", unlockedLevels);
         }
+        model.addAttribute("unlockedLevels", unlockedLevels);
+
         return "play";
     }
 
