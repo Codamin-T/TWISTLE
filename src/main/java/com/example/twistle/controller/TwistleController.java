@@ -130,6 +130,11 @@ public class TwistleController {
         return "play";
     }
 
+    @RequestMapping(value = "/unlockedLevels", method = RequestMethod.GET)
+    public HashMap<String, Boolean> showUnlockedLevels() {
+        return (HashMap)session.getAttribute("unlockedLevels");
+    }
+
     @GetMapping("/sida2")
     public String showSida2() {
         //FOR UNLOCKING NEXT LEVEL, SETS THIS LEVEL TO COMPLETE
