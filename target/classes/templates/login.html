@@ -35,6 +35,9 @@
                    required
                    class="input">
 
+
+            <div id = "error" th:if="${error}" th:text="${error}"></div>
+
             <button type="submit" class="btn primary">
                 Login
             </button>
@@ -53,6 +56,8 @@
     </footer>
 
 </div>
+
+
 
 </body>
 </html>
