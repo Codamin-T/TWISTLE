@@ -31,6 +31,8 @@ let currentRow = 0;
 // All ganme bubbles
 let bubbles = [];
 
+//total amount of rows in each level
+let totalRows = [];
 
 
 //Fetch a random word from the server
@@ -47,7 +49,7 @@ function loadWord() {
             WORD = data.trim();
 
             // just for testing 🚦🚦
-            alert(" The word is   " + WORD);
+            alert(" The word is " + WORD);
             //
 
             startGame();
@@ -59,6 +61,7 @@ function loadWord() {
  function startGame() {
 
     bubbles = document.querySelectorAll(".bubble");
+    totalRows = Number(document.getElementById("game").dataset.rows);
 
     document.addEventListener("keydown", handleKeyPress);
 }
@@ -146,7 +149,14 @@ function loadWord() {
         setTimeout(() => {
             alert("Right word!");
         }, 100);
-    }
+    }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
+
+          setTimeout(() => {
+                          alert("Failed! The word was " + WORD);
+                    }, 100);
+                    }
+
+
     currentRow++;
     currentGuess = "";
 }
