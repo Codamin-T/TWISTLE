@@ -14,6 +14,8 @@ body{
     }
 
 /*.container div {
+
+.container div {
     margin: 0;
     border-radius: 50%;
     font-family: Helvetica;
@@ -92,4 +94,49 @@ h1 {
 .wrong{
     background:  #787c7e;
     color: white;
+    cursor: default;
+}
+
+.info {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.toggle {
+    background: #82BA88;
+    opacity: 80%;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#toggle {
+    display: none;
+}
+
+.how-to-play {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+
+    width: 220px;
+    padding: 10px;
+    border-radius: 10px;
+
+    background: rgba(112, 193, 225, 0.3);
+}
+
+#toggle:checked ~ .how-to-play {
+    display: block;
+}
+
+.grid {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
