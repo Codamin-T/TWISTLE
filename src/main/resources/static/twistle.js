@@ -143,6 +143,9 @@ function loadWord() {
     }
     // WIN CONDTION
     if (currentGuess === WORD) {
+        const len = String(WORD_LENGTH);
+        fetch(`completeLevel/${len}`);
+
         setTimeout(() => {
             alert("Right word!");
         }, 100);
