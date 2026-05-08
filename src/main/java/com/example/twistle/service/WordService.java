@@ -18,8 +18,10 @@ public class WordService {
 
     @Cacheable(value="word", key="#length")
     public Word getDailyWord(int length){
+        
+        
         List<Word> words = wordRepository.findAllRandomByLengthNotRecent(length);
-
+        
         long today = LocalDate.now().toEpochDay();
         System.out.println("today: " + today);
 

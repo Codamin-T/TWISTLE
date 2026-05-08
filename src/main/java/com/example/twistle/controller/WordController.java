@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class WordController {
 
     private final WordRepository wordRepository;
+ 
     private final HttpSession session;
 
     @Autowired
@@ -24,7 +25,7 @@ public class WordController {
     public WordController(WordRepository wordRepository, HttpSession session, WordService wordService) {
         this.wordRepository = wordRepository;
         this.session = session;
-        //this.wordService = wordService;
+        this.wordService = wordService;
     }
 
     // Directs user to Twistle menu
@@ -37,13 +38,17 @@ public class WordController {
     @GetMapping("/word-guess/{length}")
     public String wordGuess(@PathVariable int length, Model model){
         System.out.println("Pressed length:"+length);
-        model.addAttribute("length", length);
-
-        Word word = wordService.getDailyWord(length);
-        model.addAttribute("word", word);
-        System.out.println("Word to guess: " + word.getWord_text());
-
+       
+       
+     
+         Word word = (Word)session.getAttribute("currentWord");
+        
+        /// DET ÄR BARA TEST 🚦🚦🚦🚦 DEN RADEN SKICKAR WORD FRÅN JAVA TILL HTML-SIADAN SÅ ATT JAVA SCRIPT KAN ANVÄNDA DEN SENARE
+        model.addAttribute("word", /*word*/  word.getWord_text());
+        
+        word = wordService.getDailyWord(length);
         session.setAttribute("currentWord", word);
+        model.addAttribute("length", length);
         return "word-guess-game";
     }
 
@@ -54,16 +59,42 @@ public class WordController {
     }
 
     // Receives users guess and processes it
-    @PostMapping("/word-guess")
-    public String WordGuess(String guessText){
-        Word word = (Word)session.getAttribute("currentWord");
-        String wordText = word.getWord_text().toLowerCase();
 
+    @PostMapping("/word-guess")
+    
+    public String WordGuess(String guessText){
+       Word word = (Word)session.getAttribute("currentWord");
+        if (word == null) {
+            return "redirect:/word-menu";
+        }
+        String wordText = word.getWord_text().toLowerCase();
         if (guessText.toLowerCase().equals(wordText)) {
             System.out.println("Word guessed correctly");
-
             return "redirect:/word-guess/"+wordText.length()+"/success";
+            
         }
-        return "redirect:/word-guess/"+wordText.length();
+    
+      return "redirect:/word-guess/"+wordText.length();
+      
+    }
+    
+    
+    
+    
+    //test 🤔🤔🤔🤔
+   
+/*
+* Fetch a word based on the given length and returns it as text .
+ */
+    @GetMapping("/word/{length}")
+    @ResponseBody
+    public String getWord(@PathVariable int length) {
+        Word word = wordService.getDailyWord(length);
+        if (word == null) {
+            return "";
+        }
+        return word.getWord_text();
     }
 }
+
+

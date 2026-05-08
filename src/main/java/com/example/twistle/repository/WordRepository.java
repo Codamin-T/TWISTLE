@@ -16,7 +16,7 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 
     @Query(value = "SELECT * FROM word WHERE CHAR_LENGTH(word_text) = :length AND (last_used >= current_date - 100 or last_used is null)", nativeQuery = true)
     List<Word> findAllRandomByLengthNotRecent(@Param("length") int length);
-
-    @Query(value = "SELECT * FROM word WHERE last_used >= current_date - 100 or last_used is null", nativeQuery = true)
+    
+ @Query(value = "SELECT * FROM word WHERE last_used >= current_date - 100 or last_used is null", nativeQuery = true)
     List<Word> findAllRandomNotRecent();
 }
