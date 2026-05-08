@@ -65,8 +65,6 @@ h1 {
     text-decoration: none;
 }
 
-
-
 .bubble{
     width: 50px;
     height: 50px;
@@ -85,10 +83,9 @@ h1 {
     color: white;
 }
 
-.worng-postion{
+.wrong-position{
     background:  #c9b458;
     color: white;
-
 }
 
 .wrong{

@@ -1,11 +1,10 @@
 
 body {
     padding: 0;
+    background: #FFF183;
     justify-content: center;
     align-items: center;
-    background: #70C1E1;
 }
-
 
 @font-face {
     font-family: 'WillyWonka';
@@ -14,13 +13,12 @@ body {
     src: url('Wonderbar-pALD.woff') format('woff');
     }
 
-
 /*
-.fiveLetters div {
+.container div {
     margin: 0;
     border-radius: 50%;
     font-family: Helvetica;
-    background: linear-gradient(135deg, #77A80A, #EE9096);
+    background: linear-gradient(135deg, #77A800, #147CBF);
     text-align: center;
     size: 200px;
 }
@@ -29,37 +27,21 @@ body {
 
 h1 {
     text-align: center;
-    color: #286634;
+    color: #147CBF;
     font-family: WillyWonka, script;
 }
-
-
-/*
-.fiveLetters {
-    display: grid;
-   margin: 5% 50vw;
-    gap: 10px;
-    grid-template-columns: repeat(5, 60px);
-    grid-template-rows: repeat(6, 60px);
-    justify-content: center;
-   opacity: 20%;
-}
-
- */
-
 
 .container {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(5, 60px);
+    grid-template-columns: repeat(6, 60px);
     grid-template-rows: repeat(5, 60px);
     justify-content: center;
     /*opacity: 20%;*/
-
 }
 
 .sidebar {
-    position: fixed;
+    position: absolute;
     top: 20px;
     left: 20px;
 }
@@ -73,19 +55,17 @@ h1 {
 }
 
 .back-button {
-    background-color: #286634;
+    background-color: #147CBF;
     color: white;
     border: none;
     border-radius: 10px;
-   /* cursor: default;*/
-    /*display: block;*/
-   /* margin-bottom: 10px;*/
+    /*cursor: default;*/
     padding: 6px 12px;
     cursor: pointer;
     text-decoration: none;
 }
 
-    .bubble{
+.bubble{
     width: 50px;
     height: 50px;
     border: 1px solid black;
@@ -98,15 +78,15 @@ h1 {
     font-family: Helvetica;
 }
 
+
 .correct{
     background: #6aaa64;
     color: white;
 }
 
-.worng-postion{
+.wrong-position{
     background:  #c9b458;
     color: white;
-
 }
 
 .wrong{

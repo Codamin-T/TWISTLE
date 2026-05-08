@@ -135,7 +135,7 @@ function loadWord() {
             bubbles[index].classList.add("correct");
         }
         else if (WORD.includes(letter)) {
-            bubbles[index].classList.add("worng-postion");
+            bubbles[index].classList.add("wrong-position");
         }
         else {
             bubbles[index].classList.add("wrong");

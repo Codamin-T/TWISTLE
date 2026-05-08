@@ -14,13 +14,11 @@ Note Font-family were modified by the group
     src: url('Wonderbar-pALD.woff') format('woff');
     }
 
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 
 body {
     font-family: system-ui, sans-serif;
@@ -28,7 +26,6 @@ body {
     min-height: 100vh;
     color: #111;
 }
-
 
 .page {
     min-height: 100vh;
@@ -61,7 +58,6 @@ body {
     width: 100%;
 }
 
-
 .buttons {
     display: flex;
     gap: 1rem;
@@ -70,7 +66,6 @@ body {
     max-width: 500px;
     width: 100%;
 }
-
 
 .btn {
     display: flex;
@@ -90,7 +85,6 @@ body {
     text-decoration: none;
 }
 
-
 .primary {
     background: linear-gradient(135deg, #eb25b0, #7c3aed);
     color: white;
@@ -100,7 +94,6 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
 }
-
 
 .secondary {
     background: white;
@@ -133,7 +126,6 @@ footer {
     }
 }
 
-
 .form-box {
     display: flex;
     flex-direction: column;
@@ -161,7 +153,6 @@ footer {
     border-color: #7c3aed;
     box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
 }
-
 
 .link-btn {
     color: #7c3aed;
