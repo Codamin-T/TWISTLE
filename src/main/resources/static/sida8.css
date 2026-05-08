@@ -89,9 +89,9 @@ body {
     border-radius: 10px;
 
     background: rgba(112, 193, 225, 0.3);
-    }
+}
 
-    #toggle:checked ~ .how-to-play {
+#toggle:checked ~ .how-to-play {
     display: block;
 }
 
