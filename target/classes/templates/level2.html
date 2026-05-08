@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{sida6.css}">
+    <link rel="stylesheet" th:href="@{level2.css}">
 
 
-    <title>Six letters</title>
+    <title>Two letters</title>
 </head>
 <body>
-<h1>6 letters</h1>
+<h1>2 letters</h1>
 <aside class="info">
     <input type="checkbox" id="toggle">
     <label for="toggle" class="toggle">
@@ -18,7 +18,7 @@
 
     <div class="how-to-play">
         <p>
-            This is the six letter game.
+            This is the two letter game.
             After each guess, the letters will turn different colors.
             Green means that the letter is in the correct spot.
             Yellow means that the letter exists in the word, but is in the incorrect spot.
@@ -26,49 +26,37 @@
         </p>
     </div>
 </aside>
-<!--<div class = "container">-->
-
-<div id="game" data-length="6" class="container">
-
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
-
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+<!-- <div class = "container"-->
+<!--Game container holding selected word lenght som are two letters -->
+    <div id="game" data-length="2" class="container">
     <div class="bubble"></div>
     <div class="bubble"></div>
 
-
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
     <div class="bubble"></div>
     <div class="bubble"></div>
 
-
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
     <div class="bubble"></div>
     <div class="bubble"></div>
 
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
     <div class="bubble"></div>
     <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+    <!--
+        <div class="bubble"></div>
+
+        <div class="bubble"></div>
+
+        <div class="bubble"></div>
+
+        <div class="bubble"></div>
+
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+
+    -->
 </div>
-
 <a th:href="@{/play}" class="back-button" style="font-size:25px">Go back
 </a>
 
@@ -78,6 +66,8 @@
         <div class="side-item">⭐ Score <span id="score">0</span></div>
     </aside>
 </div>
+
+
 
 <script th:src="@{/twistle.js}"></script>
 

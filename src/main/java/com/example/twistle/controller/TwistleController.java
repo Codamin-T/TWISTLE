@@ -5,16 +5,13 @@ import com.example.twistle.repository.*;
 import com.example.twistle.config.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -139,11 +136,12 @@ public class TwistleController {
         return "play";
     }
 
-    @PostMapping("/completeLevel")
     @ResponseBody
-    public void completeLevel(@RequestParam String level) {
+    @GetMapping("/completeLevel/{level}")
+    public void completeLevel(@PathVariable String level) {
+        System.out.println("Unlocked level: " + level);
         // Boolean[] unlockedLevelsArray = (Boolean[]) session.getAttribute("unlockedLevelsArray");
-        Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>) session.getAttribute("unlockedLevels");
+        Map<String, Boolean> unlockedLevels = (HashMap)session.getAttribute("unlockedLevels");
         unlockedLevels.put(level, true);
         session.setAttribute("unlockedLevels", unlockedLevels);
     }
@@ -160,35 +158,35 @@ public class TwistleController {
         /*
         HashMap<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
         unlockedLevels.put("level2_complete", true); */
-        return "sida2";
+        return "level2";
     }
 
     @GetMapping("/sida3")
     public String showSida3(){
-        return"sida3";
+        return "level3";
     }
 
     @GetMapping("/sida4")
     public String showSida4(){
-        return "sida4";
+        return "level4";
     }
 
     @GetMapping("/sida5")
-    public String showSida5(){return "sida5";}
+    public String showSida5(){return "level5";}
 
     @GetMapping("/sida6")
     public String showSida6(){
-        return"sida6";
+        return "level6";
     }
 
     @GetMapping("/sida7")
     public String showSida7() {
-        return "sida7";
+        return "level7";
     }
 
     @GetMapping("/sida8")
     public String showSida8() {
-        return "sida8";
+        return "level8";
     }
 }
 

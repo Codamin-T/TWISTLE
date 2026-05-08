@@ -135,7 +135,7 @@ function loadWord() {
             bubbles[index].classList.add("correct");
         }
         else if (WORD.includes(letter)) {
-            bubbles[index].classList.add("worng-postion");
+            bubbles[index].classList.add("wrong-position");
         }
         else {
             bubbles[index].classList.add("wrong");
@@ -143,6 +143,9 @@ function loadWord() {
     }
     // WIN CONDTION
     if (currentGuess === WORD) {
+        const len = String(WORD_LENGTH);
+        fetch(`completeLevel/${WORD_LENGTH}`);
+
         setTimeout(() => {
             alert("Right word!");
         }, 100);
