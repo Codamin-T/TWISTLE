@@ -3,12 +3,18 @@ package com.example.twistle.controller;
 import com.example.twistle.model.*;
 import com.example.twistle.repository.*;
 import com.example.twistle.config.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TwistleController {
@@ -19,6 +25,8 @@ public class TwistleController {
     private ProfileRepository profileRepository;
     @Autowired
     private WordRepository wordRepository;
+    @Autowired
+    private HttpSession session;
 
     public TwistleController() {
         this.securityConfig = new SecurityConfig();
@@ -103,12 +111,48 @@ public class TwistleController {
     }
 
     @GetMapping("/play")
-    public String showPlay() {
+    public String showPlay(Model model) {
+        Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
+
+        if (unlockedLevels == null) {
+            unlockedLevels = new HashMap<>();
+            unlockedLevels.put("1", true);
+            unlockedLevels.put("2", false);
+            unlockedLevels.put("3", false);
+            unlockedLevels.put("4", false);
+            unlockedLevels.put("5", false);
+            unlockedLevels.put("6", false);
+            unlockedLevels.put("7", false);
+            unlockedLevels.put("8", false);
+
+            session.setAttribute("unlockedLevels", unlockedLevels);
+        }
+        model.addAttribute("unlockedLevels", unlockedLevels);
+
         return "play";
+    }
+
+    @PostMapping("/completeLevel")
+    @ResponseBody
+    public void completeLevel(@RequestParam String level) {
+        // Boolean[] unlockedLevelsArray = (Boolean[]) session.getAttribute("unlockedLevelsArray");
+        Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>) session.getAttribute("unlockedLevels");
+        unlockedLevels.put(level, true);
+        session.setAttribute("unlockedLevels", unlockedLevels);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/unlockedLevels", method = RequestMethod.GET)
+    public Map<String, Boolean> showUnlockedLevels() {
+        return (HashMap)session.getAttribute("unlockedLevels");
     }
 
     @GetMapping("/sida2")
     public String showSida2() {
+        //FOR UNLOCKING NEXT LEVEL, SETS THIS LEVEL TO COMPLETE
+        /*
+        HashMap<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
+        unlockedLevels.put("level2_complete", true); */
         return "sida2";
     }
 
