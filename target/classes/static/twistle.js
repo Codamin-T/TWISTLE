@@ -147,7 +147,7 @@ function loadWord() {
     // WIN CONDTION
     if (currentGuess === WORD) {
         setTimeout(() => {
-            alert("Right word!");
+            alert("Right word!" + "current row: " + currentRow + "totalRows:" + totalRows);
         }, 100);
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
