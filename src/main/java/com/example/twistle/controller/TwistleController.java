@@ -139,11 +139,12 @@ public class TwistleController {
         return "play";
     }
 
-    @PostMapping("/completeLevel")
     @ResponseBody
-    public void completeLevel(@RequestParam String level) {
+    @GetMapping("/completeLevel/{level}")
+    public void completeLevel(@PathVariable String level) {
+        System.out.println("Unlocked level: " + level);
         // Boolean[] unlockedLevelsArray = (Boolean[]) session.getAttribute("unlockedLevelsArray");
-        Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>) session.getAttribute("unlockedLevels");
+        Map<String, Boolean> unlockedLevels = (HashMap)session.getAttribute("unlockedLevels");
         unlockedLevels.put(level, true);
         session.setAttribute("unlockedLevels", unlockedLevels);
     }
