@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,13 +69,14 @@ public class TwistleController {
 
     // Receives and handlers register process.
     @PostMapping("/register")
-    public String processAddProfile(Profile profile) {
+    public String processAddProfile(Profile profile, RedirectAttributes redirectAttributes) {
         System.out.println("ad process add profile");
         if (profileRepository.findByUsername(profile.getUsername()) != null) {
             System.out.println("tried to register with existing username");
             return "redirect:/login";
         } else if (profile.getPassword().length() < 6) {
-            return "redirect:/register-error";
+            redirectAttributes.addFlashAttribute("error", "Password should be 6 characters");
+            return "redirect:/register";
         }
         String encodedPassword = passwordEncoder.encode(profile.getPassword());
         profile.setPassword(encodedPassword);
@@ -97,17 +99,22 @@ public class TwistleController {
 
     // Receives login request and handles it.
     @PostMapping("/login")
-    public String processLogin(Profile profile) {
+    public String processLogin(Profile profile, RedirectAttributes redirectAttributes) {
         System.out.println("login process login");
+        //Måste kontollera om användaren bara är felstavat först
         Profile existingProfile = profileRepository.findByUsername(profile.getUsername());
         if (existingProfile == null) {
-            return "redirect:/register";
+            redirectAttributes.addFlashAttribute("error", "Wrong username or password");
+            return "redirect:/login";
         }
         if (passwordEncoder.matches(profile.getPassword(), existingProfile.getPassword())) {
             System.out.println("Successfully logged in");
             return "redirect:/play";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Wrong username or password");
+            return "redirect:/login";
         }
-        return "redirect:/";
+        //return "redirect:/login"; //7 maj
     }
 
     @GetMapping("/play")
