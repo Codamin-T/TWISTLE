@@ -156,7 +156,7 @@ function loadWord() {
           setTimeout(() => {
                           alert("Failed! The word was " + WORD);
                     }, 100);
-                    }
+    }
 
 
     currentRow++;
