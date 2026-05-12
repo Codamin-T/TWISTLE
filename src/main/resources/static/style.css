@@ -96,9 +96,9 @@ body {
 }
 
 .secondary {
-    background: white;
+    background: linear-gradient(#0055A0, #8CC1E9);
     border: 1px solid #ddd;
-    color: #111;
+    color: white;
 }
 
 .secondary:hover {
@@ -157,7 +157,7 @@ footer {
 .link-btn {
     color: #7c3aed;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 2.0rem;
 }
 
 .link-btn:hover {
