@@ -54,7 +54,7 @@ function loadWord() {
             WORD = data.trim();
 
             // just for testing 🚦🚦
-            //alert(" The word is   " + WORD);
+            alert(" The word is   " + WORD);
             //
 
             startGame();

@@ -54,7 +54,7 @@ function loadWord() {
             WORD = data.trim();
 
             // just for testing 🚦🚦
-            //alert(" The word is   " + WORD);
+            alert(" The word is   " + WORD);
             //
 
             startGame();
@@ -87,6 +87,8 @@ function loadWord() {
 
     else if (key === "Enter") {
         checkGuess();
+
+        // Clicks 'Next level' button if it's enabled
         if(nextLvlBtn.hasAttribute("href")) {
             nextLvlBtn.click();
         }
