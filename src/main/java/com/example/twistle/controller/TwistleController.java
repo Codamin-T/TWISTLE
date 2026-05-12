@@ -140,7 +140,6 @@ public class TwistleController {
     @GetMapping("/completeLevel/{level}")
     public void completeLevel(@PathVariable String level) {
         System.out.println("Unlocked level: " + level);
-        // Boolean[] unlockedLevelsArray = (Boolean[]) session.getAttribute("unlockedLevelsArray");
         Map<String, Boolean> unlockedLevels = (HashMap)session.getAttribute("unlockedLevels");
         unlockedLevels.put(level, true);
         session.setAttribute("unlockedLevels", unlockedLevels);
