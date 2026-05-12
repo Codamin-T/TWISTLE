@@ -133,6 +133,22 @@ public class TwistleController {
         }
         model.addAttribute("unlockedLevels", unlockedLevels);
 
+
+        Map<String, Boolean> completedWords = (HashMap<String, Boolean>) session.getAttribute("completedWords");
+        if (completedWords == null) {
+            completedWords = new HashMap<>();
+            completedWords.put("1", true);
+            completedWords.put("2", false);
+            completedWords.put("3", false);
+            completedWords.put("4", false);
+            completedWords.put("5", false);
+            completedWords.put("6", false);
+            completedWords.put("7", false);
+            completedWords.put("8", false);
+
+            session.setAttribute("unlockedLevels", unlockedLevels);
+        }
+
         return "play";
     }
 
@@ -140,9 +156,11 @@ public class TwistleController {
     @GetMapping("/completeLevel/{level}")
     public void completeLevel(@PathVariable String level, String word) {
         System.out.println("Unlocked level: " + level);
-        // Boolean[] unlockedLevelsArray = (Boolean[]) session.getAttribute("unlockedLevelsArray");
         Map<String, Boolean> unlockedLevels = (HashMap)session.getAttribute("unlockedLevels");
         unlockedLevels.put(level, true);
+
+
+
         session.setAttribute("unlockedLevels", unlockedLevels);
 
         Map<String, Boolean> completedWord = (HashMap)session.getAttribute("completedWord");

@@ -148,6 +148,8 @@ function loadWord() {
     if (currentGuess === WORD) {
         fetch(`completeLevel/${WORD_LENGTH}`);
 
+
+
         setTimeout(() => {
             alert("Right word!");
         }, 100);
