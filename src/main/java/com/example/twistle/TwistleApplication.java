@@ -10,3 +10,4 @@ public class TwistleApplication {
     }
 
 }
+//DENNA SIDA ÄR MAIN SIDA SOM KÖR PROGRAMET
