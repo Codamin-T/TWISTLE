@@ -189,8 +189,8 @@ function loadWord() {
 
          currentRow++;
          currentGuess = "";
-    }
-}
+ }
+
 function initialize() {
 // Create the key board
     let keyboard = [
