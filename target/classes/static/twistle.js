@@ -49,7 +49,7 @@ function loadWord() {
             WORD = data.trim();
 
             // just for testing 🚦🚦
-            alert(" The word is " + WORD);
+            //alert(" The word is " + WORD);
             //
 
             startGame();
@@ -64,10 +64,12 @@ function loadWord() {
     totalRows = Number(document.getElementById("game").dataset.rows);
 
     document.addEventListener("keydown", handleKeyPress);
+
+    initialize();
 }
 
 
-// Handel key input
+// Handle key input
 
  function handleKeyPress(e) {
 
@@ -134,15 +136,18 @@ function loadWord() {
         const letter = currentGuess[i];
         const correct = WORD[i];
 
-        if (letter === correct) {
-            bubbles[index].classList.add("correct");
-        }
-        else if (WORD.includes(letter)) {
-            bubbles[index].classList.add("wrong-position");
-        }
-        else {
-            bubbles[index].classList.add("wrong");
-        }
+       if (letter === correct) {
+           bubbles[index].classList.add("correct");
+           updateKeyboard(letter, "correct");
+       }
+       else if (WORD.includes(letter)) {
+           bubbles[index].classList.add("wrong-position");
+           updateKeyboard(letter, "wrong-position");
+       }
+       else {
+           bubbles[index].classList.add("wrong");
+           updateKeyboard(letter, "wrong");
+       }
     }
     // WIN CONDTION
     if (currentGuess === WORD) {
@@ -201,14 +206,14 @@ function initialize() {
         }
         document.body.appendChild(keyboardRow);
     }
-    document.addEventListener("keyup", (e) => {
+    /*document.addEventListener("keyup", (e) => {
             processInput(e);
-        })
+        })*/
 }
 
 function processKey() {
     e = { "code" : this.id };
-    processInput(e);
+    processInput(handleKeyPress);
 }
 
 function processInput(e) {
@@ -242,6 +247,19 @@ function processInput(e) {
     }
 }
 
+function updateKeyboard(letter, status) {
+    const keyTile = document.getElementById("Key" + letter.toUpperCase());
+    if (!keyTile) return;
+
+    // Priority: correct > wrong-position > wrong. Never downgrade.
+    if (keyTile.classList.contains("correct")) return;
+    if (keyTile.classList.contains("wrong-position") && status !== "correct") return;
+
+    keyTile.classList.remove("correct", "wrong-position", "wrong");
+    keyTile.classList.add(status);
+}
+
 // Start game
 loadWord();
+
 
