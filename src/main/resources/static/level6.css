@@ -13,18 +13,6 @@ body {
     src: url('Wonderbar-pALD.woff') format('woff');
     }
 
-/*
-.container div {
-    margin: 0;
-    border-radius: 50%;
-    font-family: Helvetica;
-    background: linear-gradient(135deg, #77A800, #147CBF);
-    text-align: center;
-    size: 200px;
-}
-
- */
-
 h1 {
     text-align: center;
     color: #147CBF;
@@ -59,7 +47,6 @@ h1 {
     color: white;
     border: none;
     border-radius: 10px;
-    /*cursor: default;*/
     padding: 6px 12px;
     cursor: pointer;
     text-decoration: none;
