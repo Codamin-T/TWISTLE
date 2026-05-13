@@ -88,7 +88,7 @@ function loadWord() {
 }
 
 
-//Check is input is availd letter
+//Check is input is a vaild letter
 
  function isLetter(key) {
     return /^[a-zA-Z]$/.test(key)
@@ -138,7 +138,7 @@ function loadWord() {
             bubbles[index].classList.add("correct");
         }
         else if (WORD.includes(letter)) {
-            bubbles[index].classList.add("worng-postion");
+            bubbles[index].classList.add("wrong-position");
         }
         else {
             bubbles[index].classList.add("wrong");
