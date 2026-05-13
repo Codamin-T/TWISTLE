@@ -182,11 +182,11 @@ function loadWord() {
 
         fetch(`completeLevel/${WORD_LENGTH}`);
 
-
+         currentRow++;
+         currentGuess = "";
     }
-    currentRow++;
-    currentGuess = "";
-}
+
+
 // Start game
 loadWord();
 

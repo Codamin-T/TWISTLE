@@ -33,6 +33,7 @@ let bubbles = [];
 
 //total amount of rows in each level
 let totalRows = [];
+
 // Next level button
 let nextLvlBtn = document.querySelector(".next-level-button");
 
@@ -57,7 +58,6 @@ function loadWord() {
 
             // just for testing 🚦🚦
             alert(" The word is " + WORD);
-
             //
 
             startGame();
@@ -180,15 +180,13 @@ function loadWord() {
                     }, 100);
                     }
 
-
-
         fetch(`completeLevel/${WORD_LENGTH}`);
 
-
+         currentRow++;
+         currentGuess = "";
     }
-    currentRow++;
-    currentGuess = "";
-}
+
+
 // Start game
 loadWord();
 
