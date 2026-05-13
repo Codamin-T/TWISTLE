@@ -63,6 +63,35 @@ h1 {
     cursor: pointer;
     padding: 6px 12px;
     text-decoration: none;
+    transition: 0.1s;
+}
+
+.next-level-button {
+    position: fixed;
+    vertical-align: center;
+    right: 20px;
+    background-color: #EE9096;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 6px 12px;
+    display: inline-block;
+    transition: transform 0.1s;
+    text-decoration: none;
+    font-family: WillyWonka;
+}
+
+.next-level-button:hover {
+    transform: scale(1.1);
+}
+
+.next-level-button.enter {
+
+}
+
+.back-button:hover {
+    transform: scale(1.1);
 }
 
 .bubble{

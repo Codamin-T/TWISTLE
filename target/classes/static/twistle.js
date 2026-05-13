@@ -33,11 +33,18 @@ let bubbles = [];
 
 //total amount of rows in each level
 let totalRows = [];
+// Next level button
+let nextLvlBtn = document.querySelector(".next-level-button");
 
+// HTML attribute for next level link
+let nextEnabled = nextLvlBtn.getAttribute("href");
 
 //Fetch a random word from the server
 
 function loadWord() {
+    nextLvlBtn.removeAttribute("href");
+    nextLvlBtn.style.opacity = "0.5";
+    nextLvlBtn.style.cursor = "not-allowed";
 
     WORD_LENGTH = Number(
         document.querySelector("#game").dataset.length
@@ -50,6 +57,7 @@ function loadWord() {
 
             // just for testing 🚦🚦
             alert(" The word is " + WORD);
+
             //
 
             startGame();
@@ -83,6 +91,11 @@ function loadWord() {
 
     else if (key === "Enter") {
         checkGuess();
+
+        // Clicks 'Next level' button if it's enabled
+        if(nextLvlBtn.hasAttribute("href")) {
+            nextLvlBtn.click();
+        }
     }
 
 }
@@ -146,10 +159,19 @@ function loadWord() {
     }
     // WIN CONDTION
     if (currentGuess === WORD) {
-        fetch(`completeLevel/${WORD_LENGTH}`);
+        nextLvlBtn.style.opacity = "1";
+        nextLvlBtn.style.cursor = "pointer"
 
         setTimeout(() => {
             alert("Right word!");
+
+            // Inflate 'Next level' button 200ms.
+            nextLvlBtn.style.transform = "scale(1.2)";
+            setTimeout(() => {
+                nextLvlBtn.style.transform = "";
+                nextLvlBtn.setAttribute("href", nextEnabled);
+            }, 200);
+
         }, 100);
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
@@ -159,6 +181,11 @@ function loadWord() {
                     }
 
 
+
+        fetch(`completeLevel/${WORD_LENGTH}`);
+
+
+    }
     currentRow++;
     currentGuess = "";
 }
