@@ -13,23 +13,13 @@ body{
     src: url('Wonderbar-pALD.woff') format('woff');
     }
 
-/*.container div {
-
-.container div {
-    margin: 0;
-    border-radius: 50%;
-    font-family: Helvetica;
-    background: linear-gradient(135deg, #EE9096, #B60300);
-    text-align: center;
-    size: 200px;
-}
-*/
 
 h1 {
     text-align: center;
     color: #EE9096;
     font-family: WillyWonka, script;
 }
+
 .container {
     display: grid;
     gap: 10px;
@@ -37,7 +27,6 @@ h1 {
     grid-template-rows: repeat(5, 60px);
     justify-content: center;
 
-    /*opacity: 20%;*/
 }
 
 .sidebar {

@@ -150,7 +150,8 @@ public class TwistleController {
         if (unlockedLevels == null){
             unlockedLevels = new HashMap<>();
             for (int i= 1; i <=8; i++){
-                int lvl = Integer.parseInt(level);
+                int lvl = Integer.parseInt(level) - 1;
+                System.out.println(lvl);
                 if (i == 1 || i == lvl){
                     unlockedLevels.put(String.valueOf(i), true);
                     continue;

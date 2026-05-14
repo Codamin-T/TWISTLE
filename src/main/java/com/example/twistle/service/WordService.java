@@ -41,14 +41,13 @@ public class WordService {
         return word;
     }
 
+    //Sets attribute 'lastUsed' to current date.
     public void setLastUsed(Word word){
         if (session.getAttribute("lastUsed") == session.getAttribute("currentWord")) {
             session.setAttribute("lastUsed", word);
             word.setLast_used(Date.valueOf(LocalDate.now()));
 
-            System.out.println("lastUsed: " + word.getLast_used());
             wordRepository.save(word);
-            System.out.println("lastUsed: " + word.getLast_used());
         }
 
     }
