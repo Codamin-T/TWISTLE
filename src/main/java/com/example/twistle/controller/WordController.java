@@ -90,6 +90,7 @@ public class WordController {
     @ResponseBody
     public String getWord(@PathVariable int length) {
         Word word = wordService.getDailyWord(length);
+        session.setAttribute("currentWord", word);
         if (word == null) {
             return "";
         }

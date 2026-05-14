@@ -2,14 +2,24 @@ package com.example.twistle.service;
 
 import com.example.twistle.model.Word;
 import com.example.twistle.repository.WordRepository;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
+
+
 @Service
 public class WordService {
+
+    @Autowired
+    HttpSession session;
+
     private WordRepository wordRepository;
 
     public WordService(WordRepository wordRepository) {
@@ -18,8 +28,7 @@ public class WordService {
 
     @Cacheable(value="word", key="#length")
     public Word getDailyWord(int length){
-        
-        
+
         List<Word> words = wordRepository.findAllRandomByLengthNotRecent(length);
         
         long today = LocalDate.now().toEpochDay();
@@ -30,6 +39,18 @@ public class WordService {
 
         Word word = words.get(dailyIndex);
         return word;
+    }
+
+    public void setLastUsed(Word word){
+        if (session.getAttribute("lastUsed") == session.getAttribute("currentWord")) {
+            session.setAttribute("lastUsed", word);
+            word.setLast_used(Date.valueOf(LocalDate.now()));
+
+            System.out.println("lastUsed: " + word.getLast_used());
+            wordRepository.save(word);
+            System.out.println("lastUsed: " + word.getLast_used());
+        }
+
     }
 
 }

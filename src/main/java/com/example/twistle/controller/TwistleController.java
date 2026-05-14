@@ -3,6 +3,7 @@ package com.example.twistle.controller;
 import com.example.twistle.model.*;
 import com.example.twistle.repository.*;
 import com.example.twistle.config.*;
+import com.example.twistle.service.WordService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +26,8 @@ public class TwistleController {
     private WordRepository wordRepository;
     @Autowired
     private HttpSession session;
+    @Autowired
+    private WordService wordService;
 
     public TwistleController() {
         this.securityConfig = new SecurityConfig();
@@ -140,8 +143,21 @@ public class TwistleController {
     @GetMapping("/completeLevel/{level}")
     public void completeLevel(@PathVariable String level) {
         System.out.println("Unlocked level: " + level);
+        wordService.setLastUsed((Word)session.getAttribute("currentWord"));
         // Boolean[] unlockedLevelsArray = (Boolean[]) session.getAttribute("unlockedLevelsArray");
-        Map<String, Boolean> unlockedLevels = (HashMap)session.getAttribute("unlockedLevels");
+        Map<String, Boolean> unlockedLevels;
+        unlockedLevels = (HashMap)session.getAttribute("unlockedLevels");
+        if (unlockedLevels == null){
+            unlockedLevels = new HashMap<>();
+            for (int i= 1; i <=8; i++){
+                int lvl = Integer.parseInt(level);
+                if (i == 1 || i == lvl){
+                    unlockedLevels.put(String.valueOf(i), true);
+                    continue;
+                }
+                unlockedLevels.put(String.valueOf(i), false);
+            }
+        }
         unlockedLevels.put(level, true);
         session.setAttribute("unlockedLevels", unlockedLevels);
     }
@@ -154,6 +170,8 @@ public class TwistleController {
 
     @GetMapping("/sida2")
     public String showSida2() {
+        session.setAttribute("level2Word", wordService.getDailyWord(2));
+        System.out.println(session.getAttribute("currentWord"));
         //FOR UNLOCKING NEXT LEVEL, SETS THIS LEVEL TO COMPLETE
         /*
         HashMap<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");

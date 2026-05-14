@@ -2,6 +2,7 @@ package com.example.twistle.model;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -11,7 +12,7 @@ public class Word {
     @Id
     @Column(name = "word_text")
     private String wordText;
-    private Timestamp last_used;
+    private Date last_used;
     
     
     
@@ -23,10 +24,10 @@ public class Word {
         this.wordText = wordText;
     }
 
-public Timestamp getLast_used() {
+    public Date getLast_used() {
         return last_used;
     }
-    public void setLast_used(Timestamp last_used) {
+    public void setLast_used(Date last_used) {
         this.last_used = last_used;
     }
 }
