@@ -117,6 +117,7 @@ public class TwistleController {
         //return "redirect:/login"; //7 maj
     }
 
+    // Directs user to play menu page. Creates a HashMap to store if each level is unlocked.
     @GetMapping("/play")
     public String showPlay(Model model) {
         Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
@@ -139,19 +140,20 @@ public class TwistleController {
         return "play";
     }
 
+    // Called when a level is completed, unlocks next level.
     @ResponseBody
     @GetMapping("/completeLevel/{level}")
     public void completeLevel(@PathVariable String level) {
         System.out.println("Unlocked level: " + level);
         wordService.setLastUsed((Word)session.getAttribute("currentWord"));
-        // Boolean[] unlockedLevelsArray = (Boolean[]) session.getAttribute("unlockedLevelsArray");
         Map<String, Boolean> unlockedLevels;
         unlockedLevels = (HashMap)session.getAttribute("unlockedLevels");
+
+        // If the player goes directly to a level site without going to /play, the HashMap has to be created here.
         if (unlockedLevels == null){
             unlockedLevels = new HashMap<>();
             for (int i= 1; i <=8; i++){
                 int lvl = Integer.parseInt(level) - 1;
-                System.out.println(lvl);
                 if (i == 1 || i == lvl){
                     unlockedLevels.put(String.valueOf(i), true);
                     continue;
@@ -163,20 +165,17 @@ public class TwistleController {
         session.setAttribute("unlockedLevels", unlockedLevels);
     }
 
+    // Gets unlocked levels in a HashMap
     @ResponseBody
     @RequestMapping(value = "/unlockedLevels", method = RequestMethod.GET)
     public Map<String, Boolean> showUnlockedLevels() {
         return (HashMap)session.getAttribute("unlockedLevels");
     }
 
+    // The following methods are mappings to each level's HTML file:
+
     @GetMapping("/sida2")
     public String showSida2() {
-        session.setAttribute("level2Word", wordService.getDailyWord(2));
-        System.out.println(session.getAttribute("currentWord"));
-        //FOR UNLOCKING NEXT LEVEL, SETS THIS LEVEL TO COMPLETE
-        /*
-        HashMap<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
-        unlockedLevels.put("level2_complete", true); */
         return "level2";
     }
 

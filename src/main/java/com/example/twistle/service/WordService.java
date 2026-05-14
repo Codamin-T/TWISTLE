@@ -12,8 +12,6 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
-
-
 @Service
 public class WordService {
 
@@ -26,6 +24,7 @@ public class WordService {
         this.wordRepository =  wordRepository;
     }
 
+    // Gets the daily word for the parameter length.
     @Cacheable(value="word", key="#length")
     public Word getDailyWord(int length){
 
@@ -45,7 +44,7 @@ public class WordService {
     public void setLastUsed(Word word){
         if (session.getAttribute("lastUsed") == session.getAttribute("currentWord")) {
             session.setAttribute("lastUsed", word);
-            word.setLast_used(Date.valueOf(LocalDate.now()));
+            word.setLastUsed(Date.valueOf(LocalDate.now()));
 
             wordRepository.save(word);
         }

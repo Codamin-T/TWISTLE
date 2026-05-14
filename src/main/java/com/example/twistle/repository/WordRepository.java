@@ -10,19 +10,8 @@ import java.util.List;
 
 public interface WordRepository extends JpaRepository<Word, Long> {
 
-    @Query(value = "SELECT * FROM word WHERE CHAR_LENGTH(word_text) = :length ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
-    Word findRandomByLength(@Param("length") int length);
-
-    @Query(value = "SELECT * FROM word WHERE CHAR_LENGTH(word_text) = :length AND last_used >= current_date - 100 or last_used is null ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
-    Word findRandomByLengthNotRecent(@Param("length") int length);
-
     //Gets random word from the database, with desired length. Limits query by column 'last_used', set to 30 days.
     @Query(value = "SELECT * FROM word WHERE CHAR_LENGTH(word_text) = :length AND (last_used >= current_date - 30 or last_used is null)", nativeQuery = true)
     List<Word> findAllRandomByLengthNotRecent(@Param("length") int length);
-    
-    @Query(value = "SELECT * FROM word WHERE last_used >= current_date - 100 or last_used is null", nativeQuery = true)
-    List<Word> findAllRandomNotRecent();
 
-    @Query(value = "select count(*) from word where last_used != null", nativeQuery = true)
-    List<Word> countLastUsed();
 }

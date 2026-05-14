@@ -17,8 +17,6 @@ public class Profile {
     private Integer streak;
     private Timestamp created_at;
 
-
-
     public Long getId() {
         return id;
     }
@@ -31,16 +29,18 @@ public class Profile {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // The following methods are not used yet:
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getPoints() {

@@ -59,9 +59,7 @@ public class WordController {
     }
 
     // Receives users guess and processes it
-
     @PostMapping("/word-guess")
-    
     public String WordGuess(String guessText){
        Word word = (Word)session.getAttribute("currentWord");
         if (word == null) {
@@ -71,11 +69,8 @@ public class WordController {
         if (guessText.toLowerCase().equals(wordText)) {
             System.out.println("Word guessed correctly");
             return "redirect:/word-guess/"+wordText.length()+"/success";
-            
         }
-    
       return "redirect:/word-guess/"+wordText.length();
-      
     }
     
     
