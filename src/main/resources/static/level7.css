@@ -13,17 +13,6 @@ body {
     src: url('Wonderbar-pALD.woff') format('woff');
     }
 
-/* seven letters
-.sevenLetters div {
-    margin: 0;
-    border-radius: 50%;
-    font-family: Helvetica;
-    background: linear-gradient(135deg, #86299C, #EE9096);
-    text-align: center;
-    size: 200px;
-}
-
- */
 
 h1 {
     text-align: center;
@@ -33,12 +22,10 @@ h1 {
 
 .container{
     display: grid;
-  /*  margin: 5% 50vw;*/
     gap: 10px;
     grid-template-columns: repeat(7, 60px);
     grid-template-rows: repeat(5, 60px);
     justify-content: center;
-  /*  opacity: 20%;*/
 
 }
 
@@ -62,7 +49,6 @@ h1 {
     color: white;
     border: none;
     border-radius: 10px;
-    /*cursor: default;*/
     padding: 6px 12px;
     cursor: pointer;
     text-decoration: none;
@@ -146,11 +132,9 @@ h1 {
     position: absolute;
     top: 50px;
     right: 0px;
-
     width: 220px;
     padding: 10px;
     border-radius: 10px;
-
     background: rgba(112, 193, 225, 0.3);
 }
 
@@ -160,6 +144,43 @@ h1 {
 
 .grid {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keyboard-row {
+    width: 400px;
+
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+}
+
+.key-tile {
+    width: 36px;
+    height: 40px;
+    margin: 1px;
+    border: 1px solid lightgray;
+
+    /* Text */
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.enter-key-tile {
+    width: 76px;
+    height: 40px;
+    margin: 1px;
+    border: 1px solid lightgray;
+
+    /* Text */
+    font-size: 20px;
+    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
