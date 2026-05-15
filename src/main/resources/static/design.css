@@ -153,6 +153,22 @@ a {
     color: white;
 }
 
+.back-button {
+    background-color: #EE9096;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 6px 12px;
+    text-decoration: none;
+    transition: 0.1s;
+
+    position: fixed;
+    middle: 20px;
+    left: 60px;
+}
+
+
 .b2 { background: linear-gradient(135deg, #EE9096, #B60300); }
 .b3 { background: linear-gradient(135deg, #B60300, #EF8503); }
 .b4 { background: linear-gradient(135deg, #EF8503, #FDC700); }
