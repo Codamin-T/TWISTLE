@@ -164,6 +164,8 @@ function loadWord() {
     }
     // WIN CONDTION
     if (currentGuess === WORD) {
+        fetch(`completeLevel/${WORD_LENGTH}`);
+
         nextLvlBtn.style.opacity = "1";
         nextLvlBtn.style.cursor = "pointer"
 
@@ -181,13 +183,11 @@ function loadWord() {
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
           setTimeout(() => {
-                          alert("Failed! The word was " + WORD);
-                    }, 100);
-                    }
+              alert("Failed! The word was " + WORD);
+              }, 100);
+        }
 
-        fetch(`completeLevel/${WORD_LENGTH}`);
-
-         currentRow++;
+     currentRow++;
          currentGuess = "";
  }
 
