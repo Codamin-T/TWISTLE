@@ -24,7 +24,13 @@
                 Grey means that the letter does not exist in the word.
             </p>
         </div>
-    </aside>    <div id="game" data-length="4" data-rows="5" class="container">
+    </aside>
+
+    <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
+        Logout (🍬 <span th:text="${loggedInUser}"></span>)
+    </a>
+
+    <div id="game" data-length="4" data-rows="5" class="container">
 
     <!-- <div class = "container"> -->
         <div class="bubble"></div>

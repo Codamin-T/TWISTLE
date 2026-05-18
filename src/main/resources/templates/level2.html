@@ -29,6 +29,10 @@
 
 <a th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:25px">Login
 </a>
+
+<a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
+    Logout (🍬 <span th:text="${loggedInUser}"></span>)
+</a>
 <!-- <div class = "container"-->
 <!--Game container holding selected word lenght som are two letters -->
     <div id="game" data-length="2" data-rows="5" class="container">
