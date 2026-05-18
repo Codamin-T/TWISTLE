@@ -19,6 +19,8 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
 <var th:value="${unlockedLevels}" id="unlockedLevels"></var>
 
 <div class="page">
+
+
     <div class="top">
         <header class="header">
             <h1>🍭 TWISTLE 🍬</h1>
@@ -26,21 +28,31 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
 
         <aside class="info">
             <input type="checkbox" id="toggle">
+            <aside class = "rightside">
 
-            <label for="toggle" class="toggle">
-                ❔
-            </label>
+                <label for="toggle" class="toggle">
+                    ❔
+                </label>
 
-            <div class="how-to-play">
-                <p>
-                    This is a word guessing game.
-                    Each bubble represents a word of different lengths.
-                    For each word length you have a certain amount of guesses.
-                    Guess the word before you run out of guesses!
-                </p>
-            </div>
+                <div class="how-to-play">
+                    <p>
+                        This is a word guessing game.
+                        Each bubble represents a word of different lengths.
+                        For each word length you have a certain amount of guesses.
+                        Guess the word before you run out of guesses!
+                    </p>
+                </div>
+
+                <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:15px">
+                    Logout (🍬 <span th:text="${loggedInUser}"></span>)
+                </a>
+                
+            </aside>
         </aside>
+
+
     </div>
+
 
     <main class="grid">
         <section class="bubbles">
@@ -48,16 +60,17 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
                 <div class="bubble-row left">
                     <div class="bubble b2">
                         <span class="dot b2"></span>
-                  <a th:href = "@{/sida2}" class = "test" >
+                  <a th:href = "@{/sida2}" class = "bubble-link" >
                             2
                         </a>
                     </div>
                 </div>
+
             <!--</div>-->
             <div class="bubble-row right">
                 <div class="bubble b3">
                     <span class="dot b3"></span>
-                    <a th:href = "@{/sida3}" class = "test" >
+                    <a th:href = "@{/sida3}" class = "bubble-link" >
                         3
                     </a>
                 </div>
@@ -67,7 +80,7 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
                 <div class="bubble b4">
                     <span class="dot b4"></span>
                     <span class="dot b4"></span>
-                    <a th:href = "@{/sida4}" class = "test" >
+                    <a th:href = "@{/sida4}" class = "bubble-link" >
                         4
                     </a>
                 </div>
@@ -76,14 +89,14 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
             <div class="bubble-row right">
                 <div class="bubble b5">
                     <span class="dot b5"></span>
-                    <a th:href ="@{/sida5}" class = "test">
+                    <a th:href ="@{/sida5}" class = "bubble-link">
                         5
                     </a>
                 </div>
             </div>
 
             <div class="bubble-row left">
-                <div class="bubble b6"><span class="dot b6"></span><a th:href = "@{/sida6}" class = "test" >
+                <div class="bubble b6"><span class="dot b6"></span><a th:href = "@{/sida6}" class = "bubble-link" >
                     6
                 </a></div>
             </div>
@@ -91,7 +104,7 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
             <div class="bubble-row right">
                 <div class="bubble b7">
                     <span class="dot b7"></span>
-                    <a th:href = "@{/sida7}" class = "test" >
+                    <a th:href = "@{/sida7}" class = "bubble-link" >
                         7
                     </a>
                 </div>
@@ -100,7 +113,7 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
             <div class="bubble-row left">
                 <div class="bubble b8">
                     <span class="dot b8"></span>
-                    <a th:href = "@{/sida8}" class = "test" >
+                    <a th:href = "@{/sida8}" class = "bubble-link" >
                         8
                     </a>
                 </div>

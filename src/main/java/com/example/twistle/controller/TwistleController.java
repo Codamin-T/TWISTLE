@@ -109,6 +109,7 @@ public class TwistleController {
         }
         if (passwordEncoder.matches(profile.getPassword(), existingProfile.getPassword())) {
             System.out.println("Successfully logged in");
+            session.setAttribute("loggedInUser", existingProfile.getUsername());
             return "redirect:/play";
         } else {
             redirectAttributes.addFlashAttribute("error", "Wrong username or password");
@@ -117,9 +118,17 @@ public class TwistleController {
         //return "redirect:/login"; //7 maj
     }
 
+    @GetMapping("/logout")
+    public String logout() {
+        session.removeAttribute("loggedInUser");
+        return "redirect:/";
+    }
+
     // Directs user to play menu page. Creates a HashMap to store if each level is unlocked.
     @GetMapping("/play")
     public String showPlay(Model model) {
+        model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+
         Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
 
         if (unlockedLevels == null) {
@@ -175,35 +184,45 @@ public class TwistleController {
     // The following methods are mappings to each level's HTML file:
 
     @GetMapping("/sida2")
-    public String showSida2() {
+    public String showSida2(Model model) {
+
+        model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         return "level2";
     }
 
     @GetMapping("/sida3")
-    public String showSida3(){
+    public String showSida3(Model model){
+        model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         return "level3";
     }
 
     @GetMapping("/sida4")
-    public String showSida4(){
+    public String showSida4(Model model) {
+        model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         return "level4";
     }
 
     @GetMapping("/sida5")
-    public String showSida5(){return "level5";}
+    public String showSida5(Model model){
+        model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+        return "level5";
+    }
 
     @GetMapping("/sida6")
-    public String showSida6(){
+    public String showSida6(Model model){
+        model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         return "level6";
     }
 
     @GetMapping("/sida7")
-    public String showSida7() {
+    public String showSida7(Model model) {
+        model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         return "level7";
     }
 
     @GetMapping("/sida8")
-    public String showSida8() {
+    public String showSida8(Model model) {
+        model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         return "level8";
     }
 }

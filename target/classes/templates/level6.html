@@ -26,6 +26,10 @@
         </p>
     </div>
 </aside>
+
+<a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
+    Logout (🍬 <span th:text="${loggedInUser}"></span>)
+</a>
 <!--<div class = "container">-->
 
 <div id="game" data-length="6" data-rows="5" class="container">

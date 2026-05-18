@@ -17,7 +17,6 @@ Note colors and font-family were modified by the group
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:Georgia, script;
 }
 
 body {
@@ -44,7 +43,7 @@ body {
     width: 95vw;
     height: 90vh;
     padding: 20px;
-    display: flex;
+    display: grid;
     flex-direction: column;
     background: rgba(255,255,255,0.06);
     backdrop-filter: blur(18px);
@@ -73,6 +72,7 @@ body {
 }
 
 .toggle {
+    position: absolute;
     background: #82BA88;
     opacity: 80%;
     color: white;
@@ -83,6 +83,10 @@ body {
 
 #toggle {
     display: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: default;
 }
 
 .how-to-play {
@@ -247,5 +251,29 @@ a {
     justify-content: center;
     text-decoration: none;
     color: white;
+}
+
+
+.logout-button {
+    position: absolute;
+    vertical-align: center;
+    right: 20px;
+    background-color: #EE9096;
+    color: white;
+    border: none;
+    display: inline-block;
+    text-decoration: none;
+    font-family: WillyWonka;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: default;
+    width: max-content;
+}
+
+.rightside {
+    position: absolute;
+    bottom: 50px;
+    right: 20px;
 }
 
