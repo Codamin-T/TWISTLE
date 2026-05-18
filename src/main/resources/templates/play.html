@@ -157,8 +157,9 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
 </div>
 <script src="/levels.js"></script>
 
-<a th:href="@{/}" class="back-button" style="font-size:25px">⬅ </a>
-
+<a th:if="${loggedInUser == null}" th:href="@{/}" class="back-button" style="font-size:25px">
+    ⬅
+</a>
 
 </body>
 </html>
