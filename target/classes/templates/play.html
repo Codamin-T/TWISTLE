@@ -46,7 +46,7 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
                 <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:15px">
                     Logout (🍬 <span th:text="${loggedInUser}"></span>)
                 </a>
-                
+
             </aside>
         </aside>
 
@@ -124,8 +124,12 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
 
 
     <aside class="sidebar">
-        <div class="side-item">🥉Streak <span id="steak">0</span></div>
-        <div class="side-item">⭐ Score <span id="score">0</span></div>
+        <a th:if="${loggedInUser != null}" class="side-item">
+            🥉Streak
+        </a>
+        <a th:if="${loggedInUser != null}" class="side-item">
+            ⭐ Score
+        </a>
     </aside>
 
 

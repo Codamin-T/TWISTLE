@@ -62,8 +62,12 @@
 <div>
 
     <aside class="sidebar">
-        <div class="side-item">🥉Streak <span id="steak">0</span></div>
-        <div class="side-item">⭐ Score <span id="score">0</span></div>
+        <div> <a th:if="${loggedInUser != null}" class="side-item">
+            🥉Streak
+        </a> </div>
+        <div><a th:if="${loggedInUser != null}" class="side-item">
+            ⭐ Score
+        </a> </div>
     </aside>
 </div>
 
