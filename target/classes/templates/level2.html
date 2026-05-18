@@ -27,11 +27,12 @@
     </div>
 </aside>
 
-<a th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:25px">Login
+<a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:20px">
+    Login
 </a>
 
 <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
-    Logout (🍬 <span th:text="${loggedInUser}"></span>)
+    Logout (🍬 <span th:text=" ${loggedInUser}"></span>)
 </a>
 <!-- <div class = "container"-->
 <!--Game container holding selected word lenght som are two letters -->
@@ -65,6 +66,7 @@
         <div> <a th:if="${loggedInUser != null}" class="side-item">
             🥉Streak
         </a> </div>
+        
         <div><a th:if="${loggedInUser != null}" class="side-item">
             ⭐ Score
         </a> </div>
