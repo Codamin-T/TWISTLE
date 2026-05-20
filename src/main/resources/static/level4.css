@@ -91,22 +91,6 @@ h1 {
     font-family: Georgia, script;
 }
 
-.correct{
-    background: #6aaa64;
-    color: white;
-}
-
-.wrong-position{
-    background:  #c9b458;
-    color: white;
-}
-
-.wrong{
-    background:  #787c7e;
-    color: white;
-    cursor: default;
-}
-
 .info {
     position: fixed;
     top: 24px;
@@ -162,7 +146,7 @@ h1 {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    background-color: white;
+    background-color: #FDC700;
 }
 
 .key-tile {
@@ -170,6 +154,7 @@ h1 {
     height: 40px;
     margin: 1px;
     border: 1px solid lightgray;
+    background: white;
 
     /* Text */
     font-size: 20px;
@@ -177,6 +162,11 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
+}
+
+.key-tile:hover {
+    background: #70A1F1;
 }
 
 .enter-key-tile {
@@ -191,6 +181,11 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
+}
+
+.enter-key-tile:hover{
+    background: #70A1F1;
 }
 
 .logout-button {
@@ -207,4 +202,20 @@ h1 {
     transition: transform 0.1s;
     text-decoration: none;
     font-family: WillyWonka;
+}
+
+.correct{
+    background: #6aaa64;
+    color: white;
+}
+
+.wrong-position{
+    background:  #c9b458;
+    color: white;
+}
+
+.wrong{
+    background:  #787c7e;
+    color: white;
+    cursor: default;
 }
