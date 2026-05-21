@@ -42,6 +42,8 @@ let nextEnabled = nextLvlBtn.getAttribute("href");
 
 let gameOver = false;
 
+var winSound = new Audio('WIN_SOUND.mp3');
+
 //Fetch a random word from the server
 
 function loadWord() {
@@ -184,6 +186,11 @@ function loadWord() {
     }
     // WIN CONDTION
     if (currentGuess === WORD) {
+        winSound.volume = 0.1;
+        winSound.playbackRate = 1 + WORD_LENGTH/20;
+        winSound.preservesPitch = false;
+        winSound.play();
+
         fetch(`completeLevel/${WORD_LENGTH}`);
 
         nextLvlBtn.style.opacity = "1";
@@ -198,8 +205,8 @@ function loadWord() {
                 nextLvlBtn.style.transform = "";
                 nextLvlBtn.setAttribute("href", nextEnabled);
             }, 200);
-
         }, 100);
+
         return true;
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
