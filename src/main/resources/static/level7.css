@@ -92,22 +92,6 @@ h1 {
     font-family: Georgia, script;
 }
 
-.correct{
-    background: #6aaa64;
-    color: white;
-}
-
-.wrong-position{
-    background:  #c9b458;
-    color: white;
-}
-
-.wrong{
-    background:  #787c7e;
-    color: white;
-    cursor: default;
-}
-
 .info {
     position: fixed;
     top: 24px;
@@ -158,40 +142,54 @@ h1 {
 }
 
 .keyboard-row {
-    width: 400px;
+    width: 600px;
 
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    background-color: white;
+    background-color: #70C1E1;
 }
 
 .key-tile {
-    width: 36px;
-    height: 40px;
+    width: 56px;
+    height: 60px;
     margin: 1px;
     border: 1px solid lightgray;
+    background: white;
+    border-radius: 10px;
 
     /* Text */
-    font-size: 20px;
+    font-size: 40px;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
+}
+
+.key-tile:hover {
+    background: #82BA88;
 }
 
 .enter-key-tile {
-    width: 76px;
-    height: 40px;
+    width: 116px;
+    height: 60px;
     margin: 1px;
     border: 1px solid lightgray;
+    border-radius: 10px;
+    background: white;
 
     /* Text */
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
+}
+
+.enter-key-tile:hover{
+    background: #82BA88;
 }
 
 .logout-button {
@@ -208,4 +206,20 @@ h1 {
     transition: transform 0.1s;
     text-decoration: none;
     font-family: WillyWonka;
+}
+
+.correct{
+    background: #6aaa64;
+    color: white;
+}
+
+.wrong-position{
+    background:  #c9b458;
+    color: white;
+}
+
+.wrong{
+    background:  #787c7e;
+    color: white;
+    cursor: default;
 }

@@ -40,6 +40,8 @@ let nextLvlBtn = document.querySelector(".next-level-button");
 // HTML attribute for next level link
 let nextEnabled = nextLvlBtn.getAttribute("href");
 
+let gameOver = false;
+
 //Fetch a random word from the server
 
 function loadWord() {
@@ -80,8 +82,13 @@ function loadWord() {
 // Handle key input
 
  function handleKeyPress(e) {
+    let key;
 
-    const key = e.key;
+    if (isLetter(e) === false && e.toString().length>10) {
+        key = e.key;
+    } else {
+        key = e;
+    }
 
     if (isLetter(key)) {
         addLetter(key);
@@ -180,6 +187,7 @@ function loadWord() {
             }, 200);
 
         }, 100);
+        return;
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
           setTimeout(() => {
@@ -237,7 +245,10 @@ function initialize() {
 
 function processKey() {
     e = { "code" : this.id };
+    let clickedKey = String(this.id).replace("Key", "");
+    console.log(clickedKey);
     processInput(handleKeyPress);
+    handleKeyPress(clickedKey);
 }
 
 function processInput(e) {
@@ -246,7 +257,7 @@ function processInput(e) {
     // alert(e.code);
     if ("KeyA" <= e.code && e.code <= "KeyZ") {
         if (col < width) {
-            let currTile = document.getElementById(row.toString() + '-' + col.toString());
+            let currTile = document.getElementById(currentRow.toString() + '-' + col.toString());
             if (currTile.innerText == "") {
                 currTile.innerText = e.code[3];
                 col += 1;
@@ -257,7 +268,7 @@ function processInput(e) {
         if (0 < col && col <= width) {
             col -=1;
         }
-        let currTile = document.getElementById(row.toString() + '-' + col.toString());
+        let currTile = document.getElementById(currentRow.toString() + '-' + col.toString());
         currTile.innerText = "";
     }
 
@@ -265,7 +276,7 @@ function processInput(e) {
         update();
     }
 
-    if (!gameOver && row == height) {
+    if (!gameOver && currentRow == totalRows) {
         gameOver = true;
         document.getElementById("answer").innerText = word;
     }
