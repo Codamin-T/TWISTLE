@@ -75,6 +75,8 @@ function loadWord() {
 
     document.addEventListener("keydown", handleKeyPress);
 
+    addControlBackspaceDelete();
+
     initialize();
 }
 
@@ -92,14 +94,25 @@ function loadWord() {
 
     if (isLetter(key)) {
         addLetter(key);
+
+        if (currentGuess.length === WORD_LENGTH){
+            updateKeyboard("Enter", "available");
+        }
+
     }
 
     else if (key === "Backspace") {
+        if (currentGuess.length === WORD_LENGTH){
+            updateKeyboard("Enter", "unavailable");
+        }
         removeLetter();
     }
 
     else if (key === "Enter") {
-        checkGuess();
+
+        if (checkGuess() === true || currentGuess.length < WORD_LENGTH){
+            updateKeyboard("Enter", "unavailable");
+        }
 
         // Clicks 'Next level' button if it's enabled
         if(nextLvlBtn.hasAttribute("href")) {
@@ -187,7 +200,7 @@ function loadWord() {
             }, 200);
 
         }, 100);
-        return;
+        return true;
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
           setTimeout(() => {
@@ -246,7 +259,6 @@ function initialize() {
 function processKey() {
     e = { "code" : this.id };
     let clickedKey = String(this.id).replace("Key", "");
-    console.log(clickedKey);
     processInput(handleKeyPress);
     handleKeyPress(clickedKey);
 }
@@ -283,6 +295,16 @@ function processInput(e) {
 }
 
 function updateKeyboard(letter, status) {
+    if (letter === "Enter"){
+        const enterTile = document.getElementById(letter);
+        if (status === "available") {
+            enterTile.classList.add(status);
+        } else {
+            enterTile.classList.remove("available");
+        }
+        return;
+    }
+
     const keyTile = document.getElementById("Key" + letter.toUpperCase());
     if (!keyTile) return;
 
@@ -292,6 +314,30 @@ function updateKeyboard(letter, status) {
 
     keyTile.classList.remove("correct", "wrong-position", "wrong");
     keyTile.classList.add(status);
+}
+
+// Allows user to delete the whole word with "Control + Backspace" like a regular text input
+function addControlBackspaceDelete(){
+    let backSpaceDown;
+    addEventListener("keydown", (event) => {
+        if (event.key === "Backspace") {
+            backSpaceDown = true;
+        }
+        if(event.ctrlKey && backSpaceDown){
+            while (currentGuess.length > 0){
+                handleKeyPress("Backspace");
+            }
+        }
+    });
+    addEventListener("keyup", (event) => {
+        if (event.key === "Backspace") {
+            backSpaceDown = false;
+        }
+    });
+
+    addEventListener("blur", () => {
+        backSpaceDown = false;
+    });
 }
 
 // Start game
