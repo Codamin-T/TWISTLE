@@ -75,7 +75,7 @@ function loadWord() {
 
     document.addEventListener("keydown", handleKeyPress);
 
-    addControlBackspaceDelete();
+    keyPressAnimations();
 
     initialize();
 }
@@ -317,10 +317,17 @@ function updateKeyboard(letter, status) {
 }
 
 // Allows user to delete the whole word with "Control + Backspace" like a regular text input
-function addControlBackspaceDelete(){
+// Animates keys
+function keyPressAnimations(){
     let backSpaceDown = false;
     addEventListener("keydown", (event) => {
+        let keyTile = document.getElementById("Key" + event.key.toUpperCase());
+        if (keyTile != null) {
+            keyTile.classList.add("is-pressed");
+        }
+
         if (event.key === "Backspace") {
+            document.getElementById("Backspace").classList.add("is-pressed");
             backSpaceDown = true;
         }
         if(event.ctrlKey && backSpaceDown){
@@ -330,7 +337,13 @@ function addControlBackspaceDelete(){
         }
     });
     addEventListener("keyup", (event) => {
+        let keyTile = document.getElementById("Key" + event.key.toUpperCase());
+        if (keyTile != null) {
+            keyTile.classList.remove("is-pressed");
+        }
+
         if (event.key === "Backspace") {
+            document.getElementById("Backspace").classList.remove("is-pressed");
             backSpaceDown = false;
         }
     });

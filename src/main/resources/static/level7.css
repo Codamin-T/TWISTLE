@@ -171,6 +171,28 @@ h1 {
     background: #82BA88;
 }
 
+.key-tile {
+    width: 56px;
+    height: 60px;
+    margin: 1px;
+    border: 1px solid lightgray;
+    background: white;
+    border-radius: 10px;
+    transition: transform 0.05s ease-out;
+
+    /* Text */
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.is-pressed {
+    transform: scale(0.90);
+}
+
 .enter-key-tile {
     width: 116px;
     height: 60px;
