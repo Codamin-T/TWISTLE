@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{style.css}">
+    <link rel="stylesheet" th:href="@{/style.css}">
     <title>Login - TWISTLE</title>
 </head>
 
@@ -42,24 +42,18 @@
                 Login
             </button>
 
-            <br><br>
-
             <a th:href="@{/register}" class="btn secondary">
                 Create new account
             </a>
 
+            <a th:href="@{/play}" class="btn guest">
+                Play without login
+            </a>
+
         </form>
     </section>
-
-    <footer>
-        <a th:href="@{/play}" class="link-btn">
-            Play Now
-        </a>
-    </footer>
-
 </div>
-
-
-
 </body>
 </html>
+
+
