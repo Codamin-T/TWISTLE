@@ -98,7 +98,6 @@ function loadWord() {
         if (currentGuess.length === WORD_LENGTH){
             updateKeyboard("Enter", "available");
         }
-
     }
 
     else if (key === "Backspace") {
@@ -109,15 +108,16 @@ function loadWord() {
     }
 
     else if (key === "Enter") {
+        // Clicks 'Next level' button if it's enabled
+        if(nextLvlBtn.hasAttribute("href")) {
+            nextLvlBtn.click();
+            return;
+        }
 
         if (checkGuess() === true || currentGuess.length < WORD_LENGTH){
             updateKeyboard("Enter", "unavailable");
         }
 
-        // Clicks 'Next level' button if it's enabled
-        if(nextLvlBtn.hasAttribute("href")) {
-            nextLvlBtn.click();
-        }
     }
 
 }
@@ -318,7 +318,7 @@ function updateKeyboard(letter, status) {
 
 // Allows user to delete the whole word with "Control + Backspace" like a regular text input
 function addControlBackspaceDelete(){
-    let backSpaceDown;
+    let backSpaceDown = false;
     addEventListener("keydown", (event) => {
         if (event.key === "Backspace") {
             backSpaceDown = true;

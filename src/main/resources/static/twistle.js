@@ -98,7 +98,6 @@ function loadWord() {
         if (currentGuess.length === WORD_LENGTH){
             updateKeyboard("Enter", "available");
         }
-
     }
 
     else if (key === "Backspace") {
@@ -109,15 +108,16 @@ function loadWord() {
     }
 
     else if (key === "Enter") {
+        // Clicks 'Next level' button if it's enabled
+        if(nextLvlBtn.hasAttribute("href")) {
+            nextLvlBtn.click();
+            return;
+        }
 
         if (checkGuess() === true || currentGuess.length < WORD_LENGTH){
             updateKeyboard("Enter", "unavailable");
         }
 
-        // Clicks 'Next level' button if it's enabled
-        if(nextLvlBtn.hasAttribute("href")) {
-            nextLvlBtn.click();
-        }
     }
 
 }
