@@ -5,8 +5,6 @@ Description : This stylesheet is used för the HTML pages index, login, start an
 Note Font-family were modified by the group
 */
 
-
-
 @font-face {
     font-family: 'WillyWonka';
     font-style: normal;
@@ -58,14 +56,18 @@ body {
     width: 100%;
 }
 
+
 .buttons {
     display: flex;
     gap: 1rem;
+    align-items: center;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 500px;
     width: 100%;
 }
+
+
 
 .btn {
     display: flex;
@@ -107,7 +109,6 @@ body {
     color:#111;
 }
 
-
 footer {
     color: #9ca3af;
     font-size: 0.9rem;
@@ -131,8 +132,8 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     width: 100%;
+    gap: 1rem;
 }
 
 .input {
@@ -163,4 +164,18 @@ footer {
 
 .link-btn:hover {
     text-decoration: underline;
+}
+
+
+.guest {
+    background: transparent;
+    border: 1px solid mediumpurple;
+    color: #374151;
+    font-weight: 600;
+}
+
+.guest:hover {
+    background: #f3f4f6;
+    border-color: #6b7280;
+    color: #111;
 }

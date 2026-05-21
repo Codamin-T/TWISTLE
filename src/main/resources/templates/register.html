@@ -6,13 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{style.css}">
+    <link rel="stylesheet" th:href="@{/style.css}">
     <title>Register</title>
 </head>
 <body>
 
 <div class="page">
-
     <header class="hero">
         <h1>Create Account</h1>
         <p>Join TWISTLE and start learning</p>
@@ -40,21 +39,15 @@
                 Register
             </button>
 
-            <br><br>
-
             <a th:href="@{/login}" class="btn secondary">
-                Already have an account? Login
+                Have an account? Login
+            </a>
+
+            <a th:href="@{/play}" class="btn guest">
+                Play & Enjoy as a guest
             </a>
         </form>
-
     </section>
-    <footer>
-        <a th:href="@{/play}" class="link-btn">
-            Play Now
-        </a>
-    </footer>
-
 </div>
-
 </body>
 </html>
