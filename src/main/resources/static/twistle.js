@@ -187,6 +187,7 @@ function loadWord() {
             }, 200);
 
         }, 100);
+        return;
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
           setTimeout(() => {

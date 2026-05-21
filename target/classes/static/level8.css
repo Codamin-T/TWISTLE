@@ -145,8 +145,7 @@ h1 {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    background-color: #86299C;
-    border-radius: 10px;
+    background-color: #82BA88;
 }
 
 .key-tile {
@@ -167,7 +166,7 @@ h1 {
 }
 
 .key-tile:hover {
-    background: #70A1F1;
+    background: #82699C;
 }
 
 .enter-key-tile {
@@ -176,9 +175,10 @@ h1 {
     margin: 1px;
     border: 1px solid lightgray;
     border-radius: 10px;
+    background: white;
 
     /* Text */
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -187,7 +187,7 @@ h1 {
 }
 
 .enter-key-tile:hover{
-    background: #70A1F1;
+    background: #82699C;
 }
 
 .logout-button {
