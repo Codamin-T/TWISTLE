@@ -180,7 +180,7 @@ function loadWord() {
             }, 200);
 
         }, 100);
-    }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
+    }  else if (currentGuess != WORD && (currentRow + 1) == totalRows){
 
           setTimeout(() => {
               alert("Failed! The word was " + WORD);
