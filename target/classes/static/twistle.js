@@ -191,7 +191,7 @@ function loadWord() {
         winSound.preservesPitch = false;
         winSound.play();
 
-        fetch(`completeLevel/${WORD_LENGTH}`);
+        fetch(`completeLevel/${WORD_LENGTH}${currentRow.toString()}`);
 
         nextLvlBtn.style.opacity = "1";
         nextLvlBtn.style.cursor = "pointer"

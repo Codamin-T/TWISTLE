@@ -67,8 +67,6 @@ body {
     width: 100%;
 }
 
-
-
 .btn {
     display: flex;
     align-items: center;
@@ -109,11 +107,15 @@ body {
     color:#111;
 }
 
+
+
+
 footer {
     color: #9ca3af;
     font-size: 0.9rem;
     text-align: center;
 }
+
 
 @media (max-width: 600px) {
     .page {

@@ -3,6 +3,7 @@ package com.example.twistle.controller;
 import com.example.twistle.model.*;
 import com.example.twistle.repository.*;
 import com.example.twistle.config.*;
+import com.example.twistle.service.ProfileService;
 import com.example.twistle.service.WordService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class TwistleController {
     private HttpSession session;
     @Autowired
     private WordService wordService;
+    @Autowired
+    private ProfileService profileService;
 
     public TwistleController() {
         this.securityConfig = new SecurityConfig();
@@ -151,9 +154,14 @@ public class TwistleController {
 
     // Called when a level is completed, unlocks next level.
     @ResponseBody
-    @GetMapping("/completeLevel/{level}")
-    public void completeLevel(@PathVariable String level) {
-        System.out.println("Unlocked level: " + level);
+    @GetMapping("/completeLevel/{level}{tries}")
+    public void completeLevel(@PathVariable String level, @PathVariable String tries) {
+
+        int currentRow = Integer.parseInt(level.substring(1));
+        level = level.substring(0, 1);
+
+        profileService.addPointsToProfile(currentRow);
+
         wordService.setLastUsed((Word)session.getAttribute("currentWord"));
         Map<String, Boolean> unlockedLevels;
         unlockedLevels = (HashMap)session.getAttribute("unlockedLevels");

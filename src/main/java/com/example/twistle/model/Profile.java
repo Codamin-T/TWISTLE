@@ -37,6 +37,14 @@ public class Profile {
         this.password = password;
     }
 
+    public void addPoints(Integer pointsToAdd) {
+        if (this.points == null) {
+            setPoints(pointsToAdd);
+            return;
+        }
+        points += pointsToAdd;
+    }
+
     // The following methods are not used yet:
 
     public void setUsername(String username) {
