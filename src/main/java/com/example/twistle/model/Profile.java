@@ -52,6 +52,9 @@ public class Profile {
     }
 
     public int getPoints() {
+        if (points == null) {
+            points = 0;
+        }
         return points;
     }
 

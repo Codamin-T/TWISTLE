@@ -207,6 +207,33 @@ function loadWord() {
             }, 200);
         }, 100);
 
+        //uppdatera score direkt på sidan när man vunnit
+        let pointsText = document.getElementById("points");
+        if(pointsText != null){
+            let currentPoints = parseInt(pointsText.innerText);
+            if (currentRow == 0) {
+                       currentPoints += 5;
+                   } else if (currentRow == 1) {
+                       currentPoints += 3;
+                   } else if (currentRow == 2) {
+                       currentPoints += 2;
+                   } else {
+                        currentPoints += 1;
+                   }
+
+            pointsText.innerText = currentPoints;}
+
+        //fetch (`/getPoints/`)
+        //.then(function(response) {
+        //            return response.json();
+        //        }).then(function(getPoints){
+        //        let points = String(getPoints);
+        //            pointsText = "⭐ Score: " + points;
+//
+        //            console.log(pointsText);
+        //        });
+
+
         return true;
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
@@ -343,6 +370,7 @@ function keyPressAnimations(){
             }
         }
     });
+
     addEventListener("keyup", (event) => {
         let keyTile = document.getElementById("Key" + event.key.toUpperCase());
         if (keyTile != null) {

@@ -43,5 +43,7 @@ public class ProfileService {
 
         profile.addPoints(points);
         profileRepository.save(profile);
+
+        session.setAttribute("points", profile.getPoints());
     }
 }

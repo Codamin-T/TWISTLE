@@ -128,7 +128,8 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
             🥉Streak
         </a>
         <a th:if="${loggedInUser != null}" class="side-item">
-            ⭐ Score
+            ⭐ Score 🍬 <span th:text="${points}"></span>
+
         </a>
     </aside>
 

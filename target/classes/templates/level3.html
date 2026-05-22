@@ -62,8 +62,8 @@
         <a th:if="${loggedInUser != null}" class="side-item">
             🥉Streak
         </a>
-        <a th:if="${loggedInUser != null}" class="side-item">
-            ⭐ Score
+        <a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
+            ⭐ Score: <span th:text="${points}" id="points"></span>
         </a>
     </aside>
 </div>

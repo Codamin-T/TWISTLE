@@ -131,6 +131,10 @@ public class TwistleController {
     @GetMapping("/play")
     public String showPlay(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+        if(session.getAttribute("loggedInUser") != null) {
+            session.setAttribute("points", profileRepository.findByUsername((String) session.getAttribute("loggedInUser")).getPoints());
+            model.addAttribute("points", session.getAttribute("points"));
+        }
 
         Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>)session.getAttribute("unlockedLevels");
 
@@ -148,6 +152,7 @@ public class TwistleController {
             session.setAttribute("unlockedLevels", unlockedLevels);
         }
         model.addAttribute("unlockedLevels", unlockedLevels);
+        model.addAttribute("points", session.getAttribute("points"));
 
         return "play";
     }
@@ -189,48 +194,74 @@ public class TwistleController {
         return (HashMap)session.getAttribute("unlockedLevels");
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/getPoints", method = RequestMethod.GET)
+    public String getPoints() {
+        return String.valueOf(profileRepository.findByUsername((String)session.getAttribute("loggedInUser")).getPoints());
+    }
+
     // The following methods are mappings to each level's HTML file:
 
     @GetMapping("/sida2")
     public String showSida2(Model model) {
-
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+        if(session.getAttribute("loggedInUser") != null){
+            model.addAttribute("points", session.getAttribute("points"));
+        }
         return "level2";
     }
 
     @GetMapping("/sida3")
     public String showSida3(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+        if(session.getAttribute("loggedInUser") != null){
+            model.addAttribute("points", session.getAttribute("points"));
+        }
         return "level3";
     }
 
     @GetMapping("/sida4")
     public String showSida4(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+        if(session.getAttribute("loggedInUser") != null){
+            model.addAttribute("points", session.getAttribute("points"));
+        }
         return "level4";
     }
 
     @GetMapping("/sida5")
     public String showSida5(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+        if(session.getAttribute("loggedInUser") != null){
+            model.addAttribute("points", session.getAttribute("points"));
+        }
         return "level5";
     }
 
     @GetMapping("/sida6")
     public String showSida6(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+        if(session.getAttribute("loggedInUser") != null){
+            model.addAttribute("points", session.getAttribute("points"));
+        }
         return "level6";
     }
 
     @GetMapping("/sida7")
     public String showSida7(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+        if(session.getAttribute("loggedInUser") != null){
+            model.addAttribute("points", session.getAttribute("points"));
+        }
         return "level7";
     }
 
     @GetMapping("/sida8")
     public String showSida8(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
+        if(session.getAttribute("loggedInUser") != null){
+            model.addAttribute("points", session.getAttribute("points"));
+        }
         return "level8";
     }
 }
