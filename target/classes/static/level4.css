@@ -5,6 +5,10 @@ body {
     background: #82BA88;
 }
 
+.how-to-play p {
+    margin: 4px 0;
+}
+
 @font-face {
     font-family: 'WillyWonka';
     font-style: normal;
@@ -32,7 +36,11 @@ h1 {
 .sidebar {
     position: absolute;
     top: 20px;
-    left: 20px;
+
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    left: 60px;
 }
 
 .side-item {
@@ -48,26 +56,30 @@ h1 {
     color: white;
     border: none;
     border-radius: 10px;
-  /*  cursor: default;*/
+
     cursor: pointer;
-    padding: 6px 12px;
+    padding: 3px 30px;
     text-decoration: none;
+
+    position: fixed;
+    top: 60vh;
+    left: 60px;
 }
 
 .next-level-button {
     position: fixed;
-    vertical-align: center;
-    right: 20px;
+    right: 60px;
     background-color: #FDC700;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 6px 12px;
+    padding: 3px 30px;
     display: inline-block;
     transition: transform 0.1s;
     text-decoration: none;
     font-family: WillyWonka;
+    top: 60vh;
 }
 
 .next-level-button:hover {
@@ -91,21 +103,25 @@ h1 {
     font-family: Georgia, script;
 }
 
-.info {
+.flex-container {
     position: fixed;
-    top: 24px;
-    right: 30%;
-    z-index: 100;
+    gap: 18px;
 
+    right: 4%;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    top: 20px;
+}
+
+.info {
+    position: static;
+    z-index: 100;
 }
 
 .toggle {
-    background: #70A1F1;
+    background: #FDC700;
     font-size: large;
-    opacity: 80%;
     color: white;
     padding: 10px;
     border-radius: 50%;
@@ -118,15 +134,17 @@ h1 {
 
 .how-to-play {
     display: none;
-    position: absolute;
-    top: 50px;
-    left: 0px;
+    position: fixed;
+    top: 22%;
+    right: 4%;
 
     width: 220px;
     padding: 10px;
     border-radius: 10px;
 
-    background: rgba(112, 193, 225, 0.3);
+    background: #FDC700;
+    opacity: 50%
+    /*background: rgba(112, 193, 225, 0.3);*/
 }
 
 #toggle:checked ~ .how-to-play {
@@ -203,16 +221,14 @@ h1 {
 }
 
 .logout-button {
-    position: absolute;
-    vertical-align: center;
-    right: 20px;
-    background-color: #EE9096;
+    position: static;
+    background-color: #FDC700;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 6px 12px;
-    display: inline-block;
+    padding: 6px 30px;
+    font-size: large;
     transition: transform 0.1s;
     text-decoration: none;
     font-family: WillyWonka;

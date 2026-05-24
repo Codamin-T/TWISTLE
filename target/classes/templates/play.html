@@ -19,38 +19,36 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
 <var th:value="${unlockedLevels}" id="unlockedLevels"></var>
 
 <div class="page">
-
-
     <div class="top">
         <header class="header">
             <h1>🍭 TWISTLE 🍬</h1>
         </header>
+        <div class = "flex-container">
+            <aside class="info">
+                <input type="checkbox" id="toggle">
 
-        <aside class="info">
-            <input type="checkbox" id="toggle">
-            <aside class = "rightside">
+                    <label for="toggle" class="toggle">
+                        ❔
+                    </label>
 
-                <label for="toggle" class="toggle">
-                    ❔
-                </label>
-
-                <div class="how-to-play">
-                    <p>
-                        This is a word guessing game.
-                        Each bubble represents a word of different lengths.
-                        For each word length you have a certain amount of guesses.
-                        Guess the word before you run out of guesses!
-                    </p>
-                </div>
-
-                <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:15px">
-                    Logout (🍬 <span th:text="${loggedInUser}"></span>)
-                </a>
+                    <div class="how-to-play">
+                        <p>
+                            This is a word guessing game.
+                            Each bubble represents a word of different lengths.
+                            For each word length you have a certain amount of guesses.
+                            Guess the word before you run out of guesses!
+                        </p>
+                    </div>
 
             </aside>
-        </aside>
-
-
+            <!--Login only shows when a user is logged out-->
+            <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:20px">
+                Login
+            </a>
+            <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:15px">
+                Logout (🍬 <span th:text="${loggedInUser}"></span>)
+            </a>
+        </div>
     </div>
 
 
@@ -158,7 +156,8 @@ Description :Main menu för Twistle. Choose a word lenghth (2-8), View score/str
 </div>
 <script src="/levels.js"></script>
 
-<a th:if="${loggedInUser == null}" th:href="@{/}" class="back-button" style="font-size:25px">
+<!--Tog bort th:if="${loggedInUser == null}"-->
+<a th:href="@{/}" class="back-button" style="font-size:25px">
     ⬅
 </a>
 

@@ -12,26 +12,27 @@
 </head>
 <body>
 <h1>5 letters</h1>
-<aside class="info">
-    <input type="checkbox" id="toggle">
-    <label for="toggle" class="toggle">
-        ❔
-    </label>
+<div class = "flex-container">
+    <aside class="info">
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle">
+            ❔
+        </label>
 
-    <div class="how-to-play">
-        <p>
-            This is the five letter game.
-            After each guess, the letters will turn different colors.
-            Green means that the letter is in the correct spot.
-            Yellow means that the letter exists in the word, but is in the incorrect spot.
-            Grey means that the letter does not exist in the word.
-        </p>
-    </div>
-</aside>
-
-<a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
-    Logout (🍬 <span th:text="${loggedInUser}"></span>)
-</a>
+        <div class="how-to-play">
+            <p>
+                This is the five letter game.
+                After each guess, the letters will turn different colors.
+                Green means that the letter is in the correct spot.
+                Yellow means that the letter exists in the word, but is in the incorrect spot.
+                Grey means that the letter does not exist in the word.
+            </p>
+        </div>
+    </aside>
+    <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
+        Logout (🍬 <span th:text="${loggedInUser}"></span>)
+    </a>
+</div>
 
 <div id="game" data-length="5" data-rows="5" class="container">
     <div class="bubble"></div>
