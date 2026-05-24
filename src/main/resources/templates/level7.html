@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{level7.css}">
     <link rel="stylesheet" th:href="@{winPopup.css}">
+    <link rel="stylesheet" th:href="@{losePopup.css}">
+
 
     <title>Seven letters</title>
 </head>
@@ -88,6 +90,8 @@
 </div>
 
 <div th:replace="winPopup :: winPopup"></div>
+<div th:replace="losePopup :: losePopup"></div>
+
 
 <a th:href="@{/play}" class="back-button" style="font-size:25px">⬅
 </a>

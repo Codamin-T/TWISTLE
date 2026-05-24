@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:href="@{level8.css}">
     <link rel="stylesheet" th:href="@{winPopup.css}">
+    <link rel="stylesheet" th:href="@{losePopup.css}">
 
-  <title>Eight letters</title>
+
+    <title>Eight letters</title>
 </head>
 <body>
 <h1>8 letters</h1>
@@ -92,6 +94,8 @@
 </a>
 
 <div th:replace="winPopup :: winPopup"></div>
+<div th:replace="losePopup :: losePopup"></div>
+
 
 <a th:href="@{/}" class="next-level-button" style="font-size:25px">Main menu
 </a>

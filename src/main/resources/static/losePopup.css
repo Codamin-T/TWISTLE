@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'WillyWonka';
+    font-style: normal;
+    font-weight: normal;
+    src: url('Wonderbar-pALD.woff') format('woff');
+}
+
+.lose-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: linear-gradient(135deg, #d0e8ff 0%, #e8d0ff 100%);
+    border-radius: 30px;
+    padding: 50px 30px;
+    box-sizing: border-box;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.lose-modal::before {
+    content: '🍭';
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 1.8rem;
+    pointer-events: none;
+}
+
+.lose-modal::after {
+    content: '🍭';
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 1.8rem;
+    pointer-events: none;
+}
+
+.lose-modal .modal-body::before {
+    content: '🍭';
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    font-size: 1.8rem;
+    pointer-events: none;
+}
+
+.lose-modal .modal-body::after {
+    content: '🍭';
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    font-size: 1.8rem;
+    pointer-events: none;
+}
