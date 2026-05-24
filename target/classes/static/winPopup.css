@@ -1,0 +1,130 @@
+@font-face {
+    font-family: 'WillyWonka';
+    font-style: normal;
+    font-weight: normal;
+    src: url('Wonderbar-pALD.woff') format('woff');
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: linear-gradient(135deg, #ffd6e0 0%, #fff9c4 100%);
+    border-radius: 30px;
+    padding: 50px 30px;
+    box-sizing: border-box;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Top-left candy */
+.modal::before {
+    content: '🍬';
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 1.8rem;
+    pointer-events: none;
+}
+
+/* Top-right candy */
+.modal::after {
+    content: '🍬';
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 1.8rem;
+    pointer-events: none;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    padding-top: 10px;
+}
+
+.title {
+    font-family: 'WillyWonka', script;
+    font-size: 2.8rem;
+    color: #c0577a;
+    margin: 0;
+}
+
+.close-button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffb3c6;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button:hover {
+    background: #ff85a1;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    font-size: 1.1rem;
+    color: #555;
+    text-align: center;
+    padding: 0 10px;
+    width: 100%;
+}
+
+/* Bottom-left candy */
+.modal-body::before {
+    content: '🍬';
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    font-size: 1.8rem;
+    pointer-events: none;
+}
+
+/* Bottom-right candy */
+.modal-body::after {
+    content: '🍬';
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    font-size: 1.8rem;
+    pointer-events: none;
+}
+
+.login-popup-button {
+    display: inline-block;
+    background: #b5ead7;
+    color: #333;
+    text-decoration: none;
+    border-radius: 20px;
+    padding: 8px 24px;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.login-popup-button:hover {
+    background: #7ed9ba;
+}

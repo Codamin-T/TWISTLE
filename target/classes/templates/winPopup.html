@@ -1,0 +1,23 @@
+<div class="modal" id="modal" th:fragment="winPopup" style="display:none" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <div class="modal-header">
+        <div class="title">You Won!</div>
+
+        <button class="close-button" id="closeButton">
+            &times;
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div th:if="${loggedInUser != null}">
+            Congratulations! You earned 1 point for winning!
+        </div>
+
+        <div th:if="${loggedInUser == null}">
+            Congratulations! Log in to save your score!
+            <br><br>
+            <a th:href="@{/login}" class="login-popup-button">Login</a>
+        </div>
+    </div>
+
+</div>
