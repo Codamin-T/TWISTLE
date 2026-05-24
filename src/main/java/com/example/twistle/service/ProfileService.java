@@ -33,6 +33,8 @@ public class ProfileService {
 
         Profile profile = profileRepository.findByUsername((String)session.getAttribute("loggedInUser"));
 
+        if (profile == null) return;
+
         if (amountOfTries == 1) {
             points = 5;
         } else if (amountOfTries == 2) {

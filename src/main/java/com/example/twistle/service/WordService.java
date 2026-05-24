@@ -42,6 +42,7 @@ public class WordService {
 
     //Sets attribute 'lastUsed' to current date.
     public void setLastUsed(Word word){
+        if (word == null) return;
         if (session.getAttribute("lastUsed") == session.getAttribute("currentWord")) {
             session.setAttribute("lastUsed", word);
             word.setLastUsed(Date.valueOf(LocalDate.now()));
