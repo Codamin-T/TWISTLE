@@ -208,7 +208,12 @@ function loadWord() {
         setTimeout(() => {
             document.getElementById("modal").style.display = "block";
 
-            // Inflate 'Next level' button 200ms.
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+
             nextLvlBtn.style.transform = "scale(1.2)";
             setTimeout(() => {
                 nextLvlBtn.style.transform = "";
