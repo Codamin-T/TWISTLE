@@ -80,6 +80,10 @@ function loadWord() {
     keyPressAnimations();
 
     initialize();
+
+    document.getElementById("closeButton").addEventListener("click", () => {
+        document.getElementById("modal").style.display = "none";
+    });
 }
 
 
@@ -197,7 +201,7 @@ function loadWord() {
         nextLvlBtn.style.cursor = "pointer"
 
         setTimeout(() => {
-            alert("Right word!");
+            document.getElementById("modal").style.display = "block";
 
             // Inflate 'Next level' button 200ms.
             nextLvlBtn.style.transform = "scale(1.2)";

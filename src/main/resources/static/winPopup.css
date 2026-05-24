@@ -11,10 +11,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 400px;
     background: linear-gradient(135deg, #ffd6e0 0%, #fff9c4 100%);
     border-radius: 30px;
-    padding: 30px;
+    padding: 50px 30px;
     box-sizing: border-box;
     z-index: 1000;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
