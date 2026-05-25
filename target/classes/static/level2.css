@@ -29,7 +29,7 @@ h1 {
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(2, min(10vh, 10vw));
-    grid-template-rows: repeat(5, min(10vh, 10vw));
+    grid-template-rows: repeat(6, min(10vh, 10vw));
     justify-content: center;
 
 }
