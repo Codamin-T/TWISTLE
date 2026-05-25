@@ -39,9 +39,7 @@ public class WordController {
     public String wordGuess(@PathVariable int length, Model model){
         System.out.println("Pressed length:"+length);
        
-       
-     
-         Word word = (Word)session.getAttribute("currentWord");
+        Word word = (Word)session.getAttribute("currentWord");
         
         /// DET ÄR BARA TEST 🚦🚦🚦🚦 DEN RADEN SKICKAR WORD FRÅN JAVA TILL HTML-SIADAN SÅ ATT JAVA SCRIPT KAN ANVÄNDA DEN SENARE
         model.addAttribute("word", /*word*/  word.getWord_text());
