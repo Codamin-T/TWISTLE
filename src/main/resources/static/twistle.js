@@ -422,7 +422,7 @@ document.addEventListener("DOMContentLoaded", () => {
         startTimer();
 
         loadWord();
-
+        startBtn.style.display = "none";
     });
 });
 
