@@ -206,7 +206,7 @@ public class TwistleController {
 
     // The following methods are mappings to each level's HTML file:
 
-    @GetMapping("/sida2")
+    @GetMapping("/level2")
     public String showSida2(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
@@ -215,7 +215,7 @@ public class TwistleController {
         return "level2";
     }
 
-    @GetMapping("/sida3")
+    @GetMapping("/level3")
     public String showSida3(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
@@ -224,7 +224,7 @@ public class TwistleController {
         return "level3";
     }
 
-    @GetMapping("/sida4")
+    @GetMapping("/level4")
     public String showSida4(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
@@ -233,7 +233,7 @@ public class TwistleController {
         return "level4";
     }
 
-    @GetMapping("/sida5")
+    @GetMapping("/level5")
     public String showSida5(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
@@ -242,7 +242,7 @@ public class TwistleController {
         return "level5";
     }
 
-    @GetMapping("/sida6")
+    @GetMapping("/level6")
     public String showSida6(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
@@ -251,7 +251,7 @@ public class TwistleController {
         return "level6";
     }
 
-    @GetMapping("/sida7")
+    @GetMapping("/level7")
     public String showSida7(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
@@ -260,7 +260,7 @@ public class TwistleController {
         return "level7";
     }
 
-    @GetMapping("/sida8")
+    @GetMapping("/level8")
     public String showSida8(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
