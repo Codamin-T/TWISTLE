@@ -77,7 +77,7 @@ function loadWord() {
 
     document.addEventListener("keydown", handleKeyPress);
 
-    keyPressAnimations();
+    keyPressEvents();
 
     initialize();
 
@@ -169,94 +169,24 @@ function loadWord() {
 
  //Check the guess
  function checkGuess() {
-
     if (currentGuess.length !== WORD_LENGTH) return;
+    colorLettersOnGuess();
 
-    for (let i = 0; i < WORD_LENGTH; i++) {
-
-        const index =
-            currentRow * WORD_LENGTH + i;
-
-        const letter = currentGuess[i];
-        const correct = WORD[i];
-
-       if (letter === correct) {
-           bubbles[index].classList.add("correct");
-           updateKeyboard(letter, "correct");
-       }
-       else if (WORD.includes(letter)) {
-           bubbles[index].classList.add("wrong-position");
-           updateKeyboard(letter, "wrong-position");
-       }
-       else {
-           bubbles[index].classList.add("wrong");
-           updateKeyboard(letter, "wrong");
-       }
-    }
     // WIN CONDTION
     if (currentGuess === WORD) {
-        winSound.volume = 0.1;
-        winSound.playbackRate = 1 + WORD_LENGTH/20;
-        winSound.preservesPitch = false;
-        winSound.play();
+        playWinSound();
 
         fetch(`completeLevel/${WORD_LENGTH}${currentRow.toString()}`);
 
-        nextLvlBtn.style.opacity = "1";
-        nextLvlBtn.style.cursor = "pointer"
-
-        setTimeout(() => {
-            document.getElementById("modal").style.display = "block";
-
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { y: 0.6 }
-            });
-
-            nextLvlBtn.style.transform = "scale(1.2)";
-            setTimeout(() => {
-                nextLvlBtn.style.transform = "";
-                nextLvlBtn.setAttribute("href", nextEnabled);
-            }, 200);
-        }, 100);
-
-        //uppdatera score direkt på sidan när man vunnit
-        let pointsText = document.getElementById("points");
-        if(pointsText != null){
-            let currentPoints = parseInt(pointsText.innerText);
-            if (currentRow == 0) {
-                       currentPoints += 5;
-                   } else if (currentRow == 1) {
-                       currentPoints += 3;
-                   } else if (currentRow == 2) {
-                       currentPoints += 2;
-                   } else {
-                        currentPoints += 1;
-                   }
-
-            pointsText.innerText = currentPoints;}
-
-        //fetch (`/getPoints/`)
-        //.then(function(response) {
-        //            return response.json();
-        //        }).then(function(getPoints){
-        //        let points = String(getPoints);
-        //            pointsText = "⭐ Score: " + points;
-//
-        //            console.log(pointsText);
-        //        });
-
-
+        winAnimations();
+        setPointsOnScreen();
         return true;
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
-
            setTimeout(() => {
                document.getElementById("correctWord").innerText = WORD;
                document.getElementById("loseModal").style.display = "block";
            }, 100);
         }
-
      currentRow++;
          currentGuess = "";
  }
@@ -303,6 +233,72 @@ function initialize() {
     /*document.addEventListener("keyup", (e) => {
             processInput(e);
         })*/
+}
+
+function colorLettersOnGuess(){
+    for (let i = 0; i < WORD_LENGTH; i++) {
+        const index = currentRow * WORD_LENGTH + i;
+        const letter = currentGuess[i];
+        const correct = WORD[i];
+
+        if (letter === correct) {
+            bubbles[index].classList.add("correct");
+            updateKeyboard(letter, "correct");
+        }
+        else if (WORD.includes(letter)) {
+            bubbles[index].classList.add("wrong-position");
+            updateKeyboard(letter, "wrong-position");
+        }
+        else {
+            bubbles[index].classList.add("wrong");
+            updateKeyboard(letter, "wrong");
+        }
+    }
+}
+
+function playWinSound(){
+    winSound.volume = 0.1;
+    winSound.playbackRate = 1 + WORD_LENGTH/20;
+    winSound.preservesPitch = false;
+    winSound.play();
+}
+
+function winAnimations(){
+    nextLvlBtn.style.opacity = "1";
+    nextLvlBtn.style.cursor = "pointer"
+
+    setTimeout(() => {
+        document.getElementById("modal").style.display = "block";
+
+        confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
+
+        nextLvlBtn.style.transform = "scale(1.2)";
+        setTimeout(() => {
+            nextLvlBtn.style.transform = "";
+            nextLvlBtn.setAttribute("href", nextEnabled);
+        }, 200);
+    }, 100);
+}
+
+function setPointsOnScreen(){
+    let pointsText = document.getElementById("points");
+    if(pointsText != null){
+        let currentPoints = parseInt(pointsText.innerText);
+        if (currentRow === 0) {
+            currentPoints += 5;
+        } else if (currentRow === 1) {
+            currentPoints += 3;
+        } else if (currentRow === 2) {
+            currentPoints += 2;
+        } else {
+            currentPoints += 1;
+        }
+        pointsText.innerText = currentPoints;
+    }
 }
 
 function processKey() {
@@ -365,9 +361,11 @@ function updateKeyboard(letter, status) {
     keyTile.classList.add(status);
 }
 
-// Allows user to delete the whole word with "Control + Backspace" like a regular text input
-// Animates keys
-function keyPressAnimations(){
+/*
+* Animates keys to be smaller when the keys are pressed down using event listeners for key-up and key-down.
+* Uses the same listeners to allow 'control+backspace' to delete the whole word.
+ */
+function keyPressEvents(){
     let backSpaceDown = false;
     addEventListener("keydown", (event) => {
         let keyTile = document.getElementById("Key" + event.key.toUpperCase());
