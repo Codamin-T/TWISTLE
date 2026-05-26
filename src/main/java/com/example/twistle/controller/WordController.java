@@ -42,7 +42,7 @@ public class WordController {
         Word word = (Word)session.getAttribute("currentWord");
         
         /// DET ÄR BARA TEST 🚦🚦🚦🚦 DEN RADEN SKICKAR WORD FRÅN JAVA TILL HTML-SIADAN SÅ ATT JAVA SCRIPT KAN ANVÄNDA DEN SENARE
-        model.addAttribute("word", /*word*/  word.getWord_text());
+        model.addAttribute("word",  word.getWordText());
         
         word = wordService.getDailyWord(length);
         session.setAttribute("currentWord", word);
@@ -63,7 +63,7 @@ public class WordController {
         if (word == null) {
             return "redirect:/word-menu";
         }
-        String wordText = word.getWord_text().toLowerCase();
+        String wordText = word.getWordText().toLowerCase();
         if (guessText.toLowerCase().equals(wordText)) {
             System.out.println("Word guessed correctly");
             return "redirect:/word-guess/"+wordText.length()+"/success";
@@ -87,7 +87,7 @@ public class WordController {
         if (word == null) {
             return "";
         }
-        return word.getWord_text();
+        return word.getWordText();
     }
 }
 
