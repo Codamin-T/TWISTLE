@@ -42,102 +42,42 @@ let nextEnabled = nextLvlBtn.getAttribute("href");
 
 let gameOver = false;
 
+let seconds = 0;
+let timerInterval = null;
+let useTimer = false;
+
 var winSound = new Audio('WIN_SOUND.mp3');
 
-function saveGameState(gameWon, gameLost, rowsCompleted) {
-    const completedRows = [];
-    for (let row = 0; row < rowsCompleted; row++) {
-        const rowData = [];
-        for (let col = 0; col < WORD_LENGTH; col++) {
-            const index = row * WORD_LENGTH + col;
-            const bubble = bubbles[index];
-            let status = "wrong";
-            if (bubble.classList.contains("correct")) status = "correct";
-            else if (bubble.classList.contains("wrong-position")) status = "wrong-position";
-            rowData.push({ letter: bubble.textContent.toLowerCase(), status });
-        }
-        completedRows.push(rowData);
-    }
 
-    const keyboardState = {};
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(letter => {
-        const keyTile = document.getElementById("Key" + letter);
-        if (keyTile) {
-            if (keyTile.classList.contains("correct")) keyboardState[letter] = "correct";
-            else if (keyTile.classList.contains("wrong-position")) keyboardState[letter] = "wrong-position";
-            else if (keyTile.classList.contains("wrong")) keyboardState[letter] = "wrong";
-        }
-    });
+function startTimer() {
+    stopTimer();
 
-    fetch(`/saveGameState/${WORD_LENGTH}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            word: WORD,
-            completedRows,
-            currentRow: completedRows.length,
-            keyboardState,
-            gameWon: gameWon || false,
-            gameLost: gameLost || false
-        })
-    });
-}
-
-function restoreGameState(savedState) {
-    currentRow = savedState.currentRow;
-
-    savedState.completedRows.forEach((row, rowIndex) => {
-        row.forEach((cell, colIndex) => {
-            const index = rowIndex * WORD_LENGTH + colIndex;
-            bubbles[index].textContent = cell.letter.toUpperCase();
-            if (cell.status) {
-                bubbles[index].classList.add(cell.status);
-            }
-        });
-    });
-
-    if (savedState.keyboardState) {
-        Object.entries(savedState.keyboardState).forEach(([letter, status]) => {
-            const keyTile = document.getElementById("Key" + letter);
-            if (keyTile) {
-                keyTile.classList.remove("correct", "wrong-position", "wrong");
-                keyTile.classList.add(status);
-            }
-        });
-    }
-
-    if (savedState.gameWon) {
-        nextLvlBtn.style.opacity = "1";
-        nextLvlBtn.style.cursor = "pointer";
-        nextLvlBtn.setAttribute("href", nextEnabled);
-    }
+    seconds = 0;
+    const timerElement = document.getElementById("timer");
+    timerInterval = setInterval(() => {
+        seconds++;
+        let mins = Math.floor(seconds / 60);
+        let secs = seconds % 60;
+        timerElement.innerText =
+            `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    }, 1000);
 }
 
 //Fetch a random word from the server
-
 function loadWord() {
-    WORD_LENGTH = Number(document.querySelector("#game").dataset.length);
+    nextLvlBtn.removeAttribute("href");
+    nextLvlBtn.style.opacity = "0.5";
+    nextLvlBtn.style.cursor = "not-allowed";
 
-    fetch(`/getSavedState/${WORD_LENGTH}`)
-        .then(res => res.json())
-        .then(savedState => {
-            if (savedState && savedState.word) {
-                WORD = savedState.word;
-                startGame();
-                restoreGameState(savedState);
-            } else {
-                nextLvlBtn.removeAttribute("href");
-                nextLvlBtn.style.opacity = "0.5";
-                nextLvlBtn.style.cursor = "not-allowed";
-                nextLvlBtn.style.pointerEvents = "none";
+    WORD_LENGTH = Number(
+        document.querySelector("#game").dataset.length
+    );
 
-                fetch(`/word/${WORD_LENGTH}`)
-                    .then(res => res.text())
-                    .then(data => {
-                        WORD = data.trim();
-                        startGame();
-                    });
-            }
+    fetch(`/word/${WORD_LENGTH}`)
+        .then(res => res.text())
+        .then(data => {
+            WORD = data.trim();
+            startGame();
         });
 }
 
@@ -150,7 +90,7 @@ function loadWord() {
 
     document.addEventListener("keydown", handleKeyPress);
 
-    keyPressAnimations();
+    keyPressEvents();
 
     initialize();
 
@@ -242,99 +182,26 @@ function loadWord() {
 
  //Check the guess
  function checkGuess() {
-
     if (currentGuess.length !== WORD_LENGTH) return;
+    colorLettersOnGuess();
 
-    for (let i = 0; i < WORD_LENGTH; i++) {
-
-        const index =
-            currentRow * WORD_LENGTH + i;
-
-        const letter = currentGuess[i];
-        const correct = WORD[i];
-
-       if (letter === correct) {
-           bubbles[index].classList.add("correct");
-           updateKeyboard(letter, "correct");
-       }
-       else if (WORD.includes(letter)) {
-           bubbles[index].classList.add("wrong-position");
-           updateKeyboard(letter, "wrong-position");
-       }
-       else {
-           bubbles[index].classList.add("wrong");
-           updateKeyboard(letter, "wrong");
-       }
-    }
     // WIN CONDTION
     if (currentGuess === WORD) {
-        winSound.volume = 0.1;
-        winSound.playbackRate = 1 + WORD_LENGTH/20;
-        winSound.preservesPitch = false;
-        winSound.play();
+        playWinSound();
 
         fetch(`completeLevel/${WORD_LENGTH}${currentRow.toString()}`);
 
-        nextLvlBtn.style.opacity = "1";
-        nextLvlBtn.style.cursor = "pointer"
-
-        setTimeout(() => {
-            document.getElementById("modal").style.display = "block";
-
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { y: 0.6 }
-            });
-
-            nextLvlBtn.style.transform = "scale(1.2)";
-            setTimeout(() => {
-                nextLvlBtn.style.transform = "";
-                nextLvlBtn.setAttribute("href", nextEnabled);
-                nextLvlBtn.style.pointerEvents = "";
-            }, 200);
-        }, 100);
-
-        //uppdatera score direkt på sidan när man vunnit
-        let pointsText = document.getElementById("points");
-        if(pointsText != null){
-            let currentPoints = parseInt(pointsText.innerText);
-            if (currentRow == 0) {
-                       currentPoints += 5;
-                   } else if (currentRow == 1) {
-                       currentPoints += 3;
-                   } else if (currentRow == 2) {
-                       currentPoints += 2;
-                   } else {
-                        currentPoints += 1;
-                   }
-
-            pointsText.innerText = currentPoints;}
-
-        //fetch (`/getPoints/`)
-        //.then(function(response) {
-        //            return response.json();
-        //        }).then(function(getPoints){
-        //        let points = String(getPoints);
-        //            pointsText = "⭐ Score: " + points;
-//
-        //            console.log(pointsText);
-        //        });
-
-        saveGameState(true, false, currentRow + 1);
+        winAnimations();
+        setPointsOnScreen();
         return true;
-
-          } else if (currentGuess != WORD && (currentRow + 1) == totalRows) {
-              setTimeout(() => {
-                  document.getElementById("correctWord").innerText = WORD;
-                  document.getElementById("loseModal").style.display = "block";
-              }, 100);
-              saveGameState(false, true, currentRow + 1);  // ADD THIS LINE
-          }
-
+    }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
+           setTimeout(() => {
+               document.getElementById("correctWord").innerText = WORD;
+               document.getElementById("loseModal").style.display = "block";
+           }, 100);
+        }
      currentRow++;
-     currentGuess = "";
-     saveGameState(false, false, currentRow);
+         currentGuess = "";
  }
 
 function initialize() {
@@ -381,6 +248,72 @@ function initialize() {
         })*/
 }
 
+function colorLettersOnGuess(){
+    for (let i = 0; i < WORD_LENGTH; i++) {
+        const index = currentRow * WORD_LENGTH + i;
+        const letter = currentGuess[i];
+        const correct = WORD[i];
+
+        if (letter === correct) {
+            bubbles[index].classList.add("correct");
+            updateKeyboard(letter, "correct");
+        }
+        else if (WORD.includes(letter)) {
+            bubbles[index].classList.add("wrong-position");
+            updateKeyboard(letter, "wrong-position");
+        }
+        else {
+            bubbles[index].classList.add("wrong");
+            updateKeyboard(letter, "wrong");
+        }
+    }
+}
+
+function playWinSound(){
+    winSound.volume = 0.1;
+    winSound.playbackRate = 1 + WORD_LENGTH/20;
+    winSound.preservesPitch = false;
+    winSound.play();
+}
+
+function winAnimations(){
+    nextLvlBtn.style.opacity = "1";
+    nextLvlBtn.style.cursor = "pointer"
+
+    setTimeout(() => {
+        document.getElementById("modal").style.display = "block";
+
+        confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
+
+        nextLvlBtn.style.transform = "scale(1.2)";
+        setTimeout(() => {
+            nextLvlBtn.style.transform = "";
+            nextLvlBtn.setAttribute("href", nextEnabled);
+        }, 200);
+    }, 100);
+}
+
+function setPointsOnScreen(){
+    let pointsText = document.getElementById("points");
+    if(pointsText != null){
+        let currentPoints = parseInt(pointsText.innerText);
+        if (currentRow === 0) {
+            currentPoints += 5;
+        } else if (currentRow === 1) {
+            currentPoints += 3;
+        } else if (currentRow === 2) {
+            currentPoints += 2;
+        } else {
+            currentPoints += 1;
+        }
+        pointsText.innerText = currentPoints;
+    }
+}
+
 function processKey() {
     e = { "code" : this.id };
     let clickedKey = String(this.id).replace("Key", "");
@@ -401,7 +334,6 @@ function processInput(e) {
             }
         }
     }
-
     else if (e.code == "Backspace") {
         if (0 < col && col <= width) {
             col -=1;
@@ -442,9 +374,11 @@ function updateKeyboard(letter, status) {
     keyTile.classList.add(status);
 }
 
-// Allows user to delete the whole word with "Control + Backspace" like a regular text input
-// Animates keys
-function keyPressAnimations(){
+/*
+* Animates keys to be smaller when the keys are pressed down using event listeners for key-up and key-down.
+* Uses the same listeners to allow 'control+backspace' to delete the whole word.
+ */
+function keyPressEvents(){
     let backSpaceDown = false;
     addEventListener("keydown", (event) => {
         let keyTile = document.getElementById("Key" + event.key.toUpperCase());
