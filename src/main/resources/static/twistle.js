@@ -421,7 +421,20 @@ function keyPressEvents(){
     });
 }
 
-// Start game
-loadWord();
+document.addEventListener("DOMContentLoaded", () => {
+    const startBtn = document.getElementById("startTimerBtn");
+
+    startBtn.addEventListener("click", () => {
+        useTimer = true;
+        startTimer();
+
+        loadWord();
+        startBtn.style.display = "none";
+    });
+});
+
+
+
+
 
 
