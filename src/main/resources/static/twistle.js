@@ -63,6 +63,12 @@ function startTimer() {
     }, 1000);
 }
 
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+
 //Fetch a random word from the server
 function loadWord() {
     nextLvlBtn.removeAttribute("href");
@@ -188,14 +194,15 @@ function loadWord() {
     // WIN CONDTION
     if (currentGuess === WORD) {
         playWinSound();
-
+        stopTimer();
         fetch(`completeLevel/${WORD_LENGTH}${currentRow.toString()}`);
 
         winAnimations();
         setPointsOnScreen();
         return true;
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
-           setTimeout(() => {
+        stopTimer();
+        setTimeout(() => {
                document.getElementById("correctWord").innerText = WORD;
                document.getElementById("loseModal").style.display = "block";
            }, 100);
