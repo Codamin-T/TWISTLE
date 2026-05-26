@@ -80,6 +80,15 @@ function loadWord() {
     keyPressAnimations();
 
     initialize();
+
+    document.getElementById("closeButton").addEventListener("click", () => {
+        document.getElementById("modal").style.display = "none";
+    });
+
+    document.getElementById("loseCloseButton").addEventListener("click", () => {
+        document.getElementById("loseModal").style.display = "none";
+    });
+
 }
 
 
@@ -197,9 +206,14 @@ function loadWord() {
         nextLvlBtn.style.cursor = "pointer"
 
         setTimeout(() => {
-            alert("Right word!");
+            document.getElementById("modal").style.display = "block";
 
-            // Inflate 'Next level' button 200ms.
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+
             nextLvlBtn.style.transform = "scale(1.2)";
             setTimeout(() => {
                 nextLvlBtn.style.transform = "";
@@ -237,9 +251,10 @@ function loadWord() {
         return true;
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
-          setTimeout(() => {
-              alert("Failed! The word was " + WORD);
-              }, 100);
+           setTimeout(() => {
+               document.getElementById("correctWord").innerText = WORD;
+               document.getElementById("loseModal").style.display = "block";
+           }, 100);
         }
 
      currentRow++;

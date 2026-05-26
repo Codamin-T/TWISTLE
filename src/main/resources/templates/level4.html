@@ -4,31 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{level4.css}">
+    <link rel="stylesheet" th:href="@{winPopup.css}">
+    <link rel="stylesheet" th:href="@{losePopup.css}">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
     <title>4 letters</title>
 </head>
 <body>
     <h1>4 letters</h1>
-    <aside class="info">
-        <input type="checkbox" id="toggle">
-        <label for="toggle" class="toggle">
-            ❔
-        </label>
+    <div class = "flex-container">
+        <aside class="info">
+            <input type="checkbox" id="toggle">
+            <label for="toggle" class="toggle">
+                ❔
+            </label>
 
-        <div class="how-to-play">
-            <p>
-                This is the four letter game.
-                After each guess, the letters will turn different colors.
-                Green means that the letter is in the correct spot.
-                Yellow means that the letter exists in the word, but is in the incorrect spot.
-                Grey means that the letter does not exist in the word.
-            </p>
-        </div>
-    </aside>
+            <div class="how-to-play">
+                <p>
+                    This is the four letter game.
+                    After each guess, the letters will turn different colors.
+                    Green means that the letter is in the correct spot.
+                    Yellow means that the letter exists in the word, but is in the incorrect spot.
+                    Grey means that the letter does not exist in the word.
+                </p>
+            </div>
+        </aside>
+        <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
+            Logout (🍬 <span th:text="${loggedInUser}"></span>)
+        </a>
+    </div>
 
-    <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
-        Logout (🍬 <span th:text="${loggedInUser}"></span>)
-    </a>
 
     <div id="game" data-length="4" data-rows="5" class="container">
 
@@ -58,6 +63,10 @@
         <div class="bubble"></div>
         <div class="bubble"></div>
     </div>
+
+    <div th:replace="winPopup :: winPopup"></div>
+    <div th:replace="losePopup :: losePopup"></div>
+
 
     <a th:href="@{/play}" class="back-button" style="font-size:25px">⬅
     </a>

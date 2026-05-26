@@ -4,57 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{level2.css}">
+    <link rel="stylesheet" th:href="@{winPopup.css}">
+    <link rel="stylesheet" th:href="@{losePopup.css}">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
 
     <title>Two letters</title>
 </head>
 <body>
-<h1>2 letters</h1>
-<aside class="info">
-    <input type="checkbox" id="toggle">
-    <label for="toggle" class="toggle">
-        ❔
-    </label>
 
-    <div class="how-to-play">
-        <p>
-            This is the two letter game.
-            After each guess, the letters will turn different colors.
-            Green means that the letter is in the correct spot.
-            Yellow means that the letter exists in the word, but is in the incorrect spot.
-            Grey means that the letter does not exist in the word.
-        </p>
+    <h1>2 letters</h1>
+    <div class = "flex-container">
+        <aside class="info">
+            <input type="checkbox" id="toggle">
+            <label for="toggle" class="toggle">
+                ❔
+            </label>
+
+            <div class="how-to-play">
+                <p>
+                    This is the two letter game.
+                    After each guess, the letters will turn different colors.
+                    Green means that the letter is in the correct spot.
+                    Yellow means that the letter exists in the word, but is in the incorrect spot.
+                    Grey means that the letter does not exist in the word.
+                </p>
+            </div>
+        </aside>
+        <!--Login only shows when a user is logged out-->
+        <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:20px">
+            Login
+        </a>
+        <!--Logout only shows when a user is logged in-->
+        <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
+            Logout 🍬 <span th:text="${loggedInUser}"></span>
+        </a>
     </div>
-</aside>
-
-<!--Login only shows when a user is logged out-->
-<a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:20px">
-    Login
-</a>
-
-<!--Logout only shows when a user is logged in-->
-<a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
-    Logout (🍬 <span th:text="${loggedInUser}"></span>)
-</a>
 
 <!--Game container holding selected word lenght som are two letters -->
-    <div id="game" data-length="2" data-rows="5" class="container">
+<div id="game" data-length="2" data-rows="6" class="container">
     <div class="bubble"></div>
     <div class="bubble"></div>
 
     <div class="bubble"></div>
     <div class="bubble"></div>
 
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
 
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
 
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
 
-</div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+
+    </div>
+
+<div th:replace="winPopup :: winPopup"></div>
+<div th:replace="losePopup :: losePopup"></div>
+
 
 <a th:href="@{/play}" class="back-button" style="font-size:25px">⬅
 </a>
@@ -63,18 +74,15 @@
 </a>
 
 <div>
-
     <aside class="sidebar">
-        <div> <a th:if="${loggedInUser != null}" class="side-item">
+        <a th:if="${loggedInUser != null}" class="side-item">
             🥉Streak
-        </a> </div>
-        
-        <div><a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
+        </a>
+        <a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
             ⭐ Score: <span th:text="${points}" id="points"></span>
-        </a> </div>
+        </a>
     </aside>
 </div>
-
 <script th:src="@{/twistle.js}"></script>
 
 </body>

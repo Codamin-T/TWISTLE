@@ -6,12 +6,21 @@ Description : Styling for Twistle main page (Layout, bubbles,aninations, cand th
 Note colors and font-family were modified by the group
 */
 
+.how-to-play p {
+    margin: 4px 0;
+}
+
+
 @font-face {
     font-family: 'WillyWonka';
     font-style: normal;
     font-weight: normal;
     src: url('Wonderbar-pALD.woff') format('woff');
-    }
+}
+
+title {
+    font-family: WillyWonka, script;
+}
 
 * {
     margin: 0;
@@ -37,7 +46,6 @@ body {
     50% { background-position: 100% }
     100% { background-position: 0% }
 }
-
 
 .page {
     width: 95vw;
@@ -67,14 +75,24 @@ body {
     cursor: default;
 }
 
+.flex-container {
+    position: fixed;
+    gap: 18px;
+
+    right: 4%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    top: 20px;
+}
+
 .info {
-    position: relative;
+    position: static;
 }
 
 .toggle {
-    position: absolute;
-    background: #82BA88;
-    opacity: 80%;
+    background: #F53C48;
+    font-size: large;
     color: white;
     padding: 10px;
     border-radius: 50%;
@@ -91,15 +109,18 @@ body {
 
 .how-to-play {
     display: none;
-    position: absolute;
-    top: 50px;
-    right: 0;
+    position: fixed;
+    top: 24%;
+    right: 4%;
+    z-index: 100;
 
     width: 220px;
     padding: 10px;
     border-radius: 10px;
 
-    background: rgba(112, 193, 225, 0.3);
+    background: #F53C48;
+    opacity: 50%;
+    /*background: rgba(112, 193, 225, 0.3);*/
 }
 
 #toggle:checked ~ .how-to-play {
@@ -158,17 +179,17 @@ a {
 }
 
 .back-button {
-    background-color: #EE9096;
+    background-color: #F53C48;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 6px 12px;
+    padding: 3px 30px;
     text-decoration: none;
     transition: 0.1s;
 
     position: fixed;
-    middle: 20px;
+    top: 60vh;
     left: 60px;
 }
 
@@ -193,7 +214,11 @@ a {
 .sidebar {
     position: absolute;
     top: 20px;
-    left: 20px;
+    display: flex;
+
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    left: 30px;
 }
 
 .side-item {
@@ -203,7 +228,6 @@ a {
     margin-bottom: 10px;
     cursor: default;
 }
-
 
 .legend {
     display: flex;
@@ -226,10 +250,9 @@ a {
 
 .candy-bg span {
     position: absolute;
-    opacity: 0.08;
+    opacity: 0.2;
     font-size: 3rem;
 }
-
 
 .candy-bg span:nth-child(1){top:10%; left:10%;}
 .candy-bg span:nth-child(2){top:40%; left:5%;}
@@ -238,9 +261,6 @@ a {
 .candy-bg span:nth-child(4){top:10%; right:10%;}
 .candy-bg span:nth-child(5){bottom:40%; right:5%;}
 .candy-bg span:nth-child(6){bottom:10%; right:20%;}
-
-
-
 
 .bubble-link {
     position: absolute;
@@ -253,27 +273,29 @@ a {
     color: white;
 }
 
-
-.logout-button {
-    position: absolute;
-    vertical-align: center;
-    right: 20px;
-    background-color: #EE9096;
+.login-button {
+    position: static;
+    background-color: #F53C48;
     color: white;
     border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 6px 30px;
     display: inline-block;
     text-decoration: none;
     font-family: WillyWonka;
-    padding: 10px;
+}
+
+.logout-button {
+    position: static;
+    background-color: #F53C48;
+    color: white;
+    border: none;
     border-radius: 10px;
-    margin-bottom: 10px;
-    cursor: default;
-    width: max-content;
+    cursor: pointer;
+    padding: 6px 30px;
+    font-size: large;
+    transition: transform 0.1s;
+    text-decoration: none;
+    font-family: WillyWonka;
 }
-
-.rightside {
-    position: absolute;
-    bottom: 50px;
-    right: 20px;
-}
-

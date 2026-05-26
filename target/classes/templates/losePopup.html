@@ -1,0 +1,20 @@
+<div class="lose-modal" id="loseModal" th:fragment="losePopup" style="display:none"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <div class="modal-header">
+        <div class="title">You Lost!</div>
+
+        <button class="close-button" id="loseCloseButton">
+            &times;
+        </button>
+    </div>
+
+    <div class="modal-body">
+        The word was: <strong id="correctWord"></strong>
+
+        <div th:if="${loggedInUser == null}">
+            <a th:href="@{/login}" class="login-popup-button">Login?</a>
+        </div>
+    </div>
+
+</div>

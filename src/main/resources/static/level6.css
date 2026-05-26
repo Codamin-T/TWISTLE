@@ -6,6 +6,10 @@ body {
     align-items: center;
 }
 
+.how-to-play p {
+    margin: 4px 0;
+}
+
 @font-face {
     font-family: 'WillyWonka';
     font-style: normal;
@@ -32,7 +36,11 @@ h1 {
 .sidebar {
     position: absolute;
     top: 20px;
-    left: 20px;
+
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    left: 60px;
 }
 
 .side-item {
@@ -48,21 +56,24 @@ h1 {
     color: white;
     border: none;
     border-radius: 10px;
-    padding: 6px 12px;
     cursor: pointer;
+    padding: 3px 30px;
     text-decoration: none;
+
+    position: fixed;
+    top: 60vh;
+    left: 60px;
 }
 
 .next-level-button {
     position: fixed;
-    vertical-align: center;
-    right: 20px;
+    right: 60px;
     background-color: #147CBF;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 6px 12px;
+    padding: 3px 60px;
     display: inline-block;
     transition: transform 0.1s;
     text-decoration: none;
@@ -90,21 +101,25 @@ h1 {
     font-family: Georgia, script;
 }
 
-.info {
+.flex-container {
     position: fixed;
-    top: 24px;
-    right: 30%;
-    z-index: 100;
+    gap: 18px;
 
+    right: 4%;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    top: 20px;
+}
+
+.info {
+    position: static;
+    z-index: 100;
 }
 
 .toggle {
-    background: #82BA88;
+    background: #147CBF;
     font-size: large;
-    opacity: 80%;
     color: white;
     padding: 10px;
     border-radius: 50%;
@@ -117,15 +132,17 @@ h1 {
 
 .how-to-play {
     display: none;
-    position: absolute;
-    top: 50px;
-    left: 0px;
+    position: fixed;
+    top: 22%;
+    right: 4%;
 
     width: 220px;
     padding: 10px;
     border-radius: 10px;
 
-    background: rgba(112, 193, 225, 0.3);
+    background: #147CBF;
+    opacity: 50%
+    /*background: rgba(112, 193, 225, 0.3);*/
 }
 
 #toggle:checked ~ .how-to-play {
@@ -202,15 +219,13 @@ h1 {
 }
 
 .logout-button {
-    position: absolute;
-    vertical-align: center;
-    right: 20px;
-    background-color: #EE9096;
+    position: static;
+    background-color: #147CBF;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 6px 12px;
+    padding: 6px 30px;
     display: inline-block;
     transition: transform 0.1s;
     text-decoration: none;
