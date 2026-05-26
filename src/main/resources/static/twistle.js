@@ -421,12 +421,13 @@ document.addEventListener("DOMContentLoaded", () => {
         useTimer = true;
         startTimer();
 
+        loadWord();
+
     });
 });
 
 
 
-// Start game
-loadWord();
+
 
 
