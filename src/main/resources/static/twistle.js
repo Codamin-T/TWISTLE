@@ -414,6 +414,13 @@ function keyPressEvents(){
     });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const startBtn = document.getElementById("startTimerBtn");
+
+});
+
+
+
 // Start game
 loadWord();
 
