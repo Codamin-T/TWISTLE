@@ -203,7 +203,7 @@ public class TwistleController {
     // The following methods are mappings to each level's HTML file:
 
     @GetMapping("/sida2")
-    public String showSida2(Model model) {
+    public String showLevel2(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -212,7 +212,7 @@ public class TwistleController {
     }
 
     @GetMapping("/sida3")
-    public String showSida3(Model model){
+    public String showLevel3(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -221,7 +221,7 @@ public class TwistleController {
     }
 
     @GetMapping("/sida4")
-    public String showSida4(Model model) {
+    public String showLevel4(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -230,7 +230,7 @@ public class TwistleController {
     }
 
     @GetMapping("/sida5")
-    public String showSida5(Model model){
+    public String showLevel5(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -239,7 +239,7 @@ public class TwistleController {
     }
 
     @GetMapping("/sida6")
-    public String showSida6(Model model){
+    public String showLevel6(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -248,7 +248,7 @@ public class TwistleController {
     }
 
     @GetMapping("/sida7")
-    public String showSida7(Model model) {
+    public String showLevel7(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -257,7 +257,7 @@ public class TwistleController {
     }
 
     @GetMapping("/sida8")
-    public String showSida8(Model model) {
+    public String showLevel8(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
