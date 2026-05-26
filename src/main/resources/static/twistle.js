@@ -44,27 +44,100 @@ let gameOver = false;
 
 var winSound = new Audio('WIN_SOUND.mp3');
 
+function saveGameState(gameWon, gameLost, rowsCompleted) {
+    const completedRows = [];
+    for (let row = 0; row < rowsCompleted; row++) {
+        const rowData = [];
+        for (let col = 0; col < WORD_LENGTH; col++) {
+            const index = row * WORD_LENGTH + col;
+            const bubble = bubbles[index];
+            let status = "wrong";
+            if (bubble.classList.contains("correct")) status = "correct";
+            else if (bubble.classList.contains("wrong-position")) status = "wrong-position";
+            rowData.push({ letter: bubble.textContent.toLowerCase(), status });
+        }
+        completedRows.push(rowData);
+    }
+
+    const keyboardState = {};
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(letter => {
+        const keyTile = document.getElementById("Key" + letter);
+        if (keyTile) {
+            if (keyTile.classList.contains("correct")) keyboardState[letter] = "correct";
+            else if (keyTile.classList.contains("wrong-position")) keyboardState[letter] = "wrong-position";
+            else if (keyTile.classList.contains("wrong")) keyboardState[letter] = "wrong";
+        }
+    });
+
+    fetch(`/saveGameState/${WORD_LENGTH}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            word: WORD,
+            completedRows,
+            currentRow: completedRows.length,
+            keyboardState,
+            gameWon: gameWon || false,
+            gameLost: gameLost || false
+        })
+    });
+}
+
+function restoreGameState(savedState) {
+    currentRow = savedState.currentRow;
+
+    savedState.completedRows.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+            const index = rowIndex * WORD_LENGTH + colIndex;
+            bubbles[index].textContent = cell.letter.toUpperCase();
+            if (cell.status) {
+                bubbles[index].classList.add(cell.status);
+            }
+        });
+    });
+
+    if (savedState.keyboardState) {
+        Object.entries(savedState.keyboardState).forEach(([letter, status]) => {
+            const keyTile = document.getElementById("Key" + letter);
+            if (keyTile) {
+                keyTile.classList.remove("correct", "wrong-position", "wrong");
+                keyTile.classList.add(status);
+            }
+        });
+    }
+
+    if (savedState.gameWon) {
+        nextLvlBtn.style.opacity = "1";
+        nextLvlBtn.style.cursor = "pointer";
+        nextLvlBtn.setAttribute("href", nextEnabled);
+    }
+}
+
 //Fetch a random word from the server
 
 function loadWord() {
-    nextLvlBtn.removeAttribute("href");
-    nextLvlBtn.style.opacity = "0.5";
-    nextLvlBtn.style.cursor = "not-allowed";
+    WORD_LENGTH = Number(document.querySelector("#game").dataset.length);
 
-    WORD_LENGTH = Number(
-        document.querySelector("#game").dataset.length
-    );
+    fetch(`/getSavedState/${WORD_LENGTH}`)
+        .then(res => res.json())
+        .then(savedState => {
+            if (savedState && savedState.word) {
+                WORD = savedState.word;
+                startGame();
+                restoreGameState(savedState);
+            } else {
+                nextLvlBtn.removeAttribute("href");
+                nextLvlBtn.style.opacity = "0.5";
+                nextLvlBtn.style.cursor = "not-allowed";
+                nextLvlBtn.style.pointerEvents = "none";
 
-    fetch(`/word/${WORD_LENGTH}`)
-        .then(res => res.text())
-        .then(data => {
-            WORD = data.trim();
-
-            // just for testing 🚦🚦
-            //alert(" The word is " + WORD);
-            //
-
-            startGame();
+                fetch(`/word/${WORD_LENGTH}`)
+                    .then(res => res.text())
+                    .then(data => {
+                        WORD = data.trim();
+                        startGame();
+                    });
+            }
         });
 }
 
@@ -218,6 +291,7 @@ function loadWord() {
             setTimeout(() => {
                 nextLvlBtn.style.transform = "";
                 nextLvlBtn.setAttribute("href", nextEnabled);
+                nextLvlBtn.style.pointerEvents = "";
             }, 200);
         }, 100);
 
@@ -247,18 +321,20 @@ function loadWord() {
         //            console.log(pointsText);
         //        });
 
-
+        saveGameState(true, false, currentRow + 1);
         return true;
-    }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
 
-           setTimeout(() => {
-               document.getElementById("correctWord").innerText = WORD;
-               document.getElementById("loseModal").style.display = "block";
-           }, 100);
-        }
+          } else if (currentGuess != WORD && (currentRow + 1) == totalRows) {
+              setTimeout(() => {
+                  document.getElementById("correctWord").innerText = WORD;
+                  document.getElementById("loseModal").style.display = "block";
+              }, 100);
+              saveGameState(false, true, currentRow + 1);  // ADD THIS LINE
+          }
 
      currentRow++;
-         currentGuess = "";
+     currentGuess = "";
+     saveGameState(false, false, currentRow);
  }
 
 function initialize() {
@@ -325,6 +401,7 @@ function processInput(e) {
             }
         }
     }
+
     else if (e.code == "Backspace") {
         if (0 < col && col <= width) {
             col -=1;

@@ -199,6 +199,27 @@ public class TwistleController {
     }
 
     @ResponseBody
+    @PostMapping("/saveGameState/{level}")
+    public void saveGameState(@PathVariable String level, @RequestBody Map<String, Object> state) {
+        Map<String, Object> levelStates = (Map<String, Object>) session.getAttribute("levelStates");
+        if (levelStates == null) {
+            levelStates = new HashMap<>();
+        }
+        levelStates.put(level, state);
+        session.setAttribute("levelStates", levelStates);
+    }
+
+    @ResponseBody
+    @GetMapping("/getSavedState/{level}")
+    public Map<String, Object> getSavedState(@PathVariable String level) {
+        Map<String, Object> levelStates = (Map<String, Object>) session.getAttribute("levelStates");
+        if (levelStates == null) return new HashMap<>();
+        Object state = levelStates.get(level);
+        if (state == null) return new HashMap<>();
+        return (Map<String, Object>) state;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/getPoints", method = RequestMethod.GET)
     public String getPoints() {
         return String.valueOf(profileRepository.findByUsername((String)session.getAttribute("loggedInUser")).getPoints());
