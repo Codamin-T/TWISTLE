@@ -131,13 +131,16 @@ function loadWord() {
                 nextLvlBtn.style.cursor = "not-allowed";
                 nextLvlBtn.style.pointerEvents = "none";
 
-                fetch(`/word/${WORD_LENGTH}`)
-                    .then(res => res.text())
-                    .then(data => {
-                        WORD = data.trim();
-                        startGame();
-                    });
-            }
+    fetch(`/word/${WORD_LENGTH}`)
+        .then(res => res.text())
+        .then(data => {
+            WORD = data.trim();
+
+            // just for testing 🚦🚦
+            //alert(" The word is " + WORD);
+            //
+
+            startGame();
         });
 }
 
