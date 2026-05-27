@@ -75,15 +75,23 @@ function loadWord() {
     nextLvlBtn.style.opacity = "0.5";
     nextLvlBtn.style.cursor = "not-allowed";
 
-    WORD_LENGTH = Number(
-        document.querySelector("#game").dataset.length
-    );
+    WORD_LENGTH = Number(document.querySelector("#game").dataset.length);
 
-    fetch(`/word/${WORD_LENGTH}`)
-        .then(res => res.text())
-        .then(data => {
-            WORD = data.trim();
-            startGame();
+    fetch(`/getSavedState/${WORD_LENGTH}`)
+        .then(res => res.json())
+        .then(savedState => {
+            if (savedState && savedState.word) {
+                WORD = savedState.word;
+                startGame();
+                restoreGameState(savedState);
+            } else {
+                fetch(`/word/${WORD_LENGTH}`)
+                    .then(res => res.text())
+                    .then(data => {
+                        WORD = data.trim();
+                        startGame();
+                    });
+            }
         });
 }
 
@@ -185,10 +193,12 @@ function loadWord() {
     bubbles[index].textContent = "";
 }
 
+
  //Check the guess
  function checkGuess() {
     if (currentGuess.length !== WORD_LENGTH) return;
     colorLettersOnGuess();
+    saveGameState();
 
     // WIN CONDTION
     if (currentGuess === WORD) {
@@ -302,6 +312,56 @@ function winAnimations(){
             nextLvlBtn.setAttribute("href", nextEnabled);
         }, 200);
     }, 100);
+}
+
+function saveGameState() {
+    const guesses = [];
+    for (let row = 0; row < currentRow; row++) {
+        const letters = [];
+        const colors = [];
+        for (let col = 0; col < WORD_LENGTH; col++) {
+            const index = row * WORD_LENGTH + col;
+            letters.push(bubbles[index].textContent);
+            if (bubbles[index].classList.contains("correct")) {
+                colors.push("correct");
+            } else if (bubbles[index].classList.contains("wrong-position")) {
+                colors.push("wrong-position");
+            } else if (bubbles[index].classList.contains("wrong")) {
+                colors.push("wrong");
+            } else {
+                colors.push("");
+            }
+        }
+        guesses.push({ letters, colors });
+    }
+
+    fetch(`/saveGameState/${WORD_LENGTH}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ word: WORD, currentRow, gameOver, guesses })
+    });
+}
+
+function restoreGameState(savedState) {
+    currentRow = savedState.currentRow;
+    gameOver = savedState.gameOver || false;
+
+    const guesses = savedState.guesses || [];
+    for (let row = 0; row < guesses.length; row++) {
+        const guess = guesses[row];
+        for (let col = 0; col < WORD_LENGTH; col++) {
+            const index = row * WORD_LENGTH + col;
+            bubbles[index].textContent = guess.letters[col];
+            if (guess.colors[col]) {
+                bubbles[index].classList.add(guess.colors[col]);
+                updateKeyboard(guess.letters[col].toLowerCase(), guess.colors[col]);
+            }
+        }
+    }
+
+    if (gameOver) {
+        document.removeEventListener("keydown", handleKeyPress);
+    }
 }
 
 function setPointsOnScreen(){
