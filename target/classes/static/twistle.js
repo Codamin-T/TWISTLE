@@ -425,8 +425,6 @@ document.addEventListener("DOMContentLoaded", () => {
     startBtn.addEventListener("click", () => {
         useTimer = true;
         startTimer();
-
-        loadWord();
         startBtn.style.display = "none";
     });
 });
