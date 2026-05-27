@@ -240,6 +240,7 @@ function loadWord() {
     bubbles[index].textContent = "";
 }
 
+
  //Check the guess
  function checkGuess() {
 
