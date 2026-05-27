@@ -425,8 +425,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("startTimerBtn");
     startBtn.addEventListener("click", () => {
         useTimer = true;
-        loadWord();
-
+//TOG BORT LOADWORD
         startTimer();
         startBtn.style.display = "none";
     });
