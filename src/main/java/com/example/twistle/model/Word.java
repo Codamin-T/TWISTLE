@@ -10,11 +10,11 @@ import java.sql.Timestamp;
 public class Word {
 
     @Id
-    @Column(name = "word_text")
+    @Column(name = "wordText")
     private String wordText;
     private Date last_used;
 
-    public String getWord_text() {
+    public String getWordText() {
         return wordText;
     }
     

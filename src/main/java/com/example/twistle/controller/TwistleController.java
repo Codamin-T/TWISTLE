@@ -7,11 +7,13 @@ import com.example.twistle.service.ProfileService;
 import com.example.twistle.service.WordService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,7 +75,6 @@ public class TwistleController {
     // Receives and handlers register process.
     @PostMapping("/register")
     public String processAddProfile(Profile profile, RedirectAttributes redirectAttributes) {
-        System.out.println("ad process add profile");
         if (profileRepository.findByUsername(profile.getUsername()) != null) {
             System.out.println("tried to register with existing username");
             return "redirect:/login";
@@ -81,10 +82,12 @@ public class TwistleController {
             redirectAttributes.addFlashAttribute("error", "Password should be 6 characters");
             return "redirect:/register";
         }
+
         String encodedPassword = passwordEncoder.encode(profile.getPassword());
         profile.setPassword(encodedPassword);
         profileRepository.save(profile);
-        return "redirect:/";
+        session.setAttribute("loggedInUser", profile.getUsername());
+        return "redirect:/play";
     }
 
     // Directs user to register error page, placeholder.
@@ -103,15 +106,16 @@ public class TwistleController {
     // Receives login request and handles it.
     @PostMapping("/login")
     public String processLogin(Profile profile, RedirectAttributes redirectAttributes) {
-        System.out.println("login process login");
+        System.out.println("login process login: " + profile.getPassword());
         //Måste kontollera om användaren bara är felstavat först
         Profile existingProfile = profileRepository.findByUsername(profile.getUsername());
         if (existingProfile == null) {
+            System.out.println("Not existing profile");
             redirectAttributes.addFlashAttribute("error", "Wrong username or password");
             return "redirect:/login";
         }
         if (passwordEncoder.matches(profile.getPassword(), existingProfile.getPassword())) {
-            System.out.println("Successfully logged in");
+            System.out.println("Successfully logged in: " + profile.getPassword() + " & " + existingProfile.getPassword());
             session.setAttribute("loggedInUser", existingProfile.getUsername());
             return "redirect:/play";
         } else {
@@ -195,6 +199,27 @@ public class TwistleController {
     }
 
     @ResponseBody
+    @PostMapping("/saveGameState/{level}")
+    public void saveGameState(@PathVariable String level, @RequestBody Map<String, Object> state) {
+        Map<String, Object> levelStates = (Map<String, Object>) session.getAttribute("levelStates");
+        if (levelStates == null) {
+            levelStates = new HashMap<>();
+        }
+        levelStates.put(level, state);
+        session.setAttribute("levelStates", levelStates);
+    }
+
+    @ResponseBody
+    @GetMapping("/getSavedState/{level}")
+    public Map<String, Object> getSavedState(@PathVariable String level) {
+        Map<String, Object> levelStates = (Map<String, Object>) session.getAttribute("levelStates");
+        if (levelStates == null) return new HashMap<>();
+        Object state = levelStates.get(level);
+        if (state == null) return new HashMap<>();
+        return (Map<String, Object>) state;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/getPoints", method = RequestMethod.GET)
     public String getPoints() {
         return String.valueOf(profileRepository.findByUsername((String)session.getAttribute("loggedInUser")).getPoints());
@@ -202,8 +227,8 @@ public class TwistleController {
 
     // The following methods are mappings to each level's HTML file:
 
-    @GetMapping("/sida2")
-    public String showSida2(Model model) {
+    @GetMapping("/level2")
+    public String showLevel2(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -211,8 +236,8 @@ public class TwistleController {
         return "level2";
     }
 
-    @GetMapping("/sida3")
-    public String showSida3(Model model){
+    @GetMapping("/level3")
+    public String showLevel3(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -220,8 +245,8 @@ public class TwistleController {
         return "level3";
     }
 
-    @GetMapping("/sida4")
-    public String showSida4(Model model) {
+    @GetMapping("/level4")
+    public String showLevel4(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -229,8 +254,8 @@ public class TwistleController {
         return "level4";
     }
 
-    @GetMapping("/sida5")
-    public String showSida5(Model model){
+    @GetMapping("/level5")
+    public String showLevel5(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -238,8 +263,8 @@ public class TwistleController {
         return "level5";
     }
 
-    @GetMapping("/sida6")
-    public String showSida6(Model model){
+    @GetMapping("/level6")
+    public String showLevel6(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -247,8 +272,8 @@ public class TwistleController {
         return "level6";
     }
 
-    @GetMapping("/sida7")
-    public String showSida7(Model model) {
+    @GetMapping("/level7")
+    public String showLevel7(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
@@ -256,8 +281,8 @@ public class TwistleController {
         return "level7";
     }
 
-    @GetMapping("/sida8")
-    public String showSida8(Model model) {
+    @GetMapping("/level8")
+    public String showLevel8(Model model) {
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if(session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));

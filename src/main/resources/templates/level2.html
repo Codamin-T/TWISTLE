@@ -41,12 +41,13 @@
         </a>
     </div>
 
+<!--Game container holding selected word lenght som are two letters -->
+<div id="game" data-length="2" data-rows="6" class="container">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-
-    <!--Game container holding selected word lenght som are two letters -->
-        <div id="game" data-length="2" data-rows="5" class="container">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
         <div class="bubble"></div>
         <div class="bubble"></div>
@@ -62,26 +63,35 @@
 
     </div>
 
-    <a th:href="@{/play}" class="back-button" style="font-size:25px">⬅
-    </a>
 
-    <a th:href="@{/sida3}" class="next-level-button" style="font-size:25px">Next level
-    </a>
-
-    <div>
-
-        <aside class="sidebar">
-            <a th:if="${loggedInUser != null}" class="side-item">
-                🥉Streak
-            </a>
-
-            <a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
-                ⭐ Score: <span th:text="${points}" id="points"></span>
-            </a>
-        </aside>
-    </div>
 <div th:replace="winPopup :: winPopup"></div>
 <div th:replace="losePopup :: losePopup"></div>
+
+
+<a th:href="@{/play}" class="back-button" style="font-size:25px">⬅
+</a>
+
+<a th:href="@{/level3}" class="next-level-button" style="font-size:25px">Next level
+</a>
+
+<div>
+    <aside class="sidebar">
+        <a th:if="${loggedInUser != null}" class="side-item">
+            🥉Streak
+        </a>
+        <a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
+            ⭐ Score: <span th:text="${points}" id="points"></span>
+        </a>
+    </aside>
+</div>
+
+    <div class="timer-container">
+        <div id="timer" class="timer">⏱️00:00</div>
+
+        <button id="startTimerBtn" class="start-timer-btn">
+            Starta timer
+        </button>
+    </div>
 
 <script th:src="@{/twistle.js}"></script>
 
