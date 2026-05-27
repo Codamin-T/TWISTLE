@@ -80,32 +80,8 @@
             </a>
         </aside>
     </div>
-
-    <script th:src="@{/twistle.js}"></script>
-</div>
-
 <div th:replace="winPopup :: winPopup"></div>
 <div th:replace="losePopup :: losePopup"></div>
-
-
-<a th:href="@{/play}" class="back-button" style="font-size:25px">⬅
-</a>
-
-<a th:href="@{/sida3}" class="next-level-button" style="font-size:25px">Next level
-</a>
-
-<div>
-
-    <aside class="sidebar">
-        <div> <a th:if="${loggedInUser != null}" class="side-item">
-            🥉Streak
-        </a> </div>
-        
-        <div><a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
-            ⭐ Score: <span th:text="${points}" id="points"></span>
-        </a> </div>
-    </aside>
-</div>
 
 <script th:src="@{/twistle.js}"></script>
 

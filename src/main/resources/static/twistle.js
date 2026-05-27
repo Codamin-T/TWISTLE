@@ -28,7 +28,7 @@ let currentGuess = "";
 // Current row
 let currentRow = 0;
 
-// All ganme bubbles
+// All game bubbles
 let bubbles = [];
 
 //total amount of rows in each level
@@ -282,6 +282,7 @@ function initialize() {
             if (key == "Enter") {
                 keyTile.id = "Enter";
             }
+
             else if (key == "⌫") {
                 keyTile.id = "Backspace";
             }
