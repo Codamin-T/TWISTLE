@@ -424,6 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("startTimerBtn");
     startBtn.addEventListener("click", () => {
         useTimer = true;
+
         startTimer();
         startBtn.style.display = "none";
     });
