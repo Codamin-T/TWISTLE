@@ -63,6 +63,12 @@ function startTimer() {
     }, 1000);
 }
 
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+
 //Fetch a random word from the server
 function loadWord() {
     nextLvlBtn.removeAttribute("href");
@@ -84,7 +90,6 @@ function loadWord() {
 
 // Start the game
  function startGame() {
-
     bubbles = document.querySelectorAll(".bubble");
     totalRows = Number(document.getElementById("game").dataset.rows);
 
@@ -188,14 +193,15 @@ function loadWord() {
     // WIN CONDTION
     if (currentGuess === WORD) {
         playWinSound();
-
+        stopTimer();
         fetch(`completeLevel/${WORD_LENGTH}${currentRow.toString()}`);
 
         winAnimations();
         setPointsOnScreen();
         return true;
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
-           setTimeout(() => {
+        stopTimer();
+        setTimeout(() => {
                document.getElementById("correctWord").innerText = WORD;
                document.getElementById("loseModal").style.display = "block";
            }, 100);
@@ -412,11 +418,10 @@ function keyPressEvents(){
     addEventListener("blur", () => {
         backSpaceDown = false;
     });
-}
 
+}
 document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("startTimerBtn");
-
     startBtn.addEventListener("click", () => {
         useTimer = true;
         startTimer();
@@ -426,7 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
+loadWord();
 
 
 
