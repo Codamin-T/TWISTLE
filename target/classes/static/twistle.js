@@ -424,9 +424,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("startTimerBtn");
     startBtn.addEventListener("click", () => {
         useTimer = true;
-        startTimer();
-
         loadWord();
+
+        startTimer();
         startBtn.style.display = "none";
     });
 });
