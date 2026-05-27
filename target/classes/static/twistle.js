@@ -316,7 +316,7 @@ function winAnimations(){
 
 function saveGameState() {
     const guesses = [];
-    for (let row = 0; row < currentRow; row++) {
+    for (let row = 0; row <= currentRow; row++) {
         const letters = [];
         const colors = [];
         for (let col = 0; col < WORD_LENGTH; col++) {
