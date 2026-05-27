@@ -90,7 +90,6 @@ function loadWord() {
 
 // Start the game
  function startGame() {
-
     bubbles = document.querySelectorAll(".bubble");
     totalRows = Number(document.getElementById("game").dataset.rows);
 
@@ -419,11 +418,10 @@ function keyPressEvents(){
     addEventListener("blur", () => {
         backSpaceDown = false;
     });
-}
 
+}
 document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("startTimerBtn");
-
     startBtn.addEventListener("click", () => {
         useTimer = true;
         startTimer();
@@ -433,7 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
+loadWord();
 
 
 
