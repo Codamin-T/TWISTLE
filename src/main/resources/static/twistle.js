@@ -185,6 +185,7 @@ function loadWord() {
     bubbles[index].textContent = "";
 }
 
+
  //Check the guess
  function checkGuess() {
     if (currentGuess.length !== WORD_LENGTH) return;
