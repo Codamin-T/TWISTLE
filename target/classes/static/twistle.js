@@ -74,6 +74,7 @@ function loadWord() {
     nextLvlBtn.removeAttribute("href");
     nextLvlBtn.style.opacity = "0.5";
     nextLvlBtn.style.cursor = "not-allowed";
+    nextLvlBtn.style.pointerEvents = "none";
 
     WORD_LENGTH = Number(document.querySelector("#game").dataset.length);
 
@@ -209,6 +210,7 @@ function loadWord() {
         winAnimations();
         setPointsOnScreen();
         return true;
+
     }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
         stopTimer();
         setTimeout(() => {
@@ -310,6 +312,7 @@ function winAnimations(){
         setTimeout(() => {
             nextLvlBtn.style.transform = "";
             nextLvlBtn.setAttribute("href", nextEnabled);
+            nextLvlBtn.style.pointerEvents = "";
         }, 200);
     }, 100);
 }
