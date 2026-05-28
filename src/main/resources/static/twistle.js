@@ -106,7 +106,7 @@ function loadWord() {
 
     keyPressEvents();
 
-    initialize();
+    createKeyboard();
 
     document.getElementById("closeButton").addEventListener("click", () => {
         document.getElementById("modal").style.display = "none";
@@ -227,7 +227,7 @@ function loadWord() {
          currentGuess = "";
  }
 
-function initialize() {
+function createKeyboard() {
 // Create the key board
     let keyboard = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -267,9 +267,6 @@ function initialize() {
         }
         document.body.appendChild(keyboardRow);
     }
-    /*document.addEventListener("keyup", (e) => {
-            processInput(e);
-        })*/
 }
 
 function colorLettersOnGuess(){
