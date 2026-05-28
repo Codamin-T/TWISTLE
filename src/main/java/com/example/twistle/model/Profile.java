@@ -62,19 +62,19 @@ public class Profile {
         this.points = points;
     }
 
-    public int getStreak() {
+    public int getStreak(){
         return streak;
     }
 
-    public void setStreak(int streak) {
+    public void setStreak(int streak){
         this.streak = streak;
     }
 
-    public Timestamp getCreatedAt() {
+    public Timestamp getCreatedAt(){
         return createdAt;
     }
 
-    public void setCreatedAtt(Timestamp created_at) {
+    public void setCreatedAtt(Timestamp created_at){
         this.createdAt = created_at;
     }
 }
