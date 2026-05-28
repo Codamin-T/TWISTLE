@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProfileService {
+public class ProfileService{
 
     @Autowired
     HttpSession session;
@@ -16,7 +16,7 @@ public class ProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
-    public ProfileService(WordRepository wordRepository) {
+    public ProfileService(WordRepository wordRepository){
         this.profileRepository =  profileRepository;
     }
 
@@ -28,11 +28,11 @@ public class ProfileService {
 
         if (profile == null) return;
 
-        if (amountOfTries == 1) {
+        if (amountOfTries == 1){
             points = 5;
-        } else if (amountOfTries == 2) {
+        } else if (amountOfTries == 2){
             points = 3;
-        } else if (amountOfTries == 3) {
+        } else if (amountOfTries == 3){
             points = 2;
         }
 

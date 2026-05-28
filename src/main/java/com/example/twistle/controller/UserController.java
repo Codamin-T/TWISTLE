@@ -28,12 +28,12 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public String showStartPage() {
+    public String showStartPage(){
         return "start";
     }
 
     @GetMapping("/register")
-    public String showRegisterForm(Profile profile) {
+    public String showRegisterForm(Profile profile){
         return "register";
     }
 
@@ -42,7 +42,7 @@ public class UserController {
         if (profileRepository.findByUsername(profile.getUsername()) != null) {
             System.out.println("tried to register with existing username");
             return "redirect:/login";
-        } else if (profile.getPassword().length() < 6) {
+        } else if (profile.getPassword().length() < 6){
             redirectAttributes.addFlashAttribute("error", "Password should be 6 characters");
             return "redirect:/register";
         }
@@ -55,24 +55,24 @@ public class UserController {
     }
 
     @GetMapping("/register-error")
-    public String showRegisterError() {
+    public String showRegisterError(){
         return "register-error";
     }
 
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
+    public String showLoginForm(Model model){
         model.addAttribute("profile", new Profile());
         return "login";
     }
 
     @PostMapping("/login")
-    public String processLogin(Profile profile, RedirectAttributes redirectAttributes) {
+    public String processLogin(Profile profile, RedirectAttributes redirectAttributes){
         Profile existingProfile = profileRepository.findByUsername(profile.getUsername());
         if (existingProfile == null) {
             redirectAttributes.addFlashAttribute("error", "Wrong username or password");
             return "redirect:/login";
         }
-        if (passwordEncoder.matches(profile.getPassword(), existingProfile.getPassword())) {
+        if (passwordEncoder.matches(profile.getPassword(), existingProfile.getPassword())){
             session.setAttribute("loggedInUser", existingProfile.getUsername());
             return "redirect:/play";
         } else {
@@ -82,7 +82,7 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(){
         session.removeAttribute("loggedInUser");
         return "redirect:/";
     }

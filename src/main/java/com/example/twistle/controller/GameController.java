@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-public class GameController {
+public class GameController{
 
     @Autowired
     private ProfileRepository profileRepository;
@@ -26,16 +26,16 @@ public class GameController {
     private ProfileService profileService;
 
     @GetMapping("/play")
-    public String showPlay(Model model) {
+    public String showPlay(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
-        if (session.getAttribute("loggedInUser") != null) {
+        if (session.getAttribute("loggedInUser") != null){
             session.setAttribute("points", profileRepository.findByUsername((String) session.getAttribute("loggedInUser")).getPoints());
             model.addAttribute("points", session.getAttribute("points"));
         }
 
         Map<String, Boolean> unlockedLevels = (HashMap<String, Boolean>) session.getAttribute("unlockedLevels");
 
-        if (unlockedLevels == null) {
+        if (unlockedLevels == null){
             unlockedLevels = new HashMap<>();
             unlockedLevels.put("1", true);
             unlockedLevels.put("2", false);
@@ -55,7 +55,7 @@ public class GameController {
 
     @ResponseBody
     @GetMapping("/completeLevel/{level}{tries}")
-    public void completeLevel(@PathVariable String level, @PathVariable String tries) {
+    public void completeLevel(@PathVariable String level, @PathVariable String tries){
         int currentRow = Integer.parseInt(level.substring(1));
         level = level.substring(0, 1);
 
@@ -64,11 +64,11 @@ public class GameController {
 
         Map<String, Boolean> unlockedLevels = (HashMap) session.getAttribute("unlockedLevels");
 
-        if (unlockedLevels == null) {
+        if (unlockedLevels == null){
             unlockedLevels = new HashMap<>();
-            for (int i = 1; i <= 8; i++) {
+            for (int i = 1; i <= 8; i++){
                 int lvl = Integer.parseInt(level) - 1;
-                if (i == 1 || i == lvl) {
+                if (i == 1 || i == lvl){
                     unlockedLevels.put(String.valueOf(i), true);
                     continue;
                 }
@@ -81,15 +81,15 @@ public class GameController {
 
     @ResponseBody
     @GetMapping("/unlockedLevels")
-    public Map<String, Boolean> showUnlockedLevels() {
+    public Map<String, Boolean> showUnlockedLevels(){
         return (HashMap) session.getAttribute("unlockedLevels");
     }
 
     @ResponseBody
     @PostMapping("/saveGameState/{level}")
-    public void saveGameState(@PathVariable String level, @RequestBody Map<String, Object> state) {
+    public void saveGameState(@PathVariable String level, @RequestBody Map<String, Object> state){
         Map<String, Object> levelStates = (Map<String, Object>) session.getAttribute("levelStates");
-        if (levelStates == null) {
+        if (levelStates == null){
             levelStates = new HashMap<>();
         }
         levelStates.put(level, state);
@@ -98,7 +98,7 @@ public class GameController {
 
     @ResponseBody
     @GetMapping("/getSavedState/{level}")
-    public Map<String, Object> getSavedState(@PathVariable String level) {
+    public Map<String, Object> getSavedState(@PathVariable String level){
         Map<String, Object> levelStates = (Map<String, Object>) session.getAttribute("levelStates");
         if (levelStates == null) return new HashMap<>();
         Object state = levelStates.get(level);
@@ -108,7 +108,7 @@ public class GameController {
 
     @ResponseBody
     @GetMapping("/getPoints")
-    public String getPoints() {
+    public String getPoints(){
         return String.valueOf(profileRepository.findByUsername((String) session.getAttribute("loggedInUser")).getPoints());
     }
 }

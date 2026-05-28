@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 
-public interface WordRepository extends JpaRepository<Word, Long> {
+public interface WordRepository extends JpaRepository<Word, Long>{
 
     //Gets random word from the database, with desired length. Limits query by column 'last_used', set to 30 days.
     @Query(value = "SELECT * FROM word WHERE CHAR_LENGTH(word_text) = :length AND (last_used >= current_date - 30 or last_used is null)", nativeQuery = true)

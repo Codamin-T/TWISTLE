@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "profile")
-public class Profile {
+public class Profile{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,7 @@ public class Profile {
     }
 
     public void addPoints(Integer pointsToAdd){
-        if (this.points == null) {
+        if (this.points == null){
             setPoints(pointsToAdd);
             return;
         }

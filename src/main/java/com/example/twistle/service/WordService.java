@@ -11,14 +11,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class WordService {
+public class WordService{
 
     @Autowired
     HttpSession session;
 
     private WordRepository wordRepository;
 
-    public WordService(WordRepository wordRepository) {
+    public WordService(WordRepository wordRepository){
         this.wordRepository =  wordRepository;
     }
 
@@ -41,7 +41,7 @@ public class WordService {
     //Sets attribute 'lastUsed' to current date.
     public void setLastUsed(Word word){
         if (word == null) return;
-        if (session.getAttribute("lastUsed") == session.getAttribute("currentWord")) {
+        if (session.getAttribute("lastUsed") == session.getAttribute("currentWord")){
             session.setAttribute("lastUsed", word);
             word.setLastUsed(Date.valueOf(LocalDate.now()));
 
