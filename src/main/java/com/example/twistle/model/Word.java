@@ -3,7 +3,6 @@ package com.example.twistle.model;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "word")

@@ -6,9 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
