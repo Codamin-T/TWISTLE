@@ -38,7 +38,7 @@ let totalRows = [];
 let nextLvlBtn = document.querySelector(".next-level-button");
 
 // HTML attribute for next level link
-let nextEnabled = nextLvlBtn.getAttribute("href");
+let nextlvlBtnEnabled = nextLvlBtn.getAttribute("href");
 
 let gameOver = false;
 
@@ -312,7 +312,10 @@ function winAnimations(){
         else if (currentRow === 1) earned = 3;
         else if (currentRow === 2) earned = 2;
         else earned = 1;
-        document.getElementById("earnedPoints").innerText = earned;
+        let earnedEl = document.getElementById("earnedPoints");
+        if (earnedEl) {
+            earnedEl.innerText = earned;
+        }
 
         confetti({
             particleCount: 150,
@@ -323,7 +326,7 @@ function winAnimations(){
         nextLvlBtn.style.transform = "scale(1.2)";
         setTimeout(() => {
             nextLvlBtn.style.transform = "";
-            nextLvlBtn.setAttribute("href", nextEnabled);
+            nextLvlBtn.setAttribute("href", nextlvlBtnEnabled);
             nextLvlBtn.style.pointerEvents = "";
         }, 200);
     }, 100);
@@ -376,7 +379,7 @@ function restoreGameState(savedState) {
 
     if (gameOver) {
         document.removeEventListener("keydown", handleKeyPress);
-            nextLvlBtn.setAttribute("href", nextEnabled);
+            nextLvlBtn.setAttribute("href", nextlvlBtnEnabled);
             nextLvlBtn.style.opacity = "1";
             nextLvlBtn.style.cursor = "pointer";
             nextLvlBtn.style.pointerEvents = "";

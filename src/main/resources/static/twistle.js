@@ -312,7 +312,10 @@ function winAnimations(){
         else if (currentRow === 1) earned = 3;
         else if (currentRow === 2) earned = 2;
         else earned = 1;
-        document.getElementById("earnedPoints").innerText = earned;
+        let earnedEl = document.getElementById("earnedPoints");
+        if (earnedEl) {
+            earnedEl.innerText = earned;
+        }
 
         confetti({
             particleCount: 150,
