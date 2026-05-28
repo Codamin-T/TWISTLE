@@ -17,10 +17,10 @@
 
 
 // The correct word to guess
-let WORD = "";
+let word = "";
 
 //Length of the word
-let WORD_LENGTH = 0;
+let wordLength = 0;
 
 //Current player guess
 let currentGuess = "";
@@ -76,20 +76,20 @@ function loadWord() {
     nextLvlBtn.style.cursor = "not-allowed";
     nextLvlBtn.style.pointerEvents = "none";
 
-    WORD_LENGTH = Number(document.querySelector("#game").dataset.length);
+    wordLength = Number(document.querySelector("#game").dataset.length);
 
-    fetch(`/getSavedState/${WORD_LENGTH}`)
+    fetch(`/getSavedState/${wordLength}`)
         .then(res => res.json())
         .then(savedState => {
             if (savedState && savedState.word) {
-                WORD = savedState.word;
+                word = savedState.word;
                 startGame();
                 restoreGameState(savedState);
             } else {
-                fetch(`/word/${WORD_LENGTH}`)
+                fetch(`/word/${wordLength}`)
                     .then(res => res.text())
                     .then(data => {
-                        WORD = data.trim();
+                        word = data.trim();
                         startGame();
                     });
             }
@@ -133,13 +133,13 @@ function loadWord() {
     if (isLetter(key)) {
         addLetter(key);
 
-        if (currentGuess.length === WORD_LENGTH){
+        if (currentGuess.length === wordLength){
             updateKeyboard("Enter", "available");
         }
     }
 
     else if (key === "Backspace") {
-        if (currentGuess.length === WORD_LENGTH){
+        if (currentGuess.length === wordLength){
             updateKeyboard("Enter", "unavailable");
         }
         removeLetter();
@@ -152,7 +152,7 @@ function loadWord() {
             return;
         }
 
-        if (checkGuess() === true || currentGuess.length < WORD_LENGTH){
+        if (checkGuess() === true || currentGuess.length < wordLength){
             updateKeyboard("Enter", "unavailable");
         }
 
@@ -165,7 +165,7 @@ function loadWord() {
 
  function isLetter(key) {
     return /^[a-zA-Z]$/.test(key)
-        && currentGuess.length < WORD_LENGTH;
+        && currentGuess.length < wordLength;
 }
 
  //Add letter to guess
@@ -174,7 +174,7 @@ function loadWord() {
     currentGuess += key.toLowerCase();
 
     const index =
-        currentRow * WORD_LENGTH +
+        currentRow * wordLength +
         currentGuess.length - 1;
 
     bubbles[index].textContent = key.toUpperCase();
@@ -187,7 +187,7 @@ function loadWord() {
     if (currentGuess.length === 0) return;
 
     const index =
-        currentRow * WORD_LENGTH +
+        currentRow * wordLength +
         currentGuess.length - 1;
 
     currentGuess = currentGuess.slice(0, -1);
@@ -197,26 +197,31 @@ function loadWord() {
 
  //Check the guess
  function checkGuess() {
-    if (currentGuess.length !== WORD_LENGTH) return;
+    if (currentGuess.length !== wordLength) return;
     colorLettersOnGuess();
-    saveGameState();
 
     // WIN CONDTION
-    if (currentGuess === WORD) {
+    if (currentGuess === word) {
+        gameOver = true;
+        saveGameState();
         playWinSound();
         stopTimer();
-        fetch(`completeLevel/${WORD_LENGTH}${currentRow.toString()}`);
+        fetch(`completeLevel/${wordLength}${currentRow.toString()}`);
 
         winAnimations();
         setPointsOnScreen();
         return true;
 
-    }  else if (currentGuess != WORD && (currentRow +1) == totalRows){
+    }  else if (currentGuess != word && (currentRow +1) == totalRows){
+        gameOver = true;
+        saveGameState();
         stopTimer();
         setTimeout(() => {
-               document.getElementById("correctWord").innerText = WORD;
+               document.getElementById("correctWord").innerText = word;
                document.getElementById("loseModal").style.display = "block";
            }, 100);
+        } else{
+        saveGameState();
         }
      currentRow++;
          currentGuess = "";
@@ -268,16 +273,16 @@ function initialize() {
 }
 
 function colorLettersOnGuess(){
-    for (let i = 0; i < WORD_LENGTH; i++) {
-        const index = currentRow * WORD_LENGTH + i;
+    for (let i = 0; i < wordLength; i++) {
+        const index = currentRow * wordLength + i;
         const letter = currentGuess[i];
-        const correct = WORD[i];
+        const correct = word[i];
 
         if (letter === correct) {
             bubbles[index].classList.add("correct");
             updateKeyboard(letter, "correct");
         }
-        else if (WORD.includes(letter)) {
+        else if (word.includes(letter)) {
             bubbles[index].classList.add("wrong-position");
             updateKeyboard(letter, "wrong-position");
         }
@@ -290,7 +295,7 @@ function colorLettersOnGuess(){
 
 function playWinSound(){
     winSound.volume = 0.1;
-    winSound.playbackRate = 1 + WORD_LENGTH/20;
+    winSound.playbackRate = 1 + wordLength/20;
     winSound.preservesPitch = false;
     winSound.play();
 }
@@ -329,8 +334,8 @@ function saveGameState() {
     for (let row = 0; row <= currentRow; row++) {
         const letters = [];
         const colors = [];
-        for (let col = 0; col < WORD_LENGTH; col++) {
-            const index = row * WORD_LENGTH + col;
+        for (let col = 0; col < wordLength; col++) {
+            const index = row * wordLength + col;
             letters.push(bubbles[index].textContent);
             if (bubbles[index].classList.contains("correct")) {
                 colors.push("correct");
@@ -345,10 +350,10 @@ function saveGameState() {
         guesses.push({ letters, colors });
     }
 
-    fetch(`/saveGameState/${WORD_LENGTH}`, {
+    fetch(`/saveGameState/${wordLength}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ word: WORD, currentRow, gameOver, guesses })
+        body: JSON.stringify({ word: word, currentRow, gameOver, guesses })
     });
 }
 
@@ -359,8 +364,8 @@ function restoreGameState(savedState) {
     const guesses = savedState.guesses || [];
     for (let row = 0; row < guesses.length; row++) {
         const guess = guesses[row];
-        for (let col = 0; col < WORD_LENGTH; col++) {
-            const index = row * WORD_LENGTH + col;
+        for (let col = 0; col < wordLength; col++) {
+            const index = row * wordLength + col;
             bubbles[index].textContent = guess.letters[col];
             if (guess.colors[col]) {
                 bubbles[index].classList.add(guess.colors[col]);
@@ -371,6 +376,10 @@ function restoreGameState(savedState) {
 
     if (gameOver) {
         document.removeEventListener("keydown", handleKeyPress);
+            nextLvlBtn.setAttribute("href", nextEnabled);
+            nextLvlBtn.style.opacity = "1";
+            nextLvlBtn.style.cursor = "pointer";
+            nextLvlBtn.style.pointerEvents = "";
     }
 }
 
@@ -495,7 +504,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("startTimerBtn");
     startBtn.addEventListener("click", () => {
         useTimer = true;
-//TOG BORT LOADWORD
         startTimer();
         startBtn.style.display = "none";
     });
