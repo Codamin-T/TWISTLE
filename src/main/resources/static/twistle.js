@@ -302,6 +302,13 @@ function winAnimations(){
     setTimeout(() => {
         document.getElementById("modal").style.display = "block";
 
+        let earned;
+        if (currentRow === 0) earned = 5;
+        else if (currentRow === 1) earned = 3;
+        else if (currentRow === 2) earned = 2;
+        else earned = 1;
+        document.getElementById("earnedPoints").innerText = earned;
+
         confetti({
             particleCount: 150,
             spread: 80,

@@ -10,7 +10,7 @@
 
     <div class="modal-body">
         <div th:if="${loggedInUser != null}">
-            Congratulations! You earned 1 point for winning!
+            Congratulations! You earned <span id="earnedPoints"></span> points for winning!
         </div>
 
         <div th:if="${loggedInUser == null}">
