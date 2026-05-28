@@ -38,7 +38,7 @@ let totalRows = [];
 let nextLvlBtn = document.querySelector(".next-level-button");
 
 // HTML attribute for next level link
-let nextEnabled = nextLvlBtn.getAttribute("href");
+let nextlvlBtnEnabled = nextLvlBtn.getAttribute("href");
 
 let gameOver = false;
 
@@ -323,7 +323,7 @@ function winAnimations(){
         nextLvlBtn.style.transform = "scale(1.2)";
         setTimeout(() => {
             nextLvlBtn.style.transform = "";
-            nextLvlBtn.setAttribute("href", nextEnabled);
+            nextLvlBtn.setAttribute("href", nextlvlBtnEnabled);
             nextLvlBtn.style.pointerEvents = "";
         }, 200);
     }, 100);
@@ -376,7 +376,7 @@ function restoreGameState(savedState) {
 
     if (gameOver) {
         document.removeEventListener("keydown", handleKeyPress);
-            nextLvlBtn.setAttribute("href", nextEnabled);
+            nextLvlBtn.setAttribute("href", nextlvlBtnEnabled);
             nextLvlBtn.style.opacity = "1";
             nextLvlBtn.style.cursor = "pointer";
             nextLvlBtn.style.pointerEvents = "";
