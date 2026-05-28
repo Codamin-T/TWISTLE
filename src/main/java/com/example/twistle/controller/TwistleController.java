@@ -41,7 +41,7 @@ public class TwistleController{
 
     // Index redirection
     @GetMapping("/")
-    public String index(Model model){
+    public String showStartPage (Model model){
         model.addAttribute("profiles", profileRepository.findAll());
         return "start";
     }
