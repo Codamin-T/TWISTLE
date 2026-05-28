@@ -6,22 +6,22 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "word")
-public class Word {
+public class Word{
 
     @Id
     @Column(name = "wordText")
     private String wordText;
     private Date lastUsed;
 
-    public String getWordText() {
+    public String getWordText(){
         return wordText;
     }
     
-    public void setWordText(String wordText) {
+    public void setWordText(String wordText){
         this.wordText = wordText;
     }
 
-    public void setLastUsed(Date lastUsed) {
+    public void setLastUsed(Date lastUsed){
         this.lastUsed = lastUsed;
     }
 }
