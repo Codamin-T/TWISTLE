@@ -30,10 +30,10 @@ public class WordService {
 
         List<Word> words = wordRepository.findAllRandomByLengthNotRecent(length);
         
-        long today = LocalDate.now().toEpochDay();
-        System.out.println("today: " + today);
+        long dateToday = LocalDate.now().toEpochDay();
+        System.out.println("today: " + dateToday);
 
-        int dailyIndex = (int) (today % words.size());
+        int dailyIndex = (int) (dateToday % words.size());
         System.out.println("dailyIndex: " + dailyIndex);
 
         Word word = words.get(dailyIndex);

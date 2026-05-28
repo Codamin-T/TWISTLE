@@ -15,29 +15,29 @@ public class Profile {
     private String password;
     private Integer points;
     private Integer streak;
-    private Timestamp created_at;
+    private Timestamp createdAt;
 
-    public Long getId() {
+    public Long getId(){
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    public String getUsername() {
+    public String getUsername(){
         return username;
     }
 
-    public String getPassword() {
+    public String getPassword(){
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password){
         this.password = password;
     }
 
-    public void addPoints(Integer pointsToAdd) {
+    public void addPoints(Integer pointsToAdd){
         if (this.points == null) {
             setPoints(pointsToAdd);
             return;
@@ -47,18 +47,18 @@ public class Profile {
 
     // The following methods are not used yet:
 
-    public void setUsername(String username) {
+    public void setUsername(String username){
         this.username = username;
     }
 
-    public int getPoints() {
-        if (points == null) {
+    public int getPoints(){
+        if (points == null){
             points = 0;
         }
         return points;
     }
 
-    public void setPoints(int points) {
+    public void setPoints(int points){
         this.points = points;
     }
 
@@ -70,11 +70,11 @@ public class Profile {
         this.streak = streak;
     }
 
-    public Timestamp getCreated_at() {
-        return created_at;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
+    public void setCreatedAtt(Timestamp created_at) {
+        this.createdAt = created_at;
     }
 }
