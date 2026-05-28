@@ -12,7 +12,7 @@ public class Word {
     @Id
     @Column(name = "wordText")
     private String wordText;
-    private Date last_used;
+    private Date lastUsed;
 
     public String getWordText() {
         return wordText;
@@ -22,8 +22,8 @@ public class Word {
         this.wordText = wordText;
     }
 
-    public void setLastUsed(Date last_used) {
-        this.last_used = last_used;
+    public void setLastUsed(Date lastUsed) {
+        this.lastUsed = lastUsed;
     }
 }
 

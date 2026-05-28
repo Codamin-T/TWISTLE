@@ -5,18 +5,14 @@ import com.example.twistle.repository.*;
 import com.example.twistle.service.WordService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-
 
 @Controller
 public class WordController {
 
     private final WordRepository wordRepository;
- 
     private final HttpSession session;
 
     @Autowired
@@ -37,11 +33,9 @@ public class WordController {
     // Gets guessing screen and daily word for a specific word length.
     @GetMapping("/word-guess/{length}")
     public String wordGuess(@PathVariable int length, Model model){
-        System.out.println("Pressed length:"+length);
+        System.out.println("Pressed length:" + length);
        
         Word word = (Word)session.getAttribute("currentWord");
-        
-        /// DET ÄR BARA TEST 🚦🚦🚦🚦 DEN RADEN SKICKAR WORD FRÅN JAVA TILL HTML-SIADAN SÅ ATT JAVA SCRIPT KAN ANVÄNDA DEN SENARE
         model.addAttribute("word",  word.getWordText());
         
         word = wordService.getDailyWord(length);
@@ -70,15 +64,8 @@ public class WordController {
         }
       return "redirect:/word-guess/"+wordText.length();
     }
-    
-    
-    
-    
-    //test 🤔🤔🤔🤔
-   
-/*
-* Fetch a word based on the given length and returns it as text .
- */
+
+    //Fetch a word based on the given length and returns it as text .
     @GetMapping("/word/{length}")
     @ResponseBody
     public String getWord(@PathVariable int length) {
