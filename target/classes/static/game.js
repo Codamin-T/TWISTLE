@@ -270,20 +270,37 @@ function createKeyboard() {
 }
 
 function colorLettersOnGuess(){
+    const remainingLetters = {};
+
+    // Count letters in the word that are NOT in the correct position
+    for (let i = 0; i < wordLength; i++) {
+        if (currentGuess[i] !== word[i]) {
+            const c = word[i];
+            remainingLetters[c] = (remainingLetters[c] || 0) + 1;
+        }
+    }
+
+    // First pass: mark greens
     for (let i = 0; i < wordLength; i++) {
         const index = currentRow * wordLength + i;
         const letter = currentGuess[i];
-        const correct = word[i];
-
-        if (letter === correct) {
+        if (letter === word[i]) {
             bubbles[index].classList.add("correct");
             updateKeyboard(letter, "correct");
         }
-        else if (word.includes(letter)) {
+    }
+
+    // Second pass: mark yellows and greys
+    for (let i = 0; i < wordLength; i++) {
+        const index = currentRow * wordLength + i;
+        const letter = currentGuess[i];
+        if (letter === word[i]) continue;
+
+        if (remainingLetters[letter] > 0) {
             bubbles[index].classList.add("wrong-position");
             updateKeyboard(letter, "wrong-position");
-        }
-        else {
+            remainingLetters[letter]--;
+        } else {
             bubbles[index].classList.add("wrong");
             updateKeyboard(letter, "wrong");
         }
