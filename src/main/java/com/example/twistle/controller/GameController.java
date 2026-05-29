@@ -1,5 +1,6 @@
 package com.example.twistle.controller;
 
+import com.example.twistle.model.Profile;
 import com.example.twistle.model.Word;
 import com.example.twistle.repository.ProfileRepository;
 import com.example.twistle.service.ProfileService;
@@ -54,7 +55,7 @@ public class GameController{
     }
 
     @ResponseBody
-    @GetMapping("/completeLevel/{level}{tries}")
+    @PostMapping("/completeLevel/{level}{tries}")
     public void completeLevel(@PathVariable String level, @PathVariable String tries){
         int currentRow = Integer.parseInt(level.substring(1));
         level = level.substring(0, 1);
@@ -109,6 +110,8 @@ public class GameController{
     @ResponseBody
     @GetMapping("/getPoints")
     public String getPoints(){
-        return String.valueOf(profileRepository.findByUsername((String) session.getAttribute("loggedInUser")).getPoints());
+        String user = (String) session.getAttribute("loggedInUser");
+        Profile profile = profileRepository.findByUsername(user);
+        return String.valueOf(profile == null ? 0 : profile.getPoints());
     }
 }

@@ -81,9 +81,10 @@ public class UserController {
         }
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout(){
         session.removeAttribute("loggedInUser");
+        session.invalidate();
         return "redirect:/";
     }
 }

@@ -11,6 +11,8 @@ Description :Main menu for Twistle. Choose a word lenghth (2-8), View score/stre
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" th:href="@{design.css}">
     <title>TWISTLE</title>
 </head>
@@ -45,9 +47,11 @@ Description :Main menu for Twistle. Choose a word lenghth (2-8), View score/stre
             <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:20px">
                 Login
             </a>
-            <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:15px">
-                Logout (🍬 <span th:text="${loggedInUser}"></span>)
-            </a>
+            <form th:if="${loggedInUser != null}" th:action="@{/logout}" method="post" style="display:inline">
+                <button type="submit" class="logout-button" style="font-size:15px">
+                    Logout (🍬 <span th:text="${loggedInUser}"></span>)
+                </button>
+            </form>
         </div>
     </div>
 

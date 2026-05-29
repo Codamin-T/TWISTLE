@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecurityConfig {
+public class SecurityConfig{
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -18,8 +18,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests((auth) -> auth.anyRequest().permitAll())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/", "/login", "/register", "/register-error",
+                                "/play",
+                                "/level2", "/level3", "/level4", "/level5",
+                                "/level6", "/level7", "/level8",
+                                "/word-menu", "/word-guess/**", "/word/**",
+                                "/unlockedLevels", "/getSavedState/**",
+                                "/actuator/health",
+                                "/style.css", "/*.css", "/*.js",
+                                "/audio/**", "/fonts/**",
+                                "/favicon.ico", "/index.html"
+                        ).permitAll()
+                        .anyRequest().permitAll()
+                )
+                .formLogin(form -> form.disable())
+                .httpBasic(basic -> basic.disable())
                 .build();
     }
 }

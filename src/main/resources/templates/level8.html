@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
   <link rel="stylesheet" th:href="@{level8.css}">
     <link rel="stylesheet" th:href="@{winPopup.css}">
     <link rel="stylesheet" th:href="@{losePopup.css}">
@@ -29,9 +31,11 @@
       </p>
     </div>
   </aside>
-  <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
-    Logout (🍬 <span th:text="${loggedInUser}"></span>)
-  </a>
+  <form th:if="${loggedInUser != null}" th:action="@{/logout}" method="post" style="display:inline">
+    <button type="submit" class="logout-button" style="font-size:20px">
+      Logout (🍬 <span th:text="${loggedInUser}"></span>)
+    </button>
+  </form>
 
 </div>
 

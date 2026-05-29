@@ -48,6 +48,13 @@ let useTimer = false;
 
 var winSound = new Audio('WIN_SOUND.mp3');
 
+function csrfHeaders() {
+    const tokenEl  = document.querySelector('meta[name="_csrf"]');
+    const headerEl = document.querySelector('meta[name="_csrf_header"]');
+    if (!tokenEl || !headerEl) return {};
+    return { [headerEl.content]: tokenEl.content };
+}
+
 
 function startTimer() {
     stopTimer();
@@ -206,7 +213,10 @@ function loadWord() {
         saveGameState();
         playWinSound();
         stopTimer();
-        fetch(`completeLevel/${wordLength}${currentRow.toString()}`);
+        fetch(`completeLevel/${wordLength}${currentRow.toString()}`, {
+            method: "POST",
+            headers: csrfHeaders()
+        });
 
         winAnimations();
         setPointsOnScreen();
@@ -369,7 +379,7 @@ function saveGameState() {
 
     fetch(`/saveGameState/${wordLength}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...csrfHeaders() },
         body: JSON.stringify({ word: word, currentRow, gameOver, guesses })
     });
 }

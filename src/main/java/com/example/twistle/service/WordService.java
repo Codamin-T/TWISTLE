@@ -3,6 +3,8 @@ package com.example.twistle.service;
 import com.example.twistle.model.Word;
 import com.example.twistle.repository.WordRepository;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Service
 public class WordService{
+
+    private static final Logger log = LoggerFactory.getLogger(WordService.class);
 
     @Autowired
     HttpSession session;
@@ -27,15 +31,19 @@ public class WordService{
     public Word getDailyWord(int length){
 
         List<Word> words = wordRepository.findAllRandomByLengthNotRecent(length);
-        
+
+        if (words.isEmpty()){
+            log.warn("No non-recent words of length {}; falling back to full pool.", length);
+            words = wordRepository.findAllByLength(length);
+            if (words.isEmpty()){
+                throw new IllegalStateException("No words of length " + length + " in database");
+            }
+        }
+
         long dateToday = LocalDate.now().toEpochDay();
-        System.out.println("today: " + dateToday);
+        int dailyIndex = (int) Math.floorMod(dateToday, words.size());
 
-        int dailyIndex = (int) (dateToday % words.size());
-        System.out.println("dailyIndex: " + dailyIndex);
-
-        Word word = words.get(dailyIndex);
-        return word;
+        return words.get(dailyIndex);
     }
 
     //Sets attribute 'lastUsed' to current date.
