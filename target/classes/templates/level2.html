@@ -16,29 +16,41 @@
 <body>
 
     <h1>2 letters</h1>
-    <div class = "flex-container">
-        <aside class="info">
-            <input type="checkbox" id="toggle">
-            <label for="toggle" class="toggle">
-                ❔
-            </label>
 
-            <div class="how-to-play">
-                <p>
-                    This is the two letter game.
-                    After each guess, the letters will turn different colors.
-                    Green means that the letter is in the correct spot.
-                    Yellow means that the letter exists in the word, but is in the incorrect spot.
-                    Grey means that the letter does not exist in the word.
-                </p>
-            </div>
-        </aside>
+    <div class = "flex-container">
+        <div>
+            <aside class="sidebar">
+                <a th:if="${loggedInUser != null}" class="side-item">
+                    🥉Streak
+                </a>
+                <a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
+                    ⭐ Score: <span th:text="${points}" id="points"></span>
+                </a>
+            </aside>
+        </div>
+
+        <!--<aside class="info">
+          <input type="checkbox" id="toggle">
+          <label for="toggle" class="toggle">
+            ❔
+          </label>
+
+          <div class="how-to-play">
+            <p>
+              This is the eight letter game.
+              After each guess, the letters will turn different colors.
+              Green means that the letter is in the correct spot.
+              Yellow means that the letter exists in the word, but is in the incorrect spot.
+              Grey means that the letter does not exist in the word.
+            </p>
+          </div>
+        </aside>-->
         <!--Login only shows when a user is logged out-->
-        <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:20px">
+        <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:3.5vh">
             Login
         </a>
         <!--Logout only shows when a user is logged in-->
-        <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:20px">
+        <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:3.5vh">
             Logout 🍬 <span th:text="${loggedInUser}"></span>
         </a>
     </div>
@@ -91,27 +103,16 @@
 <a th:href="@{/play}" class="back-button" style="font-size:25px">⬅
 </a>
 
-<a th:href="@{/level3}" class="next-level-button" style="font-size:25px">Next level
+<a th:href="@{/level3}" class="next-level-button" style="font-size:4vh">Next level
 </a>
 
-<div>
-    <aside class="sidebar">
-        <a th:if="${loggedInUser != null}" class="side-item">
-            🥉Streak
-        </a>
-        <a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
-            ⭐ Score: <span th:text="${points}" id="points"></span>
-        </a>
-    </aside>
-</div>
+        <div class="timer-container">
+            <div id="timer" class="timer">⏱️00:00</div>
 
-    <div class="timer-container">
-        <div id="timer" class="timer">⏱️00:00</div>
-
-        <button id="startTimerBtn" class="start-timer-btn">
-            Starta timer
-        </button>
-    </div>
+            <button id="startTimerBtn" class="start-timer-btn">
+                Starta timer
+            </button>
+        </div>
 
 <script th:src="@{/game.js}"></script>
 

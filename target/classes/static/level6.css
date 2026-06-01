@@ -35,18 +35,20 @@ h1 {
 }
 
 .sidebar {
-    position: absolute;
-    top: 20px;
+    /*position: absolute;
+    top: 20px;*/
 
     display: flex;
-    flex-direction: column-reverse;
+    /*flex-direction: column-reverse;
     align-items: flex-start;
-    left: 60px;
+    left: 4vw;*/
+
+    gap: 10px;
 }
 
 .side-item {
     background: rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    padding: 2vh ;
     border-radius: 10px;
     margin-bottom: 10px;
     cursor: default;
@@ -68,17 +70,18 @@ h1 {
 
 .next-level-button {
     position: fixed;
-    right: 60px;
-    background-color: #147CBF;
+    right: 4vw;
+    background-color: #EE9096;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 3px 60px;
+    padding: 1vh 3vw;
     display: inline-block;
     transition: transform 0.1s;
     text-decoration: none;
     font-family: WillyWonka;
+    top: 60vh;
 }
 
 .next-level-button:hover {
@@ -222,12 +225,12 @@ h1 {
 
 .logout-button {
     position: static;
-    background-color: #147CBF;
+    background-color: #EE9096;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 6px 30px;
+    padding: 1vh 3vw;
     display: inline-block;
     transition: transform 0.1s;
     text-decoration: none;
