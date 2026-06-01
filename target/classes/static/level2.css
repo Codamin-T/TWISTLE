@@ -158,6 +158,26 @@ h1 {
     display: block;
 }
 
+.hint {
+    position: fixed;
+    right: 60px;
+    background-color: #EE9096;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 3px 30px;
+    display: inline-block;
+    transition: transform 0.1s;
+    text-decoration: none;
+    font-family: WillyWonka;
+    top: 60vh;
+}
+
+.hint:hover {
+    transform: scale(1.1);
+}
+
 .grid {
     flex: 1;
     display: flex;
@@ -265,6 +285,12 @@ h1 {
 
 .wrong{
     background: #787c7e;
+    color: white;
+    cursor: default;
+}
+
+.hinted{
+    background: #EF8503;
     color: white;
     cursor: default;
 }

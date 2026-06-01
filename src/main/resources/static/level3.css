@@ -248,3 +248,9 @@ h1 {
     color: white;
     cursor: default;
 }
+
+.hinted{
+    background: #EF8503;
+    color: white;
+    cursor: default;
+}

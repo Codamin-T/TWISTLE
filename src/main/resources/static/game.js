@@ -48,6 +48,10 @@ let useTimer = false;
 
 var winSound = new Audio('WIN_SOUND.mp3');
 
+let hintedLetter = "";
+
+let currentGuessArray = [];
+
 
 function startTimer() {
     stopTimer();
@@ -146,16 +150,25 @@ function loadWord() {
     }
 
     else if (key === "Enter") {
-        // Clicks 'Next level' button if it's enabled
-        if(nextLvlBtn.hasAttribute("href")) {
+        if (nextLvlBtn.hasAttribute("href")) {
             nextLvlBtn.click();
             return;
         }
 
-        if (checkGuess() === true || currentGuess.length < wordLength){
+        let combinedLength = 0;
+        let userCount = 0;
+        for (let i = 0; i < wordLength; i++) {
+            if (currentGuessArray[i] != null || currentGuess[userCount]) {
+                combinedLength++;
+                if (currentGuessArray[i] == null) userCount++;
+            }
+        }
+
+        if (checkGuess() === true || combinedLength < wordLength){
             updateKeyboard("Enter", "unavailable");
         }
 
+        document.getElementById("Enter").classList.remove("available");
     }
 
 }
@@ -164,44 +177,70 @@ function loadWord() {
 //Check is input is a vaild letter
 
  function isLetter(key) {
-    return /^[a-zA-Z]$/.test(key)
-        && currentGuess.length < wordLength;
+     let hintCount = currentGuessArray.filter(x => x != null).length;
+
+     return /^[a-zA-Z]$/.test(key)
+         && currentGuess.length < wordLength - hintCount;
 }
 
  //Add letter to guess
  function addLetter(key) {
 
-    currentGuess += key.toLowerCase();
+    let startRowIndex = currentRow * wordLength;
 
-    const index =
-        currentRow * wordLength +
-        currentGuess.length - 1;
+    for (let i = 0; i < wordLength; i++) {
+        let targetIndex = startRowIndex + i;
 
-    bubbles[index].textContent = key.toUpperCase();
+        if (bubbles[targetIndex].textContent === "") {
+            bubbles[targetIndex].textContent = key.toUpperCase();
+            currentGuess += key.toLowerCase();
+            break;
+        }
+    }
 }
 
 
 // Remove last letter
  function removeLetter() {
+     if (currentGuess.length === 0) {
+         return;
+     }
 
-    if (currentGuess.length === 0) return;
+     let startRowIndex = currentRow * wordLength;
 
-    const index =
-        currentRow * wordLength +
-        currentGuess.length - 1;
+     for (let i = wordLength - 1; i >= 0; i--) {
+         let targetIndex = startRowIndex + i;
 
-    currentGuess = currentGuess.slice(0, -1);
-    bubbles[index].textContent = "";
+         if (bubbles[targetIndex].textContent !== "" && currentGuessArray[i] == null) {
+             bubbles[targetIndex].textContent = "";
+             currentGuess = currentGuess.slice(0, -1);
+             break;
+         }
+     }
 }
 
 
  //Check the guess
  function checkGuess() {
-    if (currentGuess.length !== wordLength) return;
-    colorLettersOnGuess();
+    let combinedGuess = "";
+    let userLetterCount = 0;
+
+    for (let i = 0; i < wordLength; i++) {
+        if (currentGuessArray[i] != null) {
+            combinedGuess += currentGuessArray[i].toLowerCase();
+        } else {
+            if (currentGuess[userLetterCount]) {
+                combinedGuess += currentGuess[userLetterCount];
+                userLetterCount++;
+            }
+        }
+    }
+
+    if (combinedGuess.length !== wordLength) return;
+    colorLettersOnGuess(combinedGuess);
 
     // WIN CONDTION
-    if (currentGuess === word) {
+    if (combinedGuess === word) {
         gameOver = true;
         saveGameState();
         playWinSound();
@@ -212,7 +251,7 @@ function loadWord() {
         setPointsOnScreen();
         return true;
 
-    }  else if (currentGuess != word && (currentRow +1) == totalRows){
+    }  else if (combinedGuess != word && (currentRow +1) == totalRows){
         gameOver = true;
         saveGameState();
         stopTimer();
@@ -223,8 +262,24 @@ function loadWord() {
         } else{
         saveGameState();
         }
+
      currentRow++;
-         currentGuess = "";
+     currentGuess = "";
+
+     let activeHint = [...currentGuessArray];
+
+     if (currentRow < totalRows) {
+         for (let i = 0; i < wordLength; i++) {
+
+             if (activeHint[i] != null){
+                 let bubbleNextRow = (currentRow * wordLength) + i;
+                 bubbles[bubbleNextRow].textContent = activeHint[i].toUpperCase();
+                 bubbles[bubbleNextRow].classList.add("hinted");
+             }
+         }
+     }
+
+     currentGuessArray = activeHint;
  }
 
 function createKeyboard() {
@@ -269,12 +324,12 @@ function createKeyboard() {
     }
 }
 
-function colorLettersOnGuess(){
+function colorLettersOnGuess(guess){
     const remainingLetters = {};
 
     // Count letters in the word that are NOT in the correct position
     for (let i = 0; i < wordLength; i++) {
-        if (currentGuess[i] !== word[i]) {
+        if (guess[i] !== word[i]) {
             const c = word[i];
             remainingLetters[c] = (remainingLetters[c] || 0) + 1;
         }
@@ -283,7 +338,7 @@ function colorLettersOnGuess(){
     // First pass: mark greens
     for (let i = 0; i < wordLength; i++) {
         const index = currentRow * wordLength + i;
-        const letter = currentGuess[i];
+        const letter = guess[i];
         if (letter === word[i]) {
             bubbles[index].classList.add("correct");
             updateKeyboard(letter, "correct");
@@ -293,7 +348,7 @@ function colorLettersOnGuess(){
     // Second pass: mark yellows and greys
     for (let i = 0; i < wordLength; i++) {
         const index = currentRow * wordLength + i;
-        const letter = currentGuess[i];
+        const letter = guess[i];
         if (letter === word[i]) continue;
 
         if (remainingLetters[letter] > 0) {
@@ -375,7 +430,7 @@ function saveGameState() {
 }
 
 function restoreGameState(savedState) {
-    currentRow = savedState.currentRow;
+    currentRow = savedState.currentRow+1;
     gameOver = savedState.gameOver || false;
 
     const guesses = savedState.guesses || [];
@@ -393,10 +448,6 @@ function restoreGameState(savedState) {
 
     if (gameOver) {
         document.removeEventListener("keydown", handleKeyPress);
-            nextLvlBtn.setAttribute("href", nextlvlBtnEnabled);
-            nextLvlBtn.style.opacity = "1";
-            nextLvlBtn.style.cursor = "pointer";
-            nextLvlBtn.style.pointerEvents = "";
     }
 }
 
@@ -526,8 +577,58 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", () =>{
+    const hintBtn = document.getElementById("hint");
+    hintBtn.addEventListener("click", () => {
+        removePointsForHint();
+    });
+});
+
+function removePointsForHint(){
+    if (hintedLetter.length > 0) return;
+
+    addHintLetter()
+
+    let pointsText = document.getElementById("points");
+    if(pointsText != null){
+        let currentPoints = parseInt(pointsText.innerText);
+        if (currentPoints < 10){
+            currentPoints = 0;
+        } else {
+            currentPoints -= 10;
+        }
+        pointsText.innerText = currentPoints;
+    }
+}
+
+function addHintLetter() {
+    let letterArray = word.split('');
+    let availableIndexed = [];
+
+    for (let i = 0; i < wordLength; i++) {
+        let currentLetter = letterArray[i].toUpperCase()
+        let keyTile = document.getElementById("Key" + currentLetter);
+
+        if (!keyTile.classList.contains("correct")) {
+            availableIndexed.push(i);
+        }
+    }
+
+    let randomIndex = Math.floor(Math.random() * availableIndexed.length);
+    let index = availableIndexed[randomIndex];
+    let letter = letterArray[index];
+
+    hintedLetterIndex = index;
+    hintedLetter = letter;
+
+    let targetBubbleIndex = (currentRow * wordLength) + index;
+    bubbles[targetBubbleIndex].textContent = letter.toUpperCase();
+    bubbles[targetBubbleIndex].classList.add("hinted");
+    updateKeyboard(letter, "hinted");
+
+    currentGuessArray[index] = hintedLetter;
+
+    fetch(`useHint`);
+}
+
 loadWord();
-
-
-
-

@@ -1,5 +1,6 @@
 package com.example.twistle.controller;
 
+import com.example.twistle.model.Profile;
 import com.example.twistle.model.Word;
 import com.example.twistle.repository.ProfileRepository;
 import com.example.twistle.service.ProfileService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 public class GameController{
@@ -110,5 +112,11 @@ public class GameController{
     @GetMapping("/getPoints")
     public String getPoints(){
         return String.valueOf(profileRepository.findByUsername((String) session.getAttribute("loggedInUser")).getPoints());
+    }
+
+    @ResponseBody
+    @GetMapping("/useHint")
+    public void useHint(){
+       profileService.removePointsFromProfile(10);
     }
 }

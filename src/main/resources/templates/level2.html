@@ -74,6 +74,9 @@
 <a th:href="@{/level3}" class="next-level-button" style="font-size:25px">Next level
 </a>
 
+<a th:if="${loggedInUser != null}" class="hint" style="font-size:25px" id ="hint">💡
+</a>
+
 <div>
     <aside class="sidebar">
         <a th:if="${loggedInUser != null}" class="side-item">
