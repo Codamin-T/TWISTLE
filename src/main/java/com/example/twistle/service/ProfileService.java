@@ -28,18 +28,23 @@ public class ProfileService{
 
         if (profile == null) return;
 
-        if (amountOfTries == 1){
-            points = 5;
-        } else if (amountOfTries == 2){
-            points = 3;
-        } else if (amountOfTries == 3){
-            points = 2;
+        if ((boolean)session.getAttribute("usedHint")){
+            points = 1;
+        } else {
+            if (amountOfTries == 1) {
+                points = 5;
+            } else if (amountOfTries == 2) {
+                points = 3;
+            } else if (amountOfTries == 3) {
+                points = 2;
+            }
         }
 
         profile.addPoints(points);
         profileRepository.save(profile);
 
         session.setAttribute("points", profile.getPoints());
+        session.setAttribute("usedHint", false);
     }
 
     public void removePointsFromProfile(int points){

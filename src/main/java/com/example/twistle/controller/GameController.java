@@ -32,6 +32,7 @@ public class GameController{
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if (session.getAttribute("loggedInUser") != null){
             session.setAttribute("points", profileRepository.findByUsername((String) session.getAttribute("loggedInUser")).getPoints());
+            session.setAttribute("usedHint", false);
             model.addAttribute("points", session.getAttribute("points"));
         }
 
@@ -117,6 +118,7 @@ public class GameController{
     @ResponseBody
     @GetMapping("/useHint")
     public void useHint(){
-       profileService.removePointsFromProfile(10);
+        session.setAttribute("usedHint", true);
+        profileService.removePointsFromProfile(10);
     }
 }
