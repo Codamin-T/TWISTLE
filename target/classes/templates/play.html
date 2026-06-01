@@ -12,6 +12,7 @@ Description :Main menu for Twistle. Choose a word lenghth (2-8), View score/stre
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{design.css}">
+    <link rel="stylesheet" th:href="@{instructionsPopup.css}">
     <title>TWISTLE</title>
 </head>
 
@@ -120,7 +121,6 @@ Description :Main menu for Twistle. Choose a word lenghth (2-8), View score/stre
         </section>
     </main>
 
-
     <aside class="sidebar">
         <a th:if="${loggedInUser != null}" class="side-item">
             🥉Streak
@@ -154,11 +154,43 @@ Description :Main menu for Twistle. Choose a word lenghth (2-8), View score/stre
     </footer>
 
 </div>
+
+<div class="instructions-modal" id="instructionsModal" style="display:none">
+    <div class="modal-header">
+        <div class="title">How to Play</div>
+        <button class="close-button" id="instructionsCloseButton">&times;</button>
+    </div>
+    <div class="play-modal-body">
+        <p>Guess the hidden word before you run out of tries!</p>
+        <br>
+        <p>🟢 <strong>Green</strong> — correct letter, correct spot</p>
+        <br>
+        <p>🟡 <strong>Yellow</strong> — correct letter, wrong spot</p>
+        <br>
+        <p>⚫ <strong>Grey</strong> — letter not in the word</p>
+        <br>
+        <button class="close-instructions-btn" id="instructionsGotItBtn">Got it! 🍬</button>
+    </div>
+</div>
+
 <script src="/levels.js"></script>
 
 <a th:href="@{/}" class="back-button" style="font-size:25px">
     ⬅
 </a>
+
+<script>
+    const instructionsModal = document.getElementById("instructionsModal");
+    if (!sessionStorage.getItem("instructionsSeenPlay")) {
+    instructionsModal.style.display = "flex";
+    }
+    const dismiss = () => {
+    instructionsModal.style.display = "none";
+    sessionStorage.setItem("instructionsSeenPlay", "true");
+};
+    document.getElementById("instructionsCloseButton").addEventListener("click", dismiss);
+    document.getElementById("instructionsGotItBtn").addEventListener("click", dismiss);
+</script>
 
 </body>
 </html>

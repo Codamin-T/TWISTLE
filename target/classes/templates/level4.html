@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{level4.css}">
     <link rel="stylesheet" th:href="@{winPopup.css}">
     <link rel="stylesheet" th:href="@{losePopup.css}">
+    <link rel="stylesheet" th:href="@{instructionsPopup.css}">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
     <title>4 letters</title>
@@ -71,6 +72,22 @@
 
     <div th:replace="winPopup :: winPopup"></div>
     <div th:replace="losePopup :: losePopup"></div>
+
+    <div class="instructions-modal" id="instructionsModal" style="display:none">
+        <div class="modal-header">
+            <div class="title">How to Play</div>
+            <button class="close-button" id="instructionsCloseButton">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Guess the hidden word before you run out of tries!</p>
+            <br>
+            <p>🟢 <strong>Green</strong> — correct letter, correct spot</p>
+            <p>🟡 <strong>Yellow</strong> — correct letter, wrong spot</p>
+            <p>⚫ <strong>Grey</strong> — letter not in the word</p>
+            <br>
+            <button class="close-instructions-btn" id="instructionsGotItBtn">Got it! 🍬</button>
+        </div>
+    </div>
 
 
     <a th:href="@{/play}" class="back-button" style="font-size:25px">⬅

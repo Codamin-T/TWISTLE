@@ -104,6 +104,8 @@ function loadWord() {
 
     document.addEventListener("keydown", handleKeyPress);
 
+    //document.getElementById("instructions-modal").style.display = "block";
+
     keyPressEvents();
 
     createKeyboard();
@@ -115,7 +117,6 @@ function loadWord() {
     document.getElementById("loseCloseButton").addEventListener("click", () => {
         document.getElementById("loseModal").style.display = "none";
     });
-
 }
 
 
@@ -518,12 +519,27 @@ function keyPressEvents(){
 
 }
 document.addEventListener("DOMContentLoaded", () => {
+    //Timer
     const startBtn = document.getElementById("startTimerBtn");
-    startBtn.addEventListener("click", () => {
-        useTimer = true;
-        startTimer();
-        startBtn.style.display = "none";
-    });
+        if (startBtn) {
+            startBtn.addEventListener("click", () => {
+                useTimer = true;
+                startTimer();
+                startBtn.style.display = "none";
+            });
+        }
+
+    // Instructions popup
+         const instructionsModal = document.getElementById("instructionsModal");
+         if (instructionsModal) {
+             instructionsModal.style.display = "flex";
+
+             const dismiss = () => {
+                 instructionsModal.style.display = "none";
+             };
+             document.getElementById("instructionsCloseButton").addEventListener("click", dismiss);
+             document.getElementById("instructionsGotItBtn").addEventListener("click", dismiss);
+         }
 });
 
 loadWord();
