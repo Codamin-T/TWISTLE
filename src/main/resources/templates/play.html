@@ -42,10 +42,10 @@ Description :Main menu for Twistle. Choose a word lenghth (2-8), View score/stre
 
             </aside>
             <!--Login only shows when a user is logged out-->
-            <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:20px">
+            <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:3.5vh">
                 Login
             </a>
-            <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:15px">
+            <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:3.5vh">
                 Logout (🍬 <span th:text="${loggedInUser}"></span>)
             </a>
         </div>
