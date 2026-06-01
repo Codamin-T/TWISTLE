@@ -454,16 +454,21 @@ function restoreGameState(savedState) {
 
 function setPointsOnScreen(){
     let pointsText = document.getElementById("points");
-    if(pointsText != null){
-        let currentPoints = parseInt(pointsText.innerText);
-        if (currentRow === 0) {
-            currentPoints += 5;
-        } else if (currentRow === 1) {
-            currentPoints += 3;
-        } else if (currentRow === 2) {
-            currentPoints += 2;
-        } else {
+    let currentPoints = parseInt(pointsText.innerText);
+
+    if(pointsText != null) {
+        if (hintedLetter.length > 0) {
             currentPoints += 1;
+        } else {
+            if (currentRow === 0) {
+                currentPoints += 5;
+            } else if (currentRow === 1) {
+                currentPoints += 3;
+            } else if (currentRow === 2) {
+                currentPoints += 2;
+            } else {
+                currentPoints += 1;
+            }
         }
         pointsText.innerText = currentPoints;
     }
