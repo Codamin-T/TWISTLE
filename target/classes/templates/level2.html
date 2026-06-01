@@ -29,6 +29,8 @@
             </aside>
         </div>
 
+
+        <a th:if="${loggedInUser != null}" class="hint" style="font-size:25px" id ="hint">💡</a>
         <!--<aside class="info">
           <input type="checkbox" id="toggle">
           <label for="toggle" class="toggle">
@@ -105,21 +107,6 @@
 
 <a th:href="@{/level3}" class="next-level-button" style="font-size:25px">Next level
 </a>
-
-<a th:if="${loggedInUser != null}" class="hint" style="font-size:25px" id ="hint">💡
-</a>
-
-<div>
-    <aside class="sidebar">
-        <a th:if="${loggedInUser != null}" class="side-item">
-            🥉Streak
-        </a>
-        <a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
-            ⭐ Score: <span th:text="${points}" id="points"></span>
-        </a>
-    </aside>
-</div>
-
         <div class="timer-container">
             <div id="timer" class="timer">⏱️00:00</div>
 

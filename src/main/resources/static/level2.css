@@ -163,18 +163,18 @@ h1 {
 
 .hint {
     position: fixed;
-    right: 60px;
+    right: 4vw;
     background-color: #EE9096;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 3px 30px;
+    padding: 1vh 1vw;
     display: inline-block;
     transition: transform 0.1s;
     text-decoration: none;
     font-family: WillyWonka;
-    top: 60vh;
+    top: 25vh;
 }
 
 .hint:hover {
@@ -302,7 +302,7 @@ h1 {
 .timer-container {
     position: fixed;
     top: 20px;
-    left: 20px;
+    left: 4vw;
     display: flex;
     flex-direction: column;
     gap: 10px;
