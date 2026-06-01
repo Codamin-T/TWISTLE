@@ -62,6 +62,11 @@ public class GameController{
         int currentRow = Integer.parseInt(level.substring(1));
         level = level.substring(0, 1);
 
+        if (level.equals("2")) {
+            Profile profile = profileRepository.findByUsername((String)session.getAttribute("loggedInUser"));
+            profile.addStreak(1);
+        }
+
         profileService.addPointsToProfile(currentRow);
         wordService.setLastUsed((Word) session.getAttribute("currentWord"));
 

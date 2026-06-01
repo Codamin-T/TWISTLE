@@ -71,11 +71,23 @@ public class Profile{
     }
 
     public int getStreak(){
+        if (this.streak == null){
+            setStreak(0);
+        }
         return streak;
     }
 
     public void setStreak(int streak){
         this.streak = streak;
+    }
+
+    public void addStreak(int streak) {
+        if (this.streak == null){
+            setStreak(streak);
+            return;
+        }
+        this.streak += streak;
+        System.out.println("Streak");
     }
 
     public Timestamp getCreatedAt(){

@@ -21,7 +21,7 @@
         <div>
             <aside class="sidebar">
                 <a th:if="${loggedInUser != null}" class="side-item">
-                    🥉Streak
+                    🥉Streak: <span th:text="${streak}" id="streak"></span>
                 </a>
                 <a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
                     ⭐ Score: <span th:text="${points}" id="points"></span>
@@ -31,22 +31,7 @@
 
 
         <a th:if="${loggedInUser != null}" class="hint" style="font-size:25px" id ="hint">💡</a>
-        <!--<aside class="info">
-          <input type="checkbox" id="toggle">
-          <label for="toggle" class="toggle">
-            ❔
-          </label>
 
-            <div class="how-to-play">
-                <p>
-                    This is the two letter game.
-                    After each guess, the letters will turn different colors.
-                    Green means that the letter is in the correct spot.
-                    Yellow means that the letter exists in the word, but is in the incorrect spot.
-                    Grey means that the letter does not exist in the word.
-                </p>
-            </div>
-        </aside>
         <!--Login only shows when a user is logged out-->
         <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:3.5vh">
             Login

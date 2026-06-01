@@ -1,5 +1,7 @@
 package com.example.twistle.controller;
 
+import com.example.twistle.model.Profile;
+import com.example.twistle.repository.ProfileRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +14,18 @@ public class LevelController{
     @Autowired
     private HttpSession session;
 
+    @Autowired
+    private ProfileRepository profileRepository;
+
+
     private void addUserToModel(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if (session.getAttribute("loggedInUser") != null){
             model.addAttribute("points", session.getAttribute("points"));
+        }
+        if (session.getAttribute("loggedInUser") != null){
+            Profile profile = profileRepository.findByUsername((String)session.getAttribute("loggedInUser"));
+            model.addAttribute("streak", profile.getStreak());
         }
     }
 
