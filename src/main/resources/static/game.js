@@ -138,13 +138,13 @@ function loadWord() {
     if (isLetter(key)) {
         addLetter(key);
 
-        if (currentGuess.length === wordLength){
+        if (getTotalGuessLength() === wordLength){
             updateKeyboard("Enter", "available");
         }
     }
 
     else if (key === "Backspace") {
-        if (currentGuess.length === wordLength){
+        if (getTotalGuessLength() === wordLength){
             updateKeyboard("Enter", "unavailable");
         }
         removeLetter();
@@ -156,15 +156,6 @@ function loadWord() {
             return;
         }
 
-        let combinedLength = 0;
-        let userCount = 0;
-        for (let i = 0; i < wordLength; i++) {
-            if (currentGuessArray[i] != null || currentGuess[userCount]) {
-                combinedLength++;
-                if (currentGuessArray[i] == null) userCount++;
-            }
-        }
-
         if (checkGuess() === true || combinedLength < wordLength){
             updateKeyboard("Enter", "unavailable");
         }
@@ -172,6 +163,18 @@ function loadWord() {
         document.getElementById("Enter").classList.remove("available");
     }
 
+}
+
+function getTotalGuessLength(){
+    let combinedLength = 0;
+    let userCount = 0;
+    for (let i = 0; i < wordLength; i++) {
+        if (currentGuessArray[i] != null || currentGuess[userCount]) {
+            combinedLength++;
+            if (currentGuessArray[i] == null) userCount++;
+        }
+    }
+    return combinedLength;
 }
 
 
