@@ -25,6 +25,13 @@ body {
     color: #111;
 }
 
+#twistle {width:722px; height:302px; }
+
+.twistle {
+        width:722px;
+        height:302px;
+}
+
 .page {
     min-height: 100vh;
     display: grid;
