@@ -4,6 +4,7 @@ body{
     justify-content: center;
     align-items: center;
     background: #F5E8AA;
+    margin: 0;
 }
 
 .how-to-play p {
@@ -166,17 +167,18 @@ h1 {
 }
 
 .keyboard-row {
-    width: 600px;
+    width: 60vw;
 
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     background-color: #F5E8AA;
+    justify-content: center;
 }
 
 .key-tile {
-    width: 56px;
-    height: 60px;
+    width: 4vw;
+    height: 6.5vh;
     margin: 1px;
     border: 1px solid lightgray;
     background: white;
@@ -184,7 +186,7 @@ h1 {
     transition: transform 0.05s ease-out;
 
     /* Text */
-    font-size: 40px;
+    font-size: 4.5vh;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -201,8 +203,8 @@ h1 {
 }
 
 .enter-key-tile {
-    width: 116px;
-    height: 60px;
+    width: 8vw;
+    height: 6vh;
     margin: 1px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -210,7 +212,7 @@ h1 {
     cursor: not-allowed;
 
     /* Text */
-    font-size: 30px;
+    font-size: 4.5vh;
     font-weight: bold;
     display: flex;
     justify-content: center;
