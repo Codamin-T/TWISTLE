@@ -41,4 +41,15 @@ public class ProfileService{
 
         session.setAttribute("points", profile.getPoints());
     }
+
+    public void removePointsFromProfile(int points){
+        Profile profile = profileRepository.findByUsername((String)session.getAttribute("loggedInUser"));
+        if (profile == null || profile.getPoints() < points) {
+            return;
+        }
+
+        profile.removePoints(points);
+        profileRepository.save(profile);
+        session.setAttribute("points", profile.getPoints());
+    }
 }

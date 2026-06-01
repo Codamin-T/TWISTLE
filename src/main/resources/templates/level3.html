@@ -96,6 +96,19 @@
 <a th:href="@{/level4}" class="next-level-button" style="font-size:4vh">Next level
 </a>
 
+<a th:if="${loggedInUser != null}" class="hint" style="font-size:25px" id ="hint">💡
+</a>
+
+<div>
+    <aside class="sidebar">
+        <a th:if="${loggedInUser != null}" class="side-item">
+            🥉Streak
+        </a>
+        <a th:if="${loggedInUser != null}" class="side-item" id="pointsUpdated">
+            ⭐ Score: <span th:text="${points}" id="points"></span>
+        </a>
+    </aside>
+</div>
 <script th:src="@{/game.js}"></script>
 
 </body>
