@@ -452,6 +452,15 @@ function restoreGameState(savedState) {
 
     if (gameOver) {
         document.removeEventListener("keydown", handleKeyPress);
+
+        const lastGuess = guesses[guesses.length - 1];
+        const wasWin = lastGuess && lastGuess.colors.every(c => c === "correct");
+        if (wasWin) {
+            nextLvlBtn.style.opacity = "1";
+            nextLvlBtn.style.cursor = "pointer";
+            nextLvlBtn.setAttribute("href", nextlvlBtnEnabled);
+            nextLvlBtn.style.pointerEvents = "";
+        }
     }
 }
 
@@ -603,9 +612,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () =>{
     const hintBtn = document.getElementById("hint");
-    hintBtn.addEventListener("click", () => {
-        removePointsForHint();
-    });
+    if (hintBtn) {
+        hintBtn.addEventListener("click", () => {
+            removePointsForHint();
+        });
+    }
 });
 
 function removePointsForHint(){
