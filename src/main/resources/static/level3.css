@@ -30,8 +30,8 @@ h1 {
     grid-template-columns: repeat(3, min(10vh, 10vw));
     grid-template-rows: repeat(6, min(10vh, 10vw));
     justify-content: center;
-   /*opacity: 20%;*/
-  /*  opacity: 1;*/
+    /*opacity: 20%;*/
+    /*  opacity: 1;*/
 }
 
 .sidebar {
@@ -252,4 +252,44 @@ h1 {
     background:  #787c7e;
     color: white;
     cursor: default;
+}
+
+
+
+.timer-container {
+    position: fixed;
+    top: 20px;
+    left: 4vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.timer {
+    font-size: 32px;
+    font-family: "Courier New", monospace;
+    color:#EF8503;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 10px 20px;
+    border-radius: 12px;
+}
+
+
+.start-timer-btn {
+    background-color: #EF8503;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 4vh;
+    transition: transform 0.15s ease, background 0.2s ease;
+    font-family: Georgia;
+}
+
+.start-timer-btn:hover {
+    transform: scale(1.05);
+    background-color: #EF8503;
+
 }
