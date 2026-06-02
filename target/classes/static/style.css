@@ -20,7 +20,7 @@ Note Font-family were modified by the group
 
 body {
     font-family: system-ui, sans-serif;
-    background: radial-gradient(circle at top, #fdf2ff, #eef2ff);
+    background: radial-gradient(circle at top, #F8B77C, #F491B4);
     min-height: 100vh;
     color: #111;
 }
@@ -54,7 +54,7 @@ body {
 
 .hero p {
     font-size: clamp(1rem, 2.5vw, 1.2rem);
-    color: #6b7280;
+    color: white;
 }
 
 .actions {
@@ -79,21 +79,23 @@ body {
     align-items: center;
     justify-content: center;
 
-    padding: 0.9rem 1.6rem;
+    padding: 1.2rem 4.6rem;
     border-radius: 12px;
     border: none;
 
-    font-weight: 600;
+    font-weight: 300;
+    font-size: larger;
     cursor: pointer;
 
     min-width: 140px;
 
     transition: all 0.25s ease;
     text-decoration: none;
+    font-family: WillyWonka;
 }
 
 .primary {
-    background: linear-gradient(135deg, #eb25b0, #7c3aed);
+    background: linear-gradient(135deg, #D62987, #F491B4);
     color: white;
 }
 
@@ -103,7 +105,7 @@ body {
 }
 
 .secondary {
-    background: linear-gradient(#0055A0, #8CC1E9);
+    background: linear-gradient(#F491B4, #FAA4B5);
     border: 1px solid #ddd;
     color: white;
 }
