@@ -132,6 +132,7 @@ function loadWord() {
     if (isLetter(e) === false && e.toString().length>10) {
         key = e.key;
     } else {
+
         key = e;
     }
 
@@ -594,6 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 useTimer = true;
                 startTimer();
                 startBtn.style.display = "none";
+
             });
         }
 
