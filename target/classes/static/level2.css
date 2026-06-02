@@ -293,12 +293,6 @@ h1 {
     cursor: default;
 }
 
-.hinted{
-    background: #EF8503;
-    color: white;
-    cursor: default;
-}
-
 .timer-container {
     position: fixed;
     top: 20px;

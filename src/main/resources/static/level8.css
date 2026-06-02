@@ -71,7 +71,7 @@ h1 {
 .next-level-button {
     position: fixed;
     right: 4vw;
-    background-color: #EE9096;
+    background-color: #86299C;
     color: white;
     border: none;
     border-radius: 10px;
@@ -153,6 +153,23 @@ h1 {
     display: block;
 }
 
+.hint {
+    position: fixed;
+    right: 4vw;
+    background-color: #86299C;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 1vh 1vw;
+    display: inline-block;
+    transition: transform 0.1s;
+    text-decoration: none;
+    font-family: WillyWonka;
+    top: 25vh;
+    user-select: none;
+}
+
 .grid {
     flex: 1;
     display: flex;
@@ -225,7 +242,7 @@ h1 {
 
 .logout-button {
     position: static;
-    background-color: #EE9096;
+    background-color: #86299C;
     color: white;
     border: none;
     border-radius: 10px;
@@ -249,6 +266,12 @@ h1 {
 
 .wrong{
     background:  #787c7e;
+    color: white;
+    cursor: default;
+}
+
+.hinted{
+    background: #EF8503;
     color: white;
     cursor: default;
 }

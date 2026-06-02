@@ -73,7 +73,7 @@ h1 {
 .next-level-button {
     position: fixed;
     right: 4vw;
-    background-color: #EE9096;
+    background-color: #FDC700;
     color: white;
     border: none;
     border-radius: 10px;
@@ -227,7 +227,7 @@ h1 {
 
 .logout-button {
     position: static;
-    background-color: #EE9096;
+    background-color: #FDC700;
     color: white;
     border: none;
     border-radius: 10px;
