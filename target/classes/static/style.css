@@ -108,14 +108,15 @@ body {
     background: linear-gradient(#F491B4, #FAA4B5);
     border: 1px solid #ddd;
     color: white;
+    transition: all 0.25s ease;
+
 }
 
 .secondary:hover {
     transform: translateY(-3px);
-    background: #f3f4f6;
-    color:#111;
+    box-shadow: 0 10px 20px rgba(244, 145, 180, 0.25);
+    filter: brightness(1.05);
 }
-
 
 
 

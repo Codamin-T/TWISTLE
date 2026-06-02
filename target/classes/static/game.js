@@ -592,9 +592,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("startTimerBtn");
         if (startBtn) {
             startBtn.addEventListener("click", () => {
+                if(useTimer || gameOver || currentRow > 0) return;
                 useTimer = true;
                 startTimer();
-                startBtn.style.display = "none";
+
+                startBtn.disabled = true;
+               // startBtn.style.display = "none";
+                startBtn.style.pointerEvents = "none";
+                startBtn.style.opacity = "0.5";
 
             });
         }
