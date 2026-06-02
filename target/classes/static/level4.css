@@ -3,6 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     background: #82BA88;
+    margin: 0;
 }
 
 .how-to-play p {
@@ -34,18 +35,21 @@ h1 {
 }
 
 .sidebar {
-    position: absolute;
-    top: 20px;
+    /*position: absolute;
+    top: 20px;*/
 
     display: flex;
-    flex-direction: column-reverse;
+    /*flex-direction: column-reverse;
     align-items: flex-start;
-    left: 60px;
+    left: 4vw;*/
+
+    gap: 10px;
 }
+
 
 .side-item {
     background: rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    padding: 2vh ;
     border-radius: 10px;
     margin-bottom: 10px;
     cursor: default;
@@ -68,13 +72,13 @@ h1 {
 
 .next-level-button {
     position: fixed;
-    right: 60px;
+    right: 4vw;
     background-color: #FDC700;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 3px 30px;
+    padding: 1vh 3vw;
     display: inline-block;
     transition: transform 0.1s;
     text-decoration: none;
@@ -159,7 +163,8 @@ h1 {
 }
 
 .keyboard-row {
-    width: 600px;
+    width: 60vw;
+    justify-content: center;
 
     margin: 0 auto;
     display: flex;
@@ -168,8 +173,8 @@ h1 {
 }
 
 .key-tile {
-    width: 56px;
-    height: 60px;
+    width: 4vw;
+    height: 6.5vh;
     margin: 1px;
     border: 1px solid lightgray;
     background: white;
@@ -177,7 +182,7 @@ h1 {
     transition: transform 0.05s ease-out;
 
     /* Text */
-    font-size: 40px;
+    font-size: 4.5vh;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -194,8 +199,8 @@ h1 {
 }
 
 .enter-key-tile {
-    width: 116px;
-    height: 60px;
+    width: 8vw;
+    height: 6vh;
     margin: 1px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -203,7 +208,7 @@ h1 {
     cursor: not-allowed;
 
     /* Text */
-    font-size: 30px;
+    font-size: 4.5vh;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -227,8 +232,8 @@ h1 {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 6px 30px;
-    font-size: large;
+    padding: 1vh 3vw;
+    display: inline-block;
     transition: transform 0.1s;
     text-decoration: none;
     font-family: WillyWonka;

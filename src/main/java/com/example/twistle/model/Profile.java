@@ -48,6 +48,14 @@ public class Profile{
         points += pointsToAdd;
     }
 
+    public void removePoints(Integer pointsToRemove){
+        if (this.points == null || this.points - pointsToRemove <= 0){
+            setPoints(0);
+            return;
+        }
+        points -= pointsToRemove;
+    }
+
     // The following methods are not used yet:
 
     public void setUsername(String username){

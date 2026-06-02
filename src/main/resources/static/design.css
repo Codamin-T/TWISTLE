@@ -184,7 +184,7 @@ a {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 3px 30px;
+    padding: 1vh 3vw;
     text-decoration: none;
     transition: 0.1s;
 
@@ -280,7 +280,7 @@ a {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 6px 30px;
+    padding: 1vh 6vw;
     display: inline-block;
     text-decoration: none;
     font-family: WillyWonka;
@@ -293,8 +293,8 @@ a {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    padding: 6px 30px;
-    font-size: large;
+    padding: 1vh 6vw;
+    /*font-size: large;*/
     transition: transform 0.1s;
     text-decoration: none;
     font-family: WillyWonka;

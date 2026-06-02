@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 public class GameController{
@@ -31,6 +32,7 @@ public class GameController{
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
         if (session.getAttribute("loggedInUser") != null){
             session.setAttribute("points", profileRepository.findByUsername((String) session.getAttribute("loggedInUser")).getPoints());
+            session.setAttribute("usedHint", false);
             model.addAttribute("points", session.getAttribute("points"));
         }
 
@@ -113,5 +115,12 @@ public class GameController{
         String user = (String) session.getAttribute("loggedInUser");
         Profile profile = profileRepository.findByUsername(user);
         return String.valueOf(profile == null ? 0 : profile.getPoints());
+    }
+
+    @ResponseBody
+    @GetMapping("/useHint")
+    public void useHint(){
+        session.setAttribute("usedHint", true);
+        profileService.removePointsFromProfile(10);
     }
 }
