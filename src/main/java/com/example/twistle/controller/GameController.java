@@ -15,6 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Controller for incoming and outgoing game logic using service classes.
+ * Handles requests and stores temporary data in session variables.
+ */
 @Controller
 public class GameController{
 
@@ -27,6 +31,13 @@ public class GameController{
     @Autowired
     private ProfileService profileService;
 
+    /**
+     * When user clicks Play now.
+     * Initializes current user if it is logged in
+     * Initializes a map for which levels are unlocked.
+     * @param model Used to pass arguments to html file.
+     * @return Name of html file.
+     */
     @GetMapping("/play")
     public String showPlay(Model model){
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
@@ -56,6 +67,13 @@ public class GameController{
         return "play";
     }
 
+    /**
+     * Called if player completes a level
+     * Stores points in the database.
+     * Unlocks next level.
+     * @param level Which level is completed
+     * @param tries How many tries it took to complete the level, determines amount of points.
+     */
     @ResponseBody
     @GetMapping("/completeLevel/{level}{tries}")
     public void completeLevel(@PathVariable String level, @PathVariable String tries){
@@ -82,12 +100,21 @@ public class GameController{
         session.setAttribute("unlockedLevels", unlockedLevels);
     }
 
+    /**
+     * Getter for the map containing which levels are unlocked.
+     * @return Unlocked levels map.
+     */
     @ResponseBody
     @GetMapping("/unlockedLevels")
     public Map<String, Boolean> showUnlockedLevels(){
         return (HashMap) session.getAttribute("unlockedLevels");
     }
 
+    /**
+     * Saves the current game state. Level and guesses.
+     * @param level Which level to save.
+     * @param state Guesses on that level.
+     */
     @ResponseBody
     @PostMapping("/saveGameState/{level}")
     public void saveGameState(@PathVariable String level, @RequestBody Map<String, Object> state){
@@ -99,6 +126,11 @@ public class GameController{
         session.setAttribute("levelStates", levelStates);
     }
 
+    /**
+     * Getter for saved game state.
+     * @param level Which level to get saved guesses to.
+     * @return Returns a map containing the guesses for that level.
+     */
     @ResponseBody
     @GetMapping("/getSavedState/{level}")
     public Map<String, Object> getSavedState(@PathVariable String level){
@@ -109,12 +141,21 @@ public class GameController{
         return (Map<String, Object>) state;
     }
 
+    /**
+     * Getter for a users points.
+     * @return Returns the amount of points for the logged-in user.
+     */
     @ResponseBody
     @GetMapping("/getPoints")
     public String getPoints(){
         return String.valueOf(profileRepository.findByUsername((String) session.getAttribute("loggedInUser")).getPoints());
     }
 
+    /**
+     * Called when a hint is used.
+     * Sets session variable for if a hint has been used to true.
+     * Calls a service class to remove 10 points from the user.
+     */
     @ResponseBody
     @GetMapping("/useHint")
     public void useHint(){

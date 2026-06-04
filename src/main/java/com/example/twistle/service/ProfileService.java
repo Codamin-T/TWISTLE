@@ -7,12 +7,15 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class for Profile.
+ * Includes logic for setting attributes of a Profile object.
+ */
 @Service
 public class ProfileService{
 
     @Autowired
     HttpSession session;
-
     @Autowired
     private ProfileRepository profileRepository;
 
@@ -20,6 +23,12 @@ public class ProfileService{
         this.profileRepository =  profileRepository;
     }
 
+    /**
+     * Adds points to a profile.
+     * Includes logic for point system to determine how many points the user gets.
+     * Saves points to the database and session variables.
+     * @param currentRow Current row represents amount of tries.
+     */
     public void addPointsToProfile(int currentRow){
         int amountOfTries = currentRow+1;
         int points = 1;
@@ -47,6 +56,11 @@ public class ProfileService{
         session.setAttribute("usedHint", false);
     }
 
+    /**
+     * Removes points from a profile.
+     * Saves the change to the database and session variable.
+     * @param points Amount of points to remove.
+     */
     public void removePointsFromProfile(int points){
         Profile profile = profileRepository.findByUsername((String)session.getAttribute("loggedInUser"));
         if (profile == null || profile.getPoints() < points) {

@@ -9,6 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for getting daily words.
+ * Uses service class to get the word and sets the session variable for it.
+ */
 @Controller
 public class WordController {
 
@@ -24,48 +28,11 @@ public class WordController {
         this.wordService = wordService;
     }
 
-    // Directs user to Twistle menu
-    @GetMapping("/word-menu")
-    public String wordMenu(Model model){
-        return "word-guess-menu";
-    }
-
-    // Gets guessing screen and daily word for a specific word length.
-    @GetMapping("/word-guess/{length}")
-    public String wordGuess(@PathVariable int length, Model model){
-        System.out.println("Pressed length:" + length);
-       
-        Word word = (Word)session.getAttribute("currentWord");
-        model.addAttribute("word",  word.getWordText());
-        
-        word = wordService.getDailyWord(length);
-        session.setAttribute("currentWord", word);
-        model.addAttribute("length", length);
-        return "word-guess-game";
-    }
-
-    // Directs to success screen
-    @GetMapping("/word-guess/{length}/success")
-    public String wordGuessSuccess(@PathVariable int length, Model model){
-        return "word-guess-success";
-    }
-
-    // Receives users guess and processes it
-    @PostMapping("/word-guess")
-    public String WordGuess(String guessText){
-       Word word = (Word)session.getAttribute("currentWord");
-        if (word == null) {
-            return "redirect:/word-menu";
-        }
-        String wordText = word.getWordText().toLowerCase();
-        if (guessText.toLowerCase().equals(wordText)) {
-            System.out.println("Word guessed correctly");
-            return "redirect:/word-guess/"+wordText.length()+"/success";
-        }
-      return "redirect:/word-guess/"+wordText.length();
-    }
-
-    //Fetch a word based on the given length and returns it as text .
+    /**
+     * Gets a word based on the given length and returns it as text
+     * @param length Length of the word to get.
+     * @return Returns the daily word.
+     */
     @GetMapping("/word/{length}")
     @ResponseBody
     public String getWord(@PathVariable int length) {

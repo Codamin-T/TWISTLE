@@ -10,6 +10,10 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Service class for Word.
+ * Includes logic for setting attributes of a Profile object, and getting a word from the database.
+ */
 @Service
 public class WordService{
 
@@ -22,6 +26,11 @@ public class WordService{
         this.wordRepository =  wordRepository;
     }
 
+    /**
+     * Getter for the daily word of a specific length.
+     * @param length Length of the word to get.
+     * @return Returns the daily word with that length.
+     */
     // Gets the daily word for the parameter length.
     @Cacheable(value="word", key="#length")
     public Word getDailyWord(int length){
@@ -38,6 +47,10 @@ public class WordService{
         return word;
     }
 
+    /**
+     * Sets the date for when a word was last used. Uses the current date.
+     * @param word Word to be set to the current date.
+     */
     //Sets attribute 'lastUsed' to current date.
     public void setLastUsed(Word word){
         if (word == null) return;

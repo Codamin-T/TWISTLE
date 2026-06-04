@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 
+/**
+ * Model class for a user profile.
+ * Includes getters and setters for attributes.
+ */
 @Entity
 @Table(name = "profile")
 public class Profile{
@@ -17,26 +21,49 @@ public class Profile{
     private Integer streak;
     private Timestamp createdAt;
 
+    /**
+     * Gets user id.
+     * @return Returns user id.
+     */
     public Long getId(){
         return id;
     }
 
+    /**
+     * Sets user id.
+     */
     public void setId(Long id){
         this.id = id;
     }
 
+    /**
+     * Gets username.
+     * @return Returns username.
+     */
     public String getUsername(){
         return username;
     }
 
+    /**
+     * Gets (encrypted) user password.
+     * @return Returns user password.
+     */
     public String getPassword(){
         return password;
     }
 
+    /**
+     * Sets (encrypted) password.
+     * @param password Password to be set.
+     */
     public void setPassword(String password){
         this.password = password;
     }
 
+    /**
+     * Adds points to profile.
+     * @param pointsToAdd Amount of points to add.
+     */
     public void addPoints(Integer pointsToAdd){
         if (this.points == null){
             setPoints(pointsToAdd);
@@ -45,6 +72,10 @@ public class Profile{
         points += pointsToAdd;
     }
 
+    /**
+     * Removes points from profile.
+     * @param pointsToRemove Amount of points to remove.
+     */
     public void removePoints(Integer pointsToRemove){
         if (this.points == null || this.points - pointsToRemove <= 0){
             setPoints(0);
@@ -55,10 +86,10 @@ public class Profile{
 
     // The following methods are not used yet:
 
-    public void setUsername(String username){
-        this.username = username;
-    }
-
+    /**
+     * Gets the amount of points the profile has.
+     * @return Returns the amount of the profile's points.
+     */
     public int getPoints(){
         if (points == null){
             points = 0;
@@ -66,23 +97,11 @@ public class Profile{
         return points;
     }
 
+    /**
+     * Sets the amount of points of the profile.
+     * @param points Amount of points to be set.
+     */
     public void setPoints(int points){
         this.points = points;
-    }
-
-    public int getStreak(){
-        return streak;
-    }
-
-    public void setStreak(int streak){
-        this.streak = streak;
-    }
-
-    public Timestamp getCreatedAt(){
-        return createdAt;
-    }
-
-    public void setCreatedAtt(Timestamp created_at){
-        this.createdAt = created_at;
     }
 }
