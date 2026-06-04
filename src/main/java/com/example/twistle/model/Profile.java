@@ -70,13 +70,13 @@ public class Profile{
         this.points = points;
     }
 
-    public int getStreak(){
-        return streak;
-    }
-
-    public void setStreak(int streak){
-        this.streak = streak;
-    }
+//    public int getStreak(){
+//        return streak;
+//    }
+//
+//    public void setStreak(int streak){
+//        this.streak = streak;
+//    }
 
     public Timestamp getCreatedAt(){
         return createdAt;

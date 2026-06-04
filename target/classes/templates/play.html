@@ -183,9 +183,7 @@ Description :Main menu for Twistle. Choose a word lenghth (2-8), View score/stre
 
 <script>
     const instructionsModal = document.getElementById("instructionsModal");
-    if (!sessionStorage.getItem("instructionsSeenPlay")) {
     instructionsModal.style.display = "flex";
-    }
     const dismiss = () => {
     instructionsModal.style.display = "none";
     sessionStorage.setItem("instructionsSeenPlay", "true");
