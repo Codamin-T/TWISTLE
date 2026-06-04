@@ -132,6 +132,7 @@ function loadWord() {
     if (isLetter(e) === false && e.toString().length>10) {
         key = e.key;
     } else {
+
         key = e;
     }
 
@@ -452,6 +453,15 @@ function restoreGameState(savedState) {
 
     if (gameOver) {
         document.removeEventListener("keydown", handleKeyPress);
+
+        const lastGuess = guesses[guesses.length - 1];
+        const wasWin = lastGuess && lastGuess.colors.every(c => c === "correct");
+        if (wasWin) {
+            nextLvlBtn.style.opacity = "1";
+            nextLvlBtn.style.cursor = "pointer";
+            nextLvlBtn.setAttribute("href", nextlvlBtnEnabled);
+            nextLvlBtn.style.pointerEvents = "";
+        }
     }
 }
 
@@ -582,9 +592,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("startTimerBtn");
         if (startBtn) {
             startBtn.addEventListener("click", () => {
+                if(useTimer || gameOver || currentRow > 0) return;
                 useTimer = true;
                 startTimer();
-                startBtn.style.display = "none";
+
+                startBtn.disabled = true;
+               // startBtn.style.display = "none";
+                startBtn.style.pointerEvents = "none";
+                startBtn.style.opacity = "0.5";
+
             });
         }
 
@@ -603,9 +619,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () =>{
     const hintBtn = document.getElementById("hint");
-    hintBtn.addEventListener("click", () => {
-        removePointsForHint();
-    });
+    if (hintBtn) {
+        hintBtn.addEventListener("click", () => {
+            removePointsForHint();
+        });
+    }
 });
 
 function removePointsForHint(){

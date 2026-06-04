@@ -6,7 +6,6 @@
   <link rel="stylesheet" th:href="@{level8.css}">
     <link rel="stylesheet" th:href="@{winPopup.css}">
     <link rel="stylesheet" th:href="@{losePopup.css}">
-  <link rel="stylesheet" th:href="@{instructionsPopup.css}">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
     <title>Eight letters</title>
@@ -26,22 +25,7 @@
   </div>
 
     <a th:if="${loggedInUser != null}" class="hint" style="font-size:25px" id ="hint">💡</a>
-    <!--<aside class="info">
-      <input type="checkbox" id="toggle">
-      <label for="toggle" class="toggle">
-        ❔
-      </label>
 
-      <div class="how-to-play">
-        <p>
-          This is the eight letter game.
-          After each guess, the letters will turn different colors.
-          Green means that the letter is in the correct spot.
-          Yellow means that the letter exists in the word, but is in the incorrect spot.
-          Grey means that the letter does not exist in the word.
-        </p>
-      </div>
-    </aside>-->
   <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:3.5vh">
     Logout (🍬 <span th:text="${loggedInUser}"></span>)
   </a>
@@ -120,26 +104,17 @@
 <div th:replace="winPopup :: winPopup"></div>
 <div th:replace="losePopup :: losePopup"></div>
 
-<div class="instructions-modal" id="instructionsModal" style="display:none">
-  <div class="modal-header">
-    <div class="title">How to Play</div>
-    <button class="close-button" id="instructionsCloseButton">&times;</button>
-  </div>
-  <div class="modal-body">
-    <p>Guess the hidden word before you run out of tries!</p>
-    <br>
-    <p>🟢 <strong>Green</strong> — correct letter, correct spot</p>
-    <p>🟡 <strong>Yellow</strong> — correct letter, wrong spot</p>
-    <p>⚫ <strong>Grey</strong> — letter not in the word</p>
-    <p>🟠 <strong>Orange</strong> — letter is in correct spot, via hint</p>
-    <br>
-    <button class="close-instructions-btn" id="instructionsGotItBtn">Got it! 🍬</button>
-  </div>
-</div>
-
 
 <a th:href="@{/}" class="next-level-button" style="font-size:4vh">Main menu
 </a>
+
+
+<div class="timer-container">
+  <div id="timer" class="timer">⏱️00:00</div>
+  <button id="startTimerBtn" class="start-timer-btn">
+    Starta timer
+  </button>
+</div>
 
 <script th:src="@{/game.js}"></script>
 

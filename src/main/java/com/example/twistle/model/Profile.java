@@ -84,7 +84,9 @@ public class Profile{
         points -= pointsToRemove;
     }
 
-    // The following methods are not used yet:
+    public void setUsername(String username){
+        this.username = username;
+    }
 
     /**
      * Gets the amount of points the profile has.
@@ -103,5 +105,21 @@ public class Profile{
      */
     public void setPoints(int points){
         this.points = points;
+    }
+
+//    public int getStreak(){
+//        return streak;
+//    }
+//
+//    public void setStreak(int streak){
+//        this.streak = streak;
+//    }
+
+    public Timestamp getCreatedAt(){
+        return createdAt;
+    }
+
+    public void setCreatedAtt(Timestamp created_at){
+        this.createdAt = created_at;
     }
 }
