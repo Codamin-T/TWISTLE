@@ -28,23 +28,6 @@
                 </a>
             </aside>
         </div>
-
-        <!--<aside class="info">
-          <input type="checkbox" id="toggle">
-          <label for="toggle" class="toggle">
-            ❔
-          </label>
-
-            <div class="how-to-play">
-                <p>
-                    This is the two letter game.
-                    After each guess, the letters will turn different colors.
-                    Green means that the letter is in the correct spot.
-                    Yellow means that the letter exists in the word, but is in the incorrect spot.
-                    Grey means that the letter does not exist in the word.
-                </p>
-            </div>
-        </aside>
         <!--Login only shows when a user is logged out-->
         <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:3.5vh">
             Login
@@ -63,19 +46,18 @@
     <div class="bubble"></div>
     <div class="bubble"></div>
 
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-
-    </div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+</div>
 
 
 <div th:replace="winPopup :: winPopup"></div>
@@ -108,7 +90,7 @@
         <div class="timer-container">
             <div id="timer" class="timer">⏱️00:00</div>
             <button id="startTimerBtn" class="start-timer-btn">
-                Starta timer
+                Start timer
             </button>
         </div>
 
