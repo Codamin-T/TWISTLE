@@ -59,8 +59,10 @@ public class GameController{
     @ResponseBody
     @PostMapping("/completeLevel/{level}{tries}")
     public void completeLevel(@PathVariable String level, @PathVariable String tries){
+        System.out.println("level: ");
         int currentRow = Integer.parseInt(level.substring(1));
         level = level.substring(0, 1);
+        System.out.println(level);
 
         profileService.addPointsToProfile(currentRow);
         wordService.setLastUsed((Word) session.getAttribute("currentWord"));
@@ -80,6 +82,7 @@ public class GameController{
         }
         unlockedLevels.put(level, true);
         session.setAttribute("unlockedLevels", unlockedLevels);
+        System.out.println("COMPLETELEVEL");
     }
 
     @ResponseBody

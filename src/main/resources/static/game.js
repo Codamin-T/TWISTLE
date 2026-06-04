@@ -89,7 +89,10 @@ function loadWord() {
 
     wordLength = Number(document.querySelector("#game").dataset.length);
 
-    fetch(`/getSavedState/${wordLength}`)
+    fetch(`/getSavedState/${wordLength}`, {
+        method: "GET",
+        headers: csrfHeaders()
+    })
         .then(res => res.json())
         .then(savedState => {
             if (savedState && savedState.word) {
@@ -97,7 +100,10 @@ function loadWord() {
                 startGame();
                 restoreGameState(savedState);
             } else {
-                fetch(`/word/${wordLength}`)
+                fetch(`/word/${wordLength}`, {
+                    method: "GET",
+                    headers: csrfHeaders()
+                })
                     .then(res => res.text())
                     .then(data => {
                         word = data.trim();
@@ -466,7 +472,12 @@ function restoreGameState(savedState) {
 }
 
 function setPointsOnScreen(){
+
     let pointsText = document.getElementById("points");
+    if (pointsText == null){
+        return;
+    }
+
     let currentPoints = parseInt(pointsText.innerText);
 
     if(pointsText != null) {
@@ -610,13 +621,15 @@ document.addEventListener("DOMContentLoaded", () => {
              document.getElementById("instructionsGotItBtn").addEventListener("click", dismiss);
          }
 });
+const hintBtn = document.getElementById("hint");
 
-document.addEventListener("DOMContentLoaded", () =>{
-    const hintBtn = document.getElementById("hint");
-    hintBtn.addEventListener("click", () => {
-        removePointsForHint();
+if (hintBtn != null) {
+    document.addEventListener("DOMContentLoaded", () => {
+        hintBtn.addEventListener("click", () => {
+            removePointsForHint();
+        });
     });
-});
+}
 
 function removePointsForHint(){
     if (hintedLetter.length > 0) return;

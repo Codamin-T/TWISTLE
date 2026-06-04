@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" th:href="@{level2.css}">
     <link rel="stylesheet" th:href="@{winPopup.css}">
     <link rel="stylesheet" th:href="@{losePopup.css}">
@@ -52,11 +52,9 @@
             Login
         </a>
         <!--Logout only shows when a user is logged in-->
-        <form th:if="${loggedInUser != null}" th:action="@{/logout}" method="post" style="display:inline">
-            <button type="submit" class="logout-button" style="font-size:3.5vh">
-                Logout 🍬 <span th:text="${loggedInUser}"></span>
-            </button>
-        </form>
+        <a th:if="${loggedInUser != null}" th:href="@{/logout}" class="logout-button" style="font-size:3.5vh">
+            Logout 🍬 <span th:text="${loggedInUser}"></span>
+        </a>
     </div>
 
 <!--Game container holding selected word lenght som are two letters -->
