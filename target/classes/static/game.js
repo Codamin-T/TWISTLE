@@ -1,58 +1,37 @@
 
 /* Description
 * This is a wordle style word guessing game
-*
-*
 *  The player must guess a hidden word by typing letters
-* on the keyboard. The word is randomly selected fron a server, and the player has
+* on the keyboard. The word is randomly selected from a server, and the player has
 * a limited number of attempts to find the correct answer.
-*
 * After each guess, the game gives feedback by coloring the letters
 * Green : correct letter in the correct position
 * Yellow: correct letter in the wrong position
 * Gray : letter is not in the word
-*
 * The game continues until the correct word is guessed
 * */
 
 
-// The correct word to guess
 let word = "";
-
-//Length of the word
 let wordLength = 0;
-
-//Current player guess
 let currentGuess = "";
-
-// Current row
 let currentRow = 0;
-
-// All game bubbles
 let bubbles = [];
-
-//total amount of rows in each level
 let totalRows = [];
-
-// Next level button
 let nextLvlBtn = document.querySelector(".next-level-button");
-
-// HTML attribute for next level link
 let nextlvlBtnEnabled = nextLvlBtn.getAttribute("href");
-
 let gameOver = false;
-
 let seconds = 0;
 let timerInterval = null;
 let useTimer = false;
-
 var winSound = new Audio('WIN_SOUND.mp3');
-
 let hintedLetter = "";
-
 let currentGuessArray = [];
 
-
+/*
+Starts the game timer and updates the timer display every second.
+@author Heba
+ */
 function startTimer() {
     stopTimer();
 
@@ -67,13 +46,21 @@ function startTimer() {
     }, 1000);
 }
 
+/**
+ * Stops the active timer.
+ * @author Heba
+ */
+
 function stopTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
 }
 
+/**
+ * Loads a saved game state or fetches a new word and starts the game.
+ * @author Sara
+ */
 
-//Fetch a random word from the server
 function loadWord() {
     nextLvlBtn.removeAttribute("href");
     nextLvlBtn.style.opacity = "0.5";
@@ -101,19 +88,18 @@ function loadWord() {
 }
 
 
-// Start the game
+/**
+ * Initializes the game, keyboard, and event listeners.
+ * @author Sara
+ */
  function startGame() {
     bubbles = document.querySelectorAll(".bubble");
     totalRows = Number(document.getElementById("game").dataset.rows);
 
     document.addEventListener("keydown", handleKeyPress);
 
-    //document.getElementById("instructions-modal").style.display = "block";
-
     keyPressEvents();
-
     createKeyboard();
-
     document.getElementById("closeButton").addEventListener("click", () => {
         document.getElementById("modal").style.display = "none";
     });
@@ -124,7 +110,12 @@ function loadWord() {
 }
 
 
-// Handle key input
+/**
+ * Handles keyboard input from physical and virtual keyboards.
+ *
+ * @param {KeyboardEvent|string} e The keyboard event or key value.
+ * @author Benjamin
+ */
 
  function handleKeyPress(e) {
     let key;
@@ -166,6 +157,13 @@ function loadWord() {
 
 }
 
+/**
+ * Calculates the total number of letters currently entered.
+ *
+ * @returns {number} Total length of the current guess.
+ * @author Benjamin
+ */
+
 function getTotalGuessLength(){
     let combinedLength = 0;
     let userCount = 0;
@@ -179,7 +177,13 @@ function getTotalGuessLength(){
 }
 
 
-//Check is input is a vaild letter
+/**
+ * Checks if the provided key is a valid letter that can be entered.
+ *
+ * @param {string} key The key to validate.
+ * @returns {boolean} True if the key is valid.
+ * @author Benjamin
+ */
 
  function isLetter(key) {
      let hintCount = currentGuessArray.filter(x => x != null).length;
@@ -188,7 +192,12 @@ function getTotalGuessLength(){
          && currentGuess.length < wordLength - hintCount;
 }
 
- //Add letter to guess
+
+/**
+ * Adds a letter to the current guess and updates the game board.
+ * @param {string} key The letter to add.
+ * @author Benjamin
+ */
  function addLetter(key) {
 
     let startRowIndex = currentRow * wordLength;
@@ -204,8 +213,12 @@ function getTotalGuessLength(){
     }
 }
 
+/**
+ * Removes the last entered letter from the current guess.
+ *
+ * @author Benjamin
+ */
 
-// Remove last letter
  function removeLetter() {
      if (currentGuess.length === 0) {
          return;
@@ -224,8 +237,13 @@ function getTotalGuessLength(){
      }
 }
 
-
- //Check the guess
+/**
+ * Validates the current guess, updates tile colors,
+ * checks win/loss conditions, and saves the game state.
+ *
+ * @returns {boolean|undefined} True if the player wins.
+ * @author Benjamin
+ */
  function checkGuess() {
     let combinedGuess = "";
     let userLetterCount = 0;
@@ -244,14 +262,12 @@ function getTotalGuessLength(){
     if (combinedGuess.length !== wordLength) return;
     colorLettersOnGuess(combinedGuess);
 
-    // WIN CONDTION
     if (combinedGuess === word) {
         gameOver = true;
         saveGameState();
         playWinSound();
         stopTimer();
         fetch(`completeLevel/${wordLength}${currentRow.toString()}`);
-
         winAnimations();
         setPointsOnScreen();
         return true;
@@ -287,8 +303,15 @@ function getTotalGuessLength(){
      currentGuessArray = activeHint;
  }
 
+
+/**
+ * Create and renders the on screen keyboard.
+ * Generates keyboard rows and keys
+ * attaches click event listeners, and adds the keyboard to the page.
+ *
+ * @author Savannah
+ */
 function createKeyboard() {
-// Create the key board
     let keyboard = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L", " "],
@@ -329,10 +352,16 @@ function createKeyboard() {
     }
 }
 
+/**
+ * Colors the guessed letters as correct, wrong-position, or wrong.
+ * Updates both the board and keyboard colors.
+ * @param guess
+ * @author Sara
+ */
+
 function colorLettersOnGuess(guess){
     const remainingLetters = {};
 
-    // Count letters in the word that are NOT in the correct position
     for (let i = 0; i < wordLength; i++) {
         if (guess[i] !== word[i]) {
             const c = word[i];
@@ -340,7 +369,6 @@ function colorLettersOnGuess(guess){
         }
     }
 
-    // First pass: mark greens
     for (let i = 0; i < wordLength; i++) {
         const index = currentRow * wordLength + i;
         const letter = guess[i];
@@ -350,7 +378,6 @@ function colorLettersOnGuess(guess){
         }
     }
 
-    // Second pass: mark yellows and greys
     for (let i = 0; i < wordLength; i++) {
         const index = currentRow * wordLength + i;
         const letter = guess[i];
@@ -367,14 +394,22 @@ function colorLettersOnGuess(guess){
     }
 }
 
+/**
+ * Plays the win sound effect.
+ * @author Sara
+ */
 function playWinSound(){
     winSound.volume = 0.1;
     winSound.playbackRate = 1 + wordLength/20;
     winSound.preservesPitch = false;
     winSound.play();
 }
-
-function winAnimations(){
+/**
+ * Shows win animations, displays earned points,
+ * launches confetti, and enables the next level button.
+ * @author Sara
+ */
+   function winAnimations(){
     nextLvlBtn.style.opacity = "1";
     nextLvlBtn.style.cursor = "pointer"
 
@@ -406,6 +441,10 @@ function winAnimations(){
     }, 100);
 }
 
+/**
+ * Saves the current game state, including guesses and colors
+ * @author Sara
+ */
 function saveGameState() {
     const guesses = [];
     for (let row = 0; row <= currentRow; row++) {
@@ -434,6 +473,11 @@ function saveGameState() {
     });
 }
 
+/**
+ * Restores a previously saved game state and updates the board.
+ * @param savedState The saved game state
+ * @author Sara
+ */
 function restoreGameState(savedState) {
     currentRow = savedState.currentRow+1;
     gameOver = savedState.gameOver || false;
@@ -465,6 +509,11 @@ function restoreGameState(savedState) {
     }
 }
 
+/**
+ * Updates the player's points after winning a round.
+ * @author Benjamin
+ *
+ */
 function setPointsOnScreen(){
     let pointsText = document.getElementById("points");
     let currentPoints = parseInt(pointsText.innerText);
@@ -487,6 +536,10 @@ function setPointsOnScreen(){
     }
 }
 
+/**
+ * Handles input from the on-screen keyboard.
+ * @author Savannah
+ */
 function processKey() {
     e = { "code" : this.id };
     let clickedKey = String(this.id).replace("Key", "");
@@ -494,10 +547,15 @@ function processKey() {
     handleKeyPress(clickedKey);
 }
 
+/**
+ * Processes keyboard input and updates the game state
+ * @param e The key event.
+ * @author Savannah
+ */
+
 function processInput(e) {
     if (gameOver) return;
 
-    // alert(e.code);
     if ("KeyA" <= e.code && e.code <= "KeyZ") {
         if (col < width) {
             let currTile = document.getElementById(currentRow.toString() + '-' + col.toString());
@@ -525,6 +583,13 @@ function processInput(e) {
     }
 }
 
+/**
+ * Updates a keyboard key's visual statu
+ * @param letter  letter The letter to update.
+ * @param status status The new status
+ * @author Benjamin
+ *
+ */
 function updateKeyboard(letter, status) {
     if (letter === "Enter"){
         const enterTile = document.getElementById(letter);
@@ -538,8 +603,6 @@ function updateKeyboard(letter, status) {
 
     const keyTile = document.getElementById("Key" + letter.toUpperCase());
     if (!keyTile) return;
-
-    // Priority: correct > wrong-position > wrong. Never downgrade.
     if (keyTile.classList.contains("correct")) return;
     if (keyTile.classList.contains("wrong-position") && status !== "correct") return;
 
@@ -550,6 +613,7 @@ function updateKeyboard(letter, status) {
 /*
 * Animates keys to be smaller when the keys are pressed down using event listeners for key-up and key-down.
 * Uses the same listeners to allow 'control+backspace' to delete the whole word.
+* @author Benjamin
  */
 function keyPressEvents(){
     let backSpaceDown = false;
@@ -588,7 +652,6 @@ function keyPressEvents(){
 
 }
 document.addEventListener("DOMContentLoaded", () => {
-    //Timer
     const startBtn = document.getElementById("startTimerBtn");
         if (startBtn) {
             startBtn.addEventListener("click", () => {
@@ -597,14 +660,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 startTimer();
 
                 startBtn.disabled = true;
-               // startBtn.style.display = "none";
                 startBtn.style.pointerEvents = "none";
                 startBtn.style.opacity = "0.5";
 
             });
         }
 
-    // Instructions popup
          const instructionsModal = document.getElementById("instructionsModal");
          if (instructionsModal) {
              instructionsModal.style.display = "flex";
@@ -626,6 +687,10 @@ document.addEventListener("DOMContentLoaded", () =>{
     }
 });
 
+/**
+ * Remove a point when a hint is used
+ * @author Benjamin
+ */
 function removePointsForHint(){
     if (hintedLetter.length > 0) return;
 
@@ -643,6 +708,10 @@ function removePointsForHint(){
     }
 }
 
+/**
+ *ADD a hint letter
+ * @author Benjamin
+ */
 function addHintLetter() {
     let letterArray = word.split('');
     let availableIndexed = [];
@@ -673,4 +742,7 @@ function addHintLetter() {
     fetch(`useHint`);
 }
 
+/**
+ * Load a new word for the game
+ */
 loadWord();
