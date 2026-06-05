@@ -9,6 +9,8 @@ Twistle is a web-based word guessing game for a school project.
 * Heba Sadlah
 * Benjamin Torsson
 
+#### *Co-authors are displayed in either commit messages or commit comments. Surrounding or relative commits the same day may be included in that pair programming session.*
+
 ---
 
 ## Prerequisites & Environment
