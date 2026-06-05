@@ -20,6 +20,7 @@ public class Word{
     /**
      * Gets the text of the word.
      * @return Returns the word text as a String.
+     * @author Benjamin Torsson
      */
     public String getWordText(){
         return wordText;
@@ -28,6 +29,7 @@ public class Word{
     /**
      * Sets the text of a word.
      * @param wordText Text to be set.
+     * @author Benjamin Torsson
      */
     public void setWordText(String wordText){
         this.wordText = wordText;
@@ -36,6 +38,7 @@ public class Word{
     /**
      * Sets the date of when the word was last used.
      * @param lastUsed The date to be set.
+     * @author Benjamin Torsson
      */
     public void setLastUsed(Date lastUsed){
         this.lastUsed = lastUsed;

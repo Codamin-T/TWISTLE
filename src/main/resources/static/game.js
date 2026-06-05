@@ -251,7 +251,6 @@ function getTotalGuessLength(){
         playWinSound();
         stopTimer();
         fetch(`completeLevel/${wordLength}${currentRow.toString()}`);
-
         winAnimations();
         setPointsOnScreen();
         return true;

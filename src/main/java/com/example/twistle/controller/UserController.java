@@ -34,6 +34,7 @@ public class UserController {
     /**
      * Maps html file to show start page.
      * @return Name of html file.
+     * @author Heba Sadlah
      */
     @GetMapping("/")
     public String showStartPage(){
@@ -44,6 +45,7 @@ public class UserController {
      * Maps html file to show register page.
      * @param profile Profile to add.
      * @return Name of html file.
+     * @author Heba Sadlah
      */
     @GetMapping("/register")
     public String showRegisterForm(Profile profile){
@@ -57,6 +59,7 @@ public class UserController {
      * @param profile Profile to add to database
      * @param redirectAttributes Attribute for error handling if the password is less than 6 characters.
      * @return Redirection depending on valid/invalid values.
+     * @author Heba Sadlah
      */
     @PostMapping("/register")
     public String processAddProfile(Profile profile, RedirectAttributes redirectAttributes) {
@@ -78,6 +81,7 @@ public class UserController {
      * Maps html file to show login page.
      * @param model Profile to use for values.
      * @return Name of html file.
+     * @author Heba Sadlah
      */
     @GetMapping("/login")
     public String showLoginForm(Model model){
@@ -92,6 +96,7 @@ public class UserController {
      * @param profile Profile containing input values.
      * @param redirectAttributes Attribute to show error messages.
      * @return Redirection depending on valid/invalid values.
+     * @author Heba Sadlah
      */
     @PostMapping("/login")
     public String processLogin(Profile profile, RedirectAttributes redirectAttributes){
@@ -113,6 +118,7 @@ public class UserController {
      * Called when a user logs out.
      * Removes session attribute for current user.
      * @return Redirection to start page.
+     * @author Sara Ibrahim
      */
     @GetMapping("/logout")
     public String logout(){

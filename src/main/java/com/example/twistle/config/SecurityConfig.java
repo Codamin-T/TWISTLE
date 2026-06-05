@@ -16,6 +16,7 @@ public class SecurityConfig {
     /**
      * Creates a new password encored and returns it.
      * @return a password encoder
+     * @author Benjamin Torsson
      */
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -27,6 +28,7 @@ public class SecurityConfig {
      * @param http
      * @return Returns the filter chain.
      * @throws Exception
+     * @author Benjamin Torsson
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{

@@ -28,6 +28,7 @@ public class ProfileService{
      * Includes logic for point system to determine how many points the user gets.
      * Saves points to the database and session variables.
      * @param currentRow Current row represents amount of tries.
+     * @author Marua Alkhafadji
      */
     public void addPointsToProfile(int currentRow){
         int amountOfTries = currentRow+1;
@@ -60,6 +61,7 @@ public class ProfileService{
      * Removes points from a profile.
      * Saves the change to the database and session variable.
      * @param points Amount of points to remove.
+     * @author Benjamin Torsson
      */
     public void removePointsFromProfile(int points){
         Profile profile = profileRepository.findByUsername((String)session.getAttribute("loggedInUser"));

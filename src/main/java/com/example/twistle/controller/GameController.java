@@ -37,6 +37,7 @@ public class GameController{
      * Initializes a map for which levels are unlocked.
      * @param model Used to pass arguments to html file.
      * @return Name of html file.
+     * @author Benjamin Torsson
      */
     @GetMapping("/play")
     public String showPlay(Model model){
@@ -73,6 +74,7 @@ public class GameController{
      * Unlocks next level.
      * @param level Which level is completed
      * @param tries How many tries it took to complete the level, determines amount of points.
+     * @author Sara Ibrahim
      */
     @ResponseBody
     @GetMapping("/completeLevel/{level}{tries}")
@@ -103,6 +105,7 @@ public class GameController{
     /**
      * Getter for the map containing which levels are unlocked.
      * @return Unlocked levels map.
+     * @author Sara Ibrahim
      */
     @ResponseBody
     @GetMapping("/unlockedLevels")
@@ -114,6 +117,7 @@ public class GameController{
      * Saves the current game state. Level and guesses.
      * @param level Which level to save.
      * @param state Guesses on that level.
+     * @author Sara Ibrahim
      */
     @ResponseBody
     @PostMapping("/saveGameState/{level}")
@@ -130,6 +134,7 @@ public class GameController{
      * Getter for saved game state.
      * @param level Which level to get saved guesses to.
      * @return Returns a map containing the guesses for that level.
+     * @author Sara Ibrahim
      */
     @ResponseBody
     @GetMapping("/getSavedState/{level}")
@@ -144,6 +149,7 @@ public class GameController{
     /**
      * Getter for a users points.
      * @return Returns the amount of points for the logged-in user.
+     * @author Sara Ibrahim
      */
     @ResponseBody
     @GetMapping("/getPoints")
@@ -155,6 +161,7 @@ public class GameController{
      * Called when a hint is used.
      * Sets session variable for if a hint has been used to true.
      * Calls a service class to remove 10 points from the user.
+     * @author Benjamin Torsson
      */
     @ResponseBody
     @GetMapping("/useHint")

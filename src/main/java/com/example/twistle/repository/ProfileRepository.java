@@ -11,6 +11,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long>{
      * Fins a profile by its username.
      * @param username Username to search with.
      * @return Returns a profile with that username.
+     * @author Benjamin Torsson
      */
     Profile findByUsername(String username);
 }

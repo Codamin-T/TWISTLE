@@ -32,6 +32,7 @@ public class WordController {
      * Gets a word based on the given length and returns it as text
      * @param length Length of the word to get.
      * @return Returns the daily word.
+     * @author Heba Sadlah
      */
     @GetMapping("/word/{length}")
     @ResponseBody

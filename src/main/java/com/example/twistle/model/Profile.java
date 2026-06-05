@@ -24,6 +24,7 @@ public class Profile{
     /**
      * Gets user id.
      * @return Returns user id.
+     * @author Benjamin Torsson
      */
     public Long getId(){
         return id;
@@ -31,6 +32,7 @@ public class Profile{
 
     /**
      * Sets user id.
+     * @author Benjamin Torsson
      */
     public void setId(Long id){
         this.id = id;
@@ -39,6 +41,7 @@ public class Profile{
     /**
      * Gets username.
      * @return Returns username.
+     * @author Benjamin Torsson
      */
     public String getUsername(){
         return username;
@@ -47,6 +50,7 @@ public class Profile{
     /**
      * Gets (encrypted) user password.
      * @return Returns user password.
+     * @author Benjamin Torsson
      */
     public String getPassword(){
         return password;
@@ -63,6 +67,7 @@ public class Profile{
     /**
      * Adds points to profile.
      * @param pointsToAdd Amount of points to add.
+     * @author Benjamin Torsson
      */
     public void addPoints(Integer pointsToAdd){
         if (this.points == null){
@@ -75,6 +80,7 @@ public class Profile{
     /**
      * Removes points from profile.
      * @param pointsToRemove Amount of points to remove.
+     * @author Benjamin Torsson
      */
     public void removePoints(Integer pointsToRemove){
         if (this.points == null || this.points - pointsToRemove <= 0){
@@ -91,6 +97,7 @@ public class Profile{
     /**
      * Gets the amount of points the profile has.
      * @return Returns the amount of the profile's points.
+     * @author Benjamin Torsson
      */
     public int getPoints(){
         if (points == null){
@@ -102,24 +109,25 @@ public class Profile{
     /**
      * Sets the amount of points of the profile.
      * @param points Amount of points to be set.
+     * @author Benjamin Torsson
      */
     public void setPoints(int points){
         this.points = points;
     }
 
-//    public int getStreak(){
-//        return streak;
-//    }
-//
-//    public void setStreak(int streak){
-//        this.streak = streak;
-//    }
-
-    public Timestamp getCreatedAt(){
-        return createdAt;
+    /**
+     * Getter for streak.
+     * @return Returns amount of streak days.
+     * @author Savannah Norgren
+     */
+    public int getStreak(){
+        return streak;
     }
-
-    public void setCreatedAtt(Timestamp created_at){
-        this.createdAt = created_at;
+    /**
+     * Setter for streak.
+     * @author Savannah Norgren
+     */
+    public void setStreak(int streak){
+       this.streak = streak;
     }
 }

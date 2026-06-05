@@ -50,6 +50,7 @@ public class WordService{
     /**
      * Sets the date for when a word was last used. Uses the current date.
      * @param word Word to be set to the current date.
+     * @author Benjamin Torsson
      */
     //Sets attribute 'lastUsed' to current date.
     public void setLastUsed(Word word){
