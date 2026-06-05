@@ -67,7 +67,7 @@ public class Profile{
     /**
      * Adds points to profile.
      * @param pointsToAdd Amount of points to add.
-     * @author Benjamin Torsson
+     * @author Marua Alkhafadji
      */
     public void addPoints(Integer pointsToAdd){
         if (this.points == null){
