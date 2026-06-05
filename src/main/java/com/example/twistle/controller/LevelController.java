@@ -33,7 +33,7 @@ public class LevelController{
      * Maps html file to show level 2.
      * @param model For passing logged-in user to the html code.
      * @return Name of html file.
-     * @author Benjamin Torsson
+     * @author Marua Alkhafadji
      */
     @GetMapping("/level2")
     public String showLevel2(Model model){
@@ -45,7 +45,7 @@ public class LevelController{
      * Maps html file to show level 3.
      * @param model For passing logged-in user to the html code.
      * @return Name of html file.
-     * @author Benjamin Torsson
+     * @author Sara Ibrahim
      */
     @GetMapping("/level3")
     public String showLevel3(Model model){
@@ -57,7 +57,7 @@ public class LevelController{
      * Maps html file to show level 4.
      * @param model For passing logged-in user to the html code.
      * @return Name of html file.
-     * @author Benjamin Torsson
+     * @author Sara Ibrahim
      */
     @GetMapping("/level4")
     public String showLevel4(Model model){
@@ -69,7 +69,7 @@ public class LevelController{
      * Maps html file to show level 5.
      * @param model For passing logged-in user to the html code.
      * @return Name of html file.
-     * @author Benjamin Torsson
+     * @author Sara Ibrahim
      */
     @GetMapping("/level5")
     public String showLevel5(Model model){
@@ -81,7 +81,7 @@ public class LevelController{
      * Maps html file to show level 6.
      * @param model For passing logged-in user to the html code.
      * @return Name of html file.
-     * @author Benjamin Torsson
+     * @author Sara Ibrahim
      */
     @GetMapping("/level6")
     public String showLevel6(Model model){
@@ -93,7 +93,7 @@ public class LevelController{
      * Maps html file to show level 7.
      * @param model For passing logged-in user to the html code.
      * @return Name of html file.
-     * @author Benjamin Torsson
+     * @author Savannah Norgren
      */
     @GetMapping("/level7")
     public String showLevel7(Model model){
@@ -105,7 +105,7 @@ public class LevelController{
      * Maps html file to show level 8.
      * @param model For passing logged-in user to the html code.
      * @return Name of html file.
-     * @author Benjamin Torsson
+     * @author Savannah Norgren
      */
     @GetMapping("/level8")
     public String showLevel8(Model model){

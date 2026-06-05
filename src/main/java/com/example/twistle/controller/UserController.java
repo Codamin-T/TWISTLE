@@ -96,7 +96,7 @@ public class UserController {
      * @param profile Profile containing input values.
      * @param redirectAttributes Attribute to show error messages.
      * @return Redirection depending on valid/invalid values.
-     * @author Heba Sadlah
+     * @author Marua Alkhafadji
      */
     @PostMapping("/login")
     public String processLogin(Profile profile, RedirectAttributes redirectAttributes){
