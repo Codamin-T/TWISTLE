@@ -1,58 +1,37 @@
 
 /* Description
 * This is a wordle style word guessing game
-*
-*
 *  The player must guess a hidden word by typing letters
 * on the keyboard. The word is randomly selected fron a server, and the player has
 * a limited number of attempts to find the correct answer.
-*
 * After each guess, the game gives feedback by coloring the letters
 * Green : correct letter in the correct position
 * Yellow: correct letter in the wrong position
 * Gray : letter is not in the word
-*
 * The game continues until the correct word is guessed
 * */
 
 
-// The correct word to guess
 let word = "";
-
-//Length of the word
 let wordLength = 0;
-
-//Current player guess
 let currentGuess = "";
-
-// Current row
 let currentRow = 0;
-
-// All game bubbles
 let bubbles = [];
-
-//total amount of rows in each level
 let totalRows = [];
-
-// Next level button
 let nextLvlBtn = document.querySelector(".next-level-button");
-
-// HTML attribute for next level link
 let nextlvlBtnEnabled = nextLvlBtn.getAttribute("href");
-
 let gameOver = false;
-
 let seconds = 0;
 let timerInterval = null;
 let useTimer = false;
-
 var winSound = new Audio('WIN_SOUND.mp3');
-
 let hintedLetter = "";
-
 let currentGuessArray = [];
 
-
+/*
+Starts the game timer and updates the timer display every second.
+@author Heba
+ */
 function startTimer() {
     stopTimer();
 
@@ -67,13 +46,22 @@ function startTimer() {
     }, 1000);
 }
 
+/**
+ * Stops the active timer.
+ * @author Heba
+ */
+
 function stopTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
 }
 
 
-//Fetch a random word from the server
+/**
+ * Loads a saved game state or fetches a new word and starts the game.
+ * @author Sara
+ */
+
 function loadWord() {
     nextLvlBtn.removeAttribute("href");
     nextLvlBtn.style.opacity = "0.5";
@@ -101,19 +89,18 @@ function loadWord() {
 }
 
 
-// Start the game
+/**
+ * Initializes the game, keyboard, and event listeners.
+ * @author Sara
+ */
  function startGame() {
     bubbles = document.querySelectorAll(".bubble");
     totalRows = Number(document.getElementById("game").dataset.rows);
 
     document.addEventListener("keydown", handleKeyPress);
 
-    //document.getElementById("instructions-modal").style.display = "block";
-
     keyPressEvents();
-
     createKeyboard();
-
     document.getElementById("closeButton").addEventListener("click", () => {
         document.getElementById("modal").style.display = "none";
     });
@@ -124,7 +111,12 @@ function loadWord() {
 }
 
 
-// Handle key input
+/**
+ * Handles keyboard input from physical and virtual keyboards.
+ *
+ * @param {KeyboardEvent|string} e The keyboard event or key value.
+ * @author Benjamin
+ */
 
  function handleKeyPress(e) {
     let key;
@@ -166,6 +158,13 @@ function loadWord() {
 
 }
 
+/**
+ * Calculates the total number of letters currently entered.
+ *
+ * @returns {number} Total length of the current guess.
+ * @author Benjamin
+ */
+
 function getTotalGuessLength(){
     let combinedLength = 0;
     let userCount = 0;
@@ -179,7 +178,13 @@ function getTotalGuessLength(){
 }
 
 
-//Check is input is a vaild letter
+/**
+ * Checks if the provided key is a valid letter that can be entered.
+ *
+ * @param {string} key The key to validate.
+ * @returns {boolean} True if the key is valid.
+ * @author Benjamin
+ */
 
  function isLetter(key) {
      let hintCount = currentGuessArray.filter(x => x != null).length;
@@ -188,7 +193,12 @@ function getTotalGuessLength(){
          && currentGuess.length < wordLength - hintCount;
 }
 
- //Add letter to guess
+
+/**
+ * Adds a letter to the current guess and updates the game board.
+ * @param {string} key The letter to add.
+ * @author Benjamin
+ */
  function addLetter(key) {
 
     let startRowIndex = currentRow * wordLength;
@@ -204,8 +214,12 @@ function getTotalGuessLength(){
     }
 }
 
+/**
+ * Removes the last entered letter from the current guess.
+ *
+ * @author Benjamin
+ */
 
-// Remove last letter
  function removeLetter() {
      if (currentGuess.length === 0) {
          return;
@@ -224,8 +238,13 @@ function getTotalGuessLength(){
      }
 }
 
-
- //Check the guess
+/**
+ * Validates the current guess, updates tile colors,
+ * checks win/loss conditions, and saves the game state.
+ *
+ * @returns {boolean|undefined} True if the player wins.
+ * @author Benjamin
+ */
  function checkGuess() {
     let combinedGuess = "";
     let userLetterCount = 0;
@@ -244,7 +263,6 @@ function getTotalGuessLength(){
     if (combinedGuess.length !== wordLength) return;
     colorLettersOnGuess(combinedGuess);
 
-    // WIN CONDTION
     if (combinedGuess === word) {
         gameOver = true;
         saveGameState();
@@ -286,8 +304,15 @@ function getTotalGuessLength(){
      currentGuessArray = activeHint;
  }
 
+
+/**
+ * Create and renders the on screen keyboard.
+ * Generates keyboard rows and keys
+ * attaches click event listeners, and adds the keyboard to the page.
+ *
+ * @author Savannah
+ */
 function createKeyboard() {
-// Create the key board
     let keyboard = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L", " "],
@@ -328,6 +353,8 @@ function createKeyboard() {
     }
 }
 
+
+
 function colorLettersOnGuess(guess){
     const remainingLetters = {};
 
@@ -339,7 +366,6 @@ function colorLettersOnGuess(guess){
         }
     }
 
-    // First pass: mark greens
     for (let i = 0; i < wordLength; i++) {
         const index = currentRow * wordLength + i;
         const letter = guess[i];
@@ -349,7 +375,6 @@ function colorLettersOnGuess(guess){
         }
     }
 
-    // Second pass: mark yellows and greys
     for (let i = 0; i < wordLength; i++) {
         const index = currentRow * wordLength + i;
         const letter = guess[i];
