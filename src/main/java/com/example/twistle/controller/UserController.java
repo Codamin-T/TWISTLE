@@ -91,7 +91,7 @@ public class UserController {
 
     /**
      * Called when a user logs in.
-     * Checks if input values are of an existing profile. If not, an errormessage is shown and the user can try again.
+     * Checks if input values are of an existing profile. If not, an error message is shown and the user can try again.
      * If the values are values, the session variable for current user is set and the play-page is shown.
      * @param profile Profile containing input values.
      * @param redirectAttributes Attribute to show error messages.
