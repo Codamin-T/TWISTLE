@@ -1,3 +1,9 @@
+/**
+ * Loads unlocked levels from the server and disables locked level links in the UI.
+ * @author Sara
+ */
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
     fetch("/unlockedLevels")

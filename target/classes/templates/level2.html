@@ -28,6 +28,7 @@
             </aside>
         </div>
 
+        <!--Login only shows when a user is logged out-->
         <a th:if="${loggedInUser == null}" th:href="@{/login}" class="login-button" title="login if you want to save your guesses" style="font-size:3.5vh">
             Login
         </a>
@@ -45,19 +46,18 @@
     <div class="bubble"></div>
     <div class="bubble"></div>
 
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-
-    </div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+</div>
 
 
 <div th:replace="winPopup :: winPopup"></div>
